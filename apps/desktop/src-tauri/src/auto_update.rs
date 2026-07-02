@@ -4,12 +4,18 @@ use std::{
     fs,
     path::{Path, PathBuf},
 };
+use tauri::{AppHandle, Emitter};
+use tauri_plugin_updater::UpdaterExt;
+
+const TAURI_UPDATE_SOURCE: &str =
+    "https://github.com/ShawnZhuge/aiotto/releases/latest/download/latest.json";
+const TAURI_UPDATE_DOWNLOAD_EVENT: &str = "auto-update-download-progress";
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct AutoUpdateManifest {
     pub version: String,
-    #[serde(default)]
+    #[serde(default, alias = "pub_date")]
     pub pub_date: Option<String>,
     #[serde(default)]
     pub notes: Option<String>,
@@ -84,6 +90,13 @@ pub struct PrepareAutoUpdateInstallResult {
     pub restart_required: bool,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct AutoUpdateDownloadProgress {
+    pub downloaded: u64,
+    pub total: Option<u64>,
+}
+
 pub fn check_auto_update_manifest_in(
     latest_json_path: &Path,
     current_version: &str,
@@ -116,7 +129,7 @@ pub fn check_install_preflight_for_bundle_path(bundle_path: &Path) -> InstallPre
         return blocked_preflight(
             bundle_path_label,
             "app_translocation",
-            "当前命中 App Translocation，请把 AIOtto 移入 Applications 后重新打开。",
+            "当前命中 App Translocation，请把 Aiotto 移入 Applications 后重新打开。",
         );
     }
 
@@ -137,6 +150,53 @@ pub fn check_install_preflight_for_bundle_path(bundle_path: &Path) -> InstallPre
 }
 
 #[tauri::command]
+pub async fn check_auto_update(app: AppHandle) -> Result<AutoUpdateCheckResult, String> {
+    let current_version = app.package_info().version.to_string();
+    let checked_at = chrono::Utc::now().to_rfc3339();
+    let updater = app
+        .updater_builder()
+        .build()
+        .map_err(|error| format!("初始化更新器失败：{error}"))?;
+
+    match updater
+        .check()
+        .await
+        .map_err(|error| format!("检查更新失败：{error}"))?
+    {
+        Some(update) => Ok(AutoUpdateCheckResult {
+            status: "available".to_string(),
+            current_version,
+            latest_version: Some(update.version.clone()),
+            checked_at: update
+                .date
+                .as_ref()
+                .map(|date| date.to_string())
+                .or(Some(checked_at)),
+            source: TAURI_UPDATE_SOURCE.to_string(),
+            release_notes: update.body.clone(),
+            package_size_bytes: None,
+            signature_configured: !update.signature.trim().is_empty(),
+            download_url: Some(update.download_url.to_string()),
+            error_code: None,
+            error_message: None,
+        }),
+        None => Ok(AutoUpdateCheckResult {
+            status: "up_to_date".to_string(),
+            current_version: current_version.clone(),
+            latest_version: Some(current_version),
+            checked_at: Some(checked_at),
+            source: TAURI_UPDATE_SOURCE.to_string(),
+            release_notes: None,
+            package_size_bytes: None,
+            signature_configured: true,
+            download_url: None,
+            error_code: None,
+            error_message: None,
+        }),
+    }
+}
+
+#[tauri::command]
 pub fn check_auto_update_manifest(
     request: CheckAutoUpdateManifestRequest,
 ) -> Result<AutoUpdateCheckResult, String> {
@@ -148,13 +208,66 @@ pub fn check_auto_update_manifest(
 }
 
 #[tauri::command]
+pub async fn install_auto_update_and_restart(
+    app: AppHandle,
+) -> Result<PrepareAutoUpdateInstallResult, String> {
+    let updater = app
+        .updater_builder()
+        .build()
+        .map_err(|error| format!("初始化更新器失败：{error}"))?;
+    let Some(update) = updater
+        .check()
+        .await
+        .map_err(|error| format!("检查更新失败：{error}"))?
+    else {
+        return Ok(PrepareAutoUpdateInstallResult {
+            status: "up_to_date".to_string(),
+            reason: None,
+            message: "当前已是最新版本。".to_string(),
+            version: app.package_info().version.to_string(),
+            staged_package_path: String::new(),
+            receipt_path: String::new(),
+            restart_required: false,
+        });
+    };
+
+    let version = update.version.clone();
+    log::info!("开始下载 Aiotto 更新: {version}");
+    let progress_app = app.clone();
+    let mut downloaded: u64 = 0;
+    let bytes = update
+        .download(
+            move |chunk_len, content_len| {
+                downloaded = downloaded.saturating_add(chunk_len as u64);
+                let _ = progress_app.emit(
+                    TAURI_UPDATE_DOWNLOAD_EVENT,
+                    AutoUpdateDownloadProgress {
+                        downloaded,
+                        total: content_len,
+                    },
+                );
+            },
+            || {},
+        )
+        .await
+        .map_err(|error| format!("下载更新失败：{error}"))?;
+
+    update
+        .install(bytes)
+        .map_err(|error| format!("安装更新失败：{error}"))?;
+
+    log::info!("Aiotto 更新已安装，正在重启应用: {version}");
+    app.restart();
+}
+
+#[tauri::command]
 pub fn check_auto_update_install_preflight(
     bundle_path: Option<String>,
 ) -> Result<InstallPreflightResult, String> {
     let resolved = bundle_path
         .map(PathBuf::from)
         .or_else(|| std::env::current_exe().ok())
-        .ok_or_else(|| "无法解析当前 AIOtto bundle 路径。".to_string())?;
+        .ok_or_else(|| "无法解析当前 Aiotto bundle 路径。".to_string())?;
     Ok(check_install_preflight_for_bundle_path(&resolved))
 }
 
@@ -207,7 +320,7 @@ pub fn prepare_auto_update_install_in(
     let file_name = package_path
         .file_name()
         .and_then(|value| value.to_str())
-        .unwrap_or("AIOtto-update-package");
+        .unwrap_or("Aiotto-update-package");
     let staged_package_path = staging_dir.join(file_name);
     fs::copy(&package_path, &staged_package_path).map_err(|error| error.to_string())?;
 

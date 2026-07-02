@@ -1,5 +1,6 @@
 import { AnimatedIcon, AnimatedListIcon, AnimatedXIcon } from '@/components/animatedLucide'
 import { Tooltip } from '../../components/ui'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../../components/ui/dialog'
 import { ThreadTocList } from './panels'
 import type { PreparedMessage } from './types'
 
@@ -13,21 +14,27 @@ export function ThreadTocDialog({
   onSelect: (messageId: string) => void
 }) {
   return (
-    <div
-      data-testid="thread-toc-dialog-backdrop"
-      data-aiotto-toc-scope="thread-content-shell"
-      className="aiotto-dialog-backdrop min-[1360px]:!hidden absolute inset-0 z-50 bg-background/45 backdrop-blur-md flex items-center justify-center p-6"
+    <Dialog
+      open
+      onOpenChange={(open) => {
+        if (!open) {
+          onClose()
+        }
+      }}
+      backdropClassName="min-[1360px]:!hidden p-4"
+      backdropDataScope="thread-content-shell"
+      backdropPosition="absolute"
+      backdropTestId="thread-toc-dialog-backdrop"
+      lockScroll={false}
+      panelClassName="w-[min(640px,calc(100%-32px))] max-h-[78%] overflow-hidden flex flex-col bg-card/95"
     >
-      <div
-        data-testid="thread-toc-dialog-panel"
-        className="aiotto-dialog-panel liquid-glass-card w-[min(640px,calc(100%-48px))] max-h-[78%] rounded-[18px] border border-border/60 bg-card/95 shadow-2xl overflow-hidden flex flex-col"
-      >
-        <div className="h-14 shrink-0 border-b border-border/60 px-4 flex items-center justify-between">
+      <DialogContent testId="thread-toc-dialog-panel" showClose={false} className="p-0 flex min-h-0 flex-1 flex-col">
+        <DialogHeader className="mb-0 h-14 shrink-0 border-b border-border/60 px-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-primary/10 text-primary shadow-inner">
+            <span className="flex h-9 w-9 items-center justify-center aiotto-radius-field bg-primary/10 text-primary shadow-inner">
               <AnimatedIcon icon={AnimatedListIcon} className="h-[18px] w-[18px]" size={18} />
             </span>
-            <h3 className="text-base font-semibold">对话目录</h3>
+            <DialogTitle className="text-base font-semibold">对话目录</DialogTitle>
           </div>
           <Tooltip content="关闭目录">
             <button
@@ -39,9 +46,9 @@ export function ThreadTocDialog({
               <AnimatedIcon icon={AnimatedXIcon} className="h-[18px] w-[18px]" size={18} />
             </button>
           </Tooltip>
-        </div>
+        </DialogHeader>
         <ThreadTocList items={items} variant="dialog" onSelect={onSelect} />
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   )
 }

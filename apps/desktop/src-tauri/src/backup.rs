@@ -307,7 +307,7 @@ pub fn list_backup_snapshots_with_source_in(backup_root: &Path) -> BackupSnapsho
 
     BackupSnapshotListRead {
         snapshots: snapshot_scan.snapshots,
-        source_label: "真实 AIOtto 备份历史".to_string(),
+        source_label: "真实 Aiotto 备份历史".to_string(),
         backup_root: backup_root.to_string_lossy().to_string(),
         backup_root_exists,
         backup_root_updated_at_epoch_ms,
@@ -485,7 +485,7 @@ pub fn create_safe_archive_in(
             skipped_paths.push(SkippedArchivePath {
                 relative_path: selected_path.to_string(),
                 reason: "protected".to_string(),
-                detail: "该候选项受默认保护，AIOtto 不会归档 active sessions、WAL/SHM 或全局状态。"
+                detail: "该候选项受默认保护，Aiotto 不会归档 active sessions、WAL/SHM 或全局状态。"
                     .to_string(),
             });
             continue;

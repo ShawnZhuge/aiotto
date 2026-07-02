@@ -62,13 +62,13 @@ export class PageErrorBoundary extends Component<
     return (
       <section
         aria-label="页面渲染失败"
-        className="m-6 rounded-[8px] border border-destructive/30 bg-destructive/5 p-5 text-sm"
+        className="m-4 aiotto-radius-card border border-destructive/30 bg-destructive/5 p-4 text-sm"
         role="alert"
       >
         <div className="space-y-2">
           <p className="text-base font-semibold text-foreground">页面渲染失败</p>
           <p className="text-muted-foreground">Aiotto 已拦截这个页面错误，下面只显示脱敏诊断摘要。</p>
-          <pre className="max-h-40 overflow-auto rounded-[8px] bg-background p-3 text-xs text-muted-foreground">
+          <pre className="max-h-40 overflow-auto aiotto-radius-inset bg-background p-3 text-xs text-muted-foreground">
             {diagnostic}
           </pre>
           <Button onClick={this.retry} variant="outline">

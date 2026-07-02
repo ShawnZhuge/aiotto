@@ -40,7 +40,7 @@ export function ShadcnDashboard() {
             <CardHeader className="p-6 pb-3">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <CardTitle className="text-xl font-semibold">AIOtto Community</CardTitle>
+                  <CardTitle className="text-xl font-semibold">Aiotto Community</CardTitle>
                   <p className="mt-2 text-sm leading-6 text-muted-foreground">
                     公开精简版保留本地会话、用量统计、扩展清单与备份视图。
                   </p>

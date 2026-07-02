@@ -1,4 +1,4 @@
-import { Clock, Search } from 'lucide-react'
+import { Clock } from 'lucide-react'
 import type { RefObject } from 'react'
 import {
   AnimatedCircleCheckIcon,
@@ -12,6 +12,8 @@ import {
   AnimatedXIcon,
 } from '@/components/animatedLucide'
 import { cn } from '@/lib/utils'
+import { CheckboxControl } from '@/components/ui/checkbox-control'
+import { SearchField } from '@/components/ui/search-field'
 import { PageState } from '../../components/page/PageState'
 import { conversationStageLabel, sanitizeConversationStage } from '../../domain/conversationStage'
 import type { ThreadRecord } from '../../domain/models'
@@ -84,7 +86,7 @@ export function ThreadListPanel(props: {
   return (
     <aside
       data-testid="thread-list-panel"
-      className="aiotto-motion-card liquid-glass-card w-[310px] xl:w-[330px] 2xl:w-[350px] shrink-0 rounded-[16px] flex flex-col overflow-hidden"
+      className="aiotto-motion-card liquid-glass-card w-[310px] xl:w-[330px] 2xl:w-[350px] shrink-0 aiotto-radius-card flex flex-col overflow-hidden"
     >
       <div
         data-testid="thread-list-header"
@@ -96,21 +98,21 @@ export function ThreadListPanel(props: {
       >
         {searchActive ? (
           <div className="relative w-full">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-            <input
+            <SearchField
               ref={searchInputRef}
-              type="search"
-              aria-label="搜索会话"
+              ariaLabel="搜索会话"
               value={searchQuery}
-              onChange={(event) => onSearchQueryChange(event.target.value)}
+              onValueChange={onSearchQueryChange}
               placeholder="搜索会话内容、目录或 ID"
-              className="h-10 w-full rounded-[10px] border border-input bg-background/80 pl-9 pr-10 text-sm outline-none backdrop-blur focus:border-primary/45 focus:ring-4 focus:ring-primary/15"
+              iconClassName="h-3.5 w-3.5"
+              showClearButton={false}
+              tone="toolbar"
             />
             <Tooltip content="关闭搜索">
               <button
                 type="button"
                 onClick={onCloseSearch}
-                className="liquid-glass-button absolute right-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-[8px] text-muted-foreground hover:text-foreground"
+                className="liquid-glass-button absolute right-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center aiotto-radius-button text-muted-foreground hover:text-foreground"
                 aria-label="关闭搜索"
               >
                 <AnimatedIcon icon={AnimatedXIcon} className="h-3.5 w-3.5" size={14} hoverAnimate={false} />
@@ -132,7 +134,7 @@ export function ThreadListPanel(props: {
                     type="button"
                     onClick={onToggleBatchMode}
                     className={cn(
-                      'liquid-glass-button flex h-7 w-7 items-center justify-center rounded-[8px] text-muted-foreground hover:text-foreground',
+                      'liquid-glass-button flex h-7 w-7 items-center justify-center aiotto-radius-button text-muted-foreground hover:text-foreground',
                       batchMode && 'bg-primary/12 text-primary ring-1 ring-primary/20',
                     )}
                     aria-label={batchMode ? '退出批量管理' : '进入批量管理'}
@@ -145,7 +147,7 @@ export function ThreadListPanel(props: {
                   <button
                     type="button"
                     onClick={onOpenSearch}
-                    className="liquid-glass-button flex h-7 w-7 items-center justify-center rounded-[8px] text-muted-foreground hover:text-foreground"
+                    className="liquid-glass-button flex h-7 w-7 items-center justify-center aiotto-radius-button text-muted-foreground hover:text-foreground"
                     aria-label="搜索会话"
                   >
                     <AnimatedIcon icon={AnimatedSearchIcon} className="h-3.5 w-3.5" size={14} />
@@ -155,7 +157,7 @@ export function ThreadListPanel(props: {
                   <button
                     type="button"
                     onClick={onReload}
-                    className="liquid-glass-button flex h-7 w-7 items-center justify-center rounded-[8px] text-muted-foreground hover:text-foreground"
+                    className="liquid-glass-button flex h-7 w-7 items-center justify-center aiotto-radius-button text-muted-foreground hover:text-foreground"
                     aria-label="刷新会话"
                   >
                     <AnimatedIcon
@@ -171,7 +173,7 @@ export function ThreadListPanel(props: {
             </div>
 
             {batchMode ? (
-              <div className="rounded-[12px] border border-border/75 bg-background/62 p-3 shadow-sm">
+              <div className="aiotto-radius-inset border border-border/75 bg-background/62 p-3 shadow-sm">
                 <div className="flex items-center gap-2">
                   <span className={cn('rounded-full border border-border bg-background px-2.5 py-1', typography.badgeText)}>
                     已选 {selectedBulkCount} 项
@@ -182,14 +184,14 @@ export function ThreadListPanel(props: {
                   <button
                     type="button"
                     onClick={onSelectAllVisibleThreads}
-                    className={cn('h-8 rounded-[8px] px-2 text-muted-foreground hover:bg-muted/70 hover:text-foreground', typography.controlText)}
+                    className={cn('h-8 aiotto-radius-button px-2 text-muted-foreground hover:bg-muted/70 hover:text-foreground', typography.controlText)}
                   >
                     全选当前
                   </button>
                   <button
                     type="button"
                     onClick={onClearSelectedThreads}
-                    className={cn('h-8 rounded-[8px] px-2 text-muted-foreground hover:bg-muted/70 hover:text-foreground', typography.controlText)}
+                    className={cn('h-8 aiotto-radius-button px-2 text-muted-foreground hover:bg-muted/70 hover:text-foreground', typography.controlText)}
                   >
                     清空已选
                   </button>
@@ -197,7 +199,7 @@ export function ThreadListPanel(props: {
                     type="button"
                     onClick={onBulkDeleteSelectedThreads}
                     disabled={bulkDeleting || selectedBulkCount === 0}
-                    className={cn('ml-auto flex h-8 items-center gap-1.5 rounded-[8px] bg-destructive/70 px-2.5 text-destructive-foreground shadow-sm hover:bg-destructive disabled:cursor-not-allowed disabled:opacity-50', typography.controlText)}
+                    className={cn('ml-auto flex h-8 items-center gap-1.5 aiotto-radius-button bg-destructive/70 px-2.5 text-destructive-foreground shadow-sm hover:bg-destructive disabled:cursor-not-allowed disabled:opacity-50', typography.controlText)}
                   >
                     <AnimatedIcon
                       icon={bulkDeleting ? AnimatedLoaderIcon : AnimatedTrash2Icon}
@@ -248,7 +250,7 @@ export function ThreadListPanel(props: {
           const isBulkSelected = selectedThreadIds.has(thread.threadId)
           const rowContent = (
             <div className="flex gap-2.5">
-              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] border border-border/55 bg-muted/55 text-foreground/85 shadow-inner">
+              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center aiotto-radius-button border border-border/55 bg-muted/55 text-foreground/85 shadow-inner">
                 <CodexSourceIcon testId="thread-list-codex-icon" />
               </span>
               <div className="min-w-0 flex-1">
@@ -285,7 +287,7 @@ export function ThreadListPanel(props: {
               <div
                 key={thread.threadId}
                 className={cn(
-                  'w-full min-h-[70px] rounded-[8px] border px-2.5 py-2 text-left transition-colors',
+                  'w-full min-h-[70px] aiotto-radius-button border px-2.5 py-2 text-left transition-colors',
                   isSelected
                     ? 'liquid-glass-section border-primary/30 bg-primary/5 shadow-sm'
                     : 'border-transparent hover:border-border hover:bg-muted/45',
@@ -293,12 +295,13 @@ export function ThreadListPanel(props: {
                 )}
               >
                 <div className="flex items-start gap-2.5">
-                  <input
-                    type="checkbox"
+                  <CheckboxControl
                     checked={isBulkSelected}
-                    onChange={() => onToggleThreadSelection(thread.threadId)}
-                    aria-label={`选择会话 ${thread.title}`}
-                    className="mt-1.5 h-4 w-4 shrink-0 rounded-[5px] border-border accent-primary"
+                    label={`选择会话 ${thread.title}`}
+                    hideLabel
+                    containerClassName="mt-1.5 shrink-0"
+                    indicatorClassName="h-4 w-4"
+                    onCheckedChange={() => onToggleThreadSelection(thread.threadId)}
                   />
                   <button
                     type="button"
@@ -317,7 +320,7 @@ export function ThreadListPanel(props: {
               key={thread.threadId}
               type="button"
               onClick={() => onSelectThread(thread.threadId)}
-              className={`w-full min-h-[70px] rounded-[8px] border px-2.5 py-2 text-left transition-colors ${
+              className={`w-full min-h-[70px] aiotto-radius-button border px-2.5 py-2 text-left transition-colors ${
                 isSelected
                   ? 'liquid-glass-section border-primary/30 bg-primary/5 shadow-sm'
                 : 'border-transparent hover:border-border hover:bg-muted/45'
@@ -361,7 +364,7 @@ export function ThreadStatusChip({ status }: { status: ThreadRecord['status'] })
   }
 
   return (
-    <span className={cn('shrink-0 rounded-[6px] border px-1.5 py-0.5', typography.badgeText, classes[status])}>
+    <span className={cn('shrink-0 aiotto-radius-button border px-1.5 py-0.5', typography.badgeText, classes[status])}>
       {labels[status]}
     </span>
   )
@@ -389,7 +392,7 @@ export function ConversationStageChip({
   const paddingClass = size === 'regular' ? 'px-2 py-0.5' : 'px-1.5 py-0.5'
 
   return (
-    <span className={cn('shrink-0 rounded-[6px] border', paddingClass, typography.badgeText, classes[safeStage])}>
+    <span className={cn('shrink-0 aiotto-radius-button border', paddingClass, typography.badgeText, classes[safeStage])}>
       {conversationStageLabel(safeStage)}
     </span>
   )
@@ -414,12 +417,12 @@ export function ThreadTocList({
 
   const containerClass =
     variant === 'dialog'
-      ? 'min-h-0 flex-1 overflow-y-auto p-3.5 flex flex-col gap-1.5'
-      : 'min-h-0 flex-1 overflow-y-auto p-3.5 flex flex-col gap-1.5'
+      ? 'min-h-0 flex-1 overflow-y-auto p-3 flex flex-col gap-1.5'
+      : 'min-h-0 flex-1 overflow-y-auto p-3 flex flex-col gap-1.5'
   const itemClass =
     variant === 'dialog'
-      ? 'w-full rounded-[10px] px-2.5 py-2.5 text-left hover:bg-muted/60 flex items-start gap-2.5 transition-colors'
-      : 'w-full rounded-[10px] px-2.5 py-2.5 text-left hover:bg-muted/60 flex items-start gap-2.5 transition-colors'
+      ? 'w-full aiotto-radius-field px-2.5 py-2.5 text-left hover:bg-muted/60 flex items-start gap-2.5 transition-colors'
+      : 'w-full aiotto-radius-field px-2.5 py-2.5 text-left hover:bg-muted/60 flex items-start gap-2.5 transition-colors'
   const indexClass =
     variant === 'dialog'
       ? cn('h-7 w-7 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center', typography.badgeText)

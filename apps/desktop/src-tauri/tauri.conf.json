@@ -1,14 +1,13 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Aiotto",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "identifier": "app.aiotto.desktop",
   "build": {
     "frontendDist": "../../../dist",
     "devUrl": "http://127.0.0.1:5173",
     "beforeDevCommand": "cd ../.. && pnpm run dev --host 127.0.0.1 --port 5173 --strictPort",
-    "beforeBuildCommand": "cd ../.. && pnpm run build",
-    "beforeBundleCommand": "cd ../.. && scripts/prepare-aiotto-release-helper.sh"
+    "beforeBuildCommand": "cd ../.. && pnpm run build"
   },
   "app": {
     "macOSPrivateApi": true,
@@ -35,6 +34,7 @@
   },
   "bundle": {
     "active": true,
+    "createUpdaterArtifacts": true,
     "publisher": "ShawnZhuge",
     "copyright": "© 2026 ShawnZhuge",
     "targets": [
@@ -52,9 +52,6 @@
     "macOS": {
       "minimumSystemVersion": "12.0",
       "hardenedRuntime": true,
-      "files": {
-        "Library/LoginItems/AIOttoMenuBarHelper.app": "target/aiotto-release-helper/AIOttoMenuBarHelper.app"
-      },
       "dmg": {
         "windowSize": {
           "width": 660,
@@ -72,6 +69,14 @@
     },
     "android": {
       "debugApplicationIdSuffix": ".debug"
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEY3RkU3RjUzRDMzREU4MUQKUldRZDZEM1RVMy8rOXhSRWRBbHJnT1dNR0w1S3MxdjVSV0VVaHJxSXVXSVJBVFhiN0hoTGZVYmMK",
+      "endpoints": [
+        "https://github.com/ShawnZhuge/aiotto/releases/latest/download/latest.json"
+      ]
     }
   }
 }

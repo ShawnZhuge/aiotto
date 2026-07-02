@@ -25,7 +25,7 @@ export function PageState({
   const state = (() => {
     switch (kind) {
       case 'loading':
-        return <LoadingState title={title} description={description} />
+        return <LoadingState layout={density === 'compact' ? 'compact' : 'panel'} title={title} description={description} />
       case 'empty':
         return <EmptyState title={title} description={description} actionLabel={actionLabel} onAction={onAction} />
       case 'permission':

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useId, type ReactNode } from 'react'
 import { AnimatedIcon, AnimatedXIcon } from '@/components/animatedLucide'
-import { Tooltip } from '@/components/ui'
+import { Tooltip } from './tooltip'
 
 function cx(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(' ')
@@ -29,6 +29,11 @@ export interface DialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   children: ReactNode
+  backdropClassName?: string
+  backdropDataScope?: string
+  backdropPosition?: 'fixed' | 'absolute'
+  backdropTestId?: string
+  lockScroll?: boolean
   panelClassName?: string
 }
 
@@ -38,10 +43,24 @@ const DialogContext = createContext<{
   titleId: string
 } | null>(null)
 
-export function Dialog({ open, onOpenChange, children, panelClassName }: DialogProps) {
+export function Dialog({
+  open,
+  onOpenChange,
+  children,
+  backdropClassName,
+  backdropDataScope,
+  backdropPosition = 'fixed',
+  backdropTestId = 'aiotto-dialog-backdrop',
+  lockScroll = true,
+  panelClassName,
+}: DialogProps) {
   const titleId = useId()
 
   useEffect(() => {
+    if (!lockScroll) {
+      return
+    }
+
     if (open) {
       document.body.style.overflow = 'hidden'
     } else {
@@ -50,7 +69,7 @@ export function Dialog({ open, onOpenChange, children, panelClassName }: DialogP
     return () => {
       document.body.style.overflow = ''
     }
-  }, [open])
+  }, [lockScroll, open])
 
   if (!open) {
     return null
@@ -59,8 +78,13 @@ export function Dialog({ open, onOpenChange, children, panelClassName }: DialogP
   return (
     <DialogContext.Provider value={{ onOpenChange, panelClassName, titleId }}>
       <div
-        className="aiotto-dialog-backdrop fixed inset-0 z-50 flex items-center justify-center bg-background/45 backdrop-blur-md"
-        data-testid="aiotto-dialog-backdrop"
+        className={cx(
+          'aiotto-dialog-backdrop inset-0 flex items-center justify-center bg-background/45 backdrop-blur-md',
+          backdropPosition,
+          backdropClassName,
+        )}
+        data-aiotto-toc-scope={backdropDataScope}
+        data-testid={backdropTestId}
         onClick={() => onOpenChange(false)}
       >
         {children}
@@ -72,11 +96,20 @@ export function Dialog({ open, onOpenChange, children, panelClassName }: DialogP
 export interface DialogContentProps {
   children: ReactNode
   className?: string
+  role?: 'dialog' | 'alertdialog'
   showClose?: boolean
+  testId?: string
   onClose?: () => void
 }
 
-export function DialogContent({ children, className, showClose = true, onClose }: DialogContentProps) {
+export function DialogContent({
+  children,
+  className,
+  role = 'dialog',
+  showClose = true,
+  testId,
+  onClose,
+}: DialogContentProps) {
   const dialog = useContext(DialogContext)
   const closeDialog = onClose ?? (() => dialog?.onOpenChange(false))
   const { contentClassName, panelClassName } = splitDialogContentClasses(className)
@@ -90,15 +123,16 @@ export function DialogContent({ children, className, showClose = true, onClose }
         dialog?.panelClassName,
         panelClassName,
       )}
-      role="dialog"
+      data-testid={testId}
+      role={role}
       onClick={(e) => e.stopPropagation()}
     >
-      <div className={cx('aiotto-dialog-content p-6', contentClassName)}>
+      <div className={cx('aiotto-dialog-content p-5', contentClassName)}>
         {showClose && (
           <Tooltip content="关闭" className="absolute right-4 top-4">
             <button
               onClick={closeDialog}
-              className="aiotto-dialog-close aiotto-motion-control liquid-glass-button rounded-[10px] p-2 text-muted-foreground hover:text-foreground"
+              className="aiotto-dialog-close aiotto-motion-control aiotto-radius-button liquid-glass-button p-2 text-muted-foreground hover:text-foreground"
               aria-label="关闭"
             >
               <AnimatedIcon icon={AnimatedXIcon} className="w-4 h-4 text-muted-foreground" size={16} />
@@ -117,7 +151,7 @@ export interface DialogHeaderProps {
 }
 
 export function DialogHeader({ children, className }: DialogHeaderProps) {
-  return <div className={cx('mb-6', className)}>{children}</div>
+  return <div className={cx('mb-5', className)}>{children}</div>
 }
 
 export interface DialogTitleProps {
@@ -128,7 +162,7 @@ export interface DialogTitleProps {
 export function DialogTitle({ children, className }: DialogTitleProps) {
   const dialog = useContext(DialogContext)
 
-  return <h2 className={cx('text-2xl font-bold text-foreground', className)} id={dialog?.titleId}>{children}</h2>
+  return <h2 className={cx('text-xl font-bold text-foreground', className)} id={dialog?.titleId}>{children}</h2>
 }
 
 export interface DialogDescriptionProps {
@@ -146,5 +180,5 @@ export interface DialogFooterProps {
 }
 
 export function DialogFooter({ children, className }: DialogFooterProps) {
-  return <div className={cx('flex items-center justify-end gap-3 mt-6', className)}>{children}</div>
+  return <div className={cx('flex items-center justify-end gap-3 mt-5', className)}>{children}</div>
 }

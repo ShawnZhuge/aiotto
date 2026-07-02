@@ -1021,7 +1021,7 @@ fn env_impact(variable_name: &str) -> &'static str {
 fn env_recommended_action(source: &str) -> &'static str {
     match source {
         "shell_profile" => "确认后迁移到受控配置，或在 shell profile 中注释。",
-        _ => "确认当前终端环境是否需要该变量；AIOtto 不会自动修改。",
+        _ => "确认当前终端环境是否需要该变量；Aiotto 不会自动修改。",
     }
 }
 

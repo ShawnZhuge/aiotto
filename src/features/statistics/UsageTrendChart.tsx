@@ -46,9 +46,21 @@ function withUsageTrendAxisHeadroom(dataMax: number) {
 export function UsageTrendChart({
   points,
   range,
+  compact = false,
+  className,
+  minHeight,
+  chartMinHeight,
+  showLegend = true,
+  frameless = false,
 }: {
   points: UsageStatisticsTrendPoint[]
   range: UsageStatisticsRange
+  compact?: boolean
+  className?: string
+  minHeight?: number
+  chartMinHeight?: number
+  showLegend?: boolean
+  frameless?: boolean
 }) {
   const chartData = points.map<UsageTrendChartDatum>((point) => ({
     date: point.date,
@@ -64,15 +76,26 @@ export function UsageTrendChart({
   return (
     <div
       aria-label="使用统计趋势图"
-      className="relative flex min-h-[380px] flex-col overflow-visible rounded-[18px] border border-border/60 bg-background/35 p-3 text-muted-foreground dark:text-slate-300"
+      className={cn(
+        'relative flex flex-col overflow-visible text-muted-foreground dark:text-slate-300',
+        frameless ? 'p-0' : 'aiotto-radius-card border border-border/60 bg-background/35 p-3',
+        compact ? 'min-h-[176px]' : 'min-h-[380px]',
+        className,
+      )}
       role="img"
+      style={minHeight === undefined ? undefined : { minHeight }}
     >
       {hasData ? null : (
         <div className={cn('pointer-events-none absolute inset-x-0 top-0 bottom-12 z-[1] grid place-items-center text-muted-foreground', typography.listTitle)}>
           暂无趋势数据
         </div>
       )}
-      <ResponsiveContainer className="min-h-[320px] flex-1" height="100%" minHeight={320} width="100%">
+      <ResponsiveContainer
+        className={cn('flex-1', compact ? 'min-h-[140px]' : 'min-h-[320px]')}
+        height="100%"
+        minHeight={chartMinHeight ?? (compact ? 140 : 320)}
+        width="100%"
+      >
         <AreaChart
           data={chartData}
           margin={{ top: 24, right: 10, bottom: 4, left: 0 }}
@@ -158,7 +181,7 @@ export function UsageTrendChart({
           />
         </AreaChart>
       </ResponsiveContainer>
-      <UsageTrendLegend />
+      {showLegend ? <UsageTrendLegend /> : null}
     </div>
   )
 }
@@ -200,7 +223,7 @@ function UsageTrendTooltip({
   }
 
   return (
-    <div className="min-w-[240px] rounded-[14px] border border-border/70 bg-card/95 p-3 shadow-xl backdrop-blur-md">
+    <div className="min-w-[240px] aiotto-radius-inset border border-border/70 bg-card/95 p-3 shadow-xl backdrop-blur-md">
       <div className={cn('mb-2', typography.cardTitle, 'text-sm')}>{label}</div>
       <div className="grid gap-1.5">
         {payload.map((entry) => {

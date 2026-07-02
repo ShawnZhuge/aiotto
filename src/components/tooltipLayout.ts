@@ -3,19 +3,17 @@ type TooltipAnchorRect = Pick<DOMRect, 'bottom' | 'height' | 'left' | 'right' | 
 type TooltipMeasuredRect = Pick<DOMRect, 'height' | 'width'>
 
 export type TooltipPosition = {
-  arrowLeft: number
   left: number
   maxWidth: number
   side: TooltipSide
   top: number
 }
 
-const TOOLTIP_OFFSET = 10
+const TOOLTIP_OFFSET = 8
 const TOOLTIP_VIEWPORT_MARGIN = 12
-const TOOLTIP_MAX_WIDTH = 280
+const TOOLTIP_MAX_WIDTH = 360
 const TOOLTIP_FALLBACK_WIDTH = 160
 const TOOLTIP_FALLBACK_HEIGHT = 34
-const TOOLTIP_ARROW_INSET = 14
 
 function clamp(value: number, min: number, max: number) {
   if (max < min) {
@@ -64,11 +62,7 @@ export function computeTooltipLayout({
 
   const unconstrainedTop = resolvedSide === 'top' ? topSideTop : bottomSideTop
   const top = clamp(unconstrainedTop, margin, viewportHeight - margin - height)
-  const arrowInset = Math.min(TOOLTIP_ARROW_INSET, Math.max(4, width / 2))
-  const arrowLeft = clamp(triggerCenterX - left, arrowInset, width - arrowInset)
-
   return {
-    arrowLeft,
     left,
     maxWidth,
     side: resolvedSide,

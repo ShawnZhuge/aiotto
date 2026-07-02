@@ -20,7 +20,10 @@ import { typography } from '@/design/typography'
 import { cn } from '@/lib/utils'
 import { ActionToast } from '../../components/actionToast'
 import { PageState } from '../../components/page/PageState'
+import { SyncActivityPill } from '../../components/states'
 import { AlertDialog, Tooltip } from '../../components/ui'
+import { Button } from '../../components/ui/button'
+import { Input } from '../../components/ui/input'
 import { useSessionMessages, useThreads } from '../../hooks/useThreads'
 import { threadsService } from '../../services/threads'
 import { ThreadTocDialog } from './dialogs'
@@ -416,7 +419,7 @@ export function ThreadsContent() {
     <div
       data-testid="thread-page-root"
       data-shadcn-scroll-root="threads"
-      className="h-full min-h-0 bg-background/60 text-foreground overflow-y-auto p-4 flex flex-col items-center"
+      className="h-full min-h-0 bg-background/40 text-foreground overflow-y-auto p-4 flex flex-col items-center"
     >
       <ActionToast
         message={toastMessage}
@@ -460,14 +463,14 @@ export function ThreadsContent() {
           onSelectThread={selectThread}
         />
 
-        <section className="aiotto-motion-card liquid-glass-card relative min-w-0 min-h-0 flex-1 rounded-[16px] flex flex-col overflow-hidden">
+        <section className="aiotto-motion-card liquid-glass-card relative min-w-0 min-h-0 flex-1 aiotto-radius-card flex flex-col overflow-hidden">
           {currentThread ? (
             <>
               <div className="shrink-0 px-4 py-3">
                 <div className="flex flex-col min-[1180px]:flex-row min-[1180px]:items-start min-[1180px]:justify-between gap-3 min-[1180px]:gap-4">
                   <div className="min-w-0 flex-1">
                     <div className="flex min-w-0 items-start gap-2">
-                      <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] border border-border/55 bg-muted/55 text-foreground/85 shadow-inner">
+                      <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center aiotto-radius-button border border-border/55 bg-muted/55 text-foreground/85 shadow-inner">
                         <CodexSourceIcon testId="thread-detail-codex-icon" />
                       </span>
                       <div className="min-w-0 flex-1">
@@ -480,34 +483,36 @@ export function ThreadsContent() {
                           {projectDirectoryPath ? (
                             <Tooltip
                               side="bottom"
+                              variant="rich"
                               content={
-                                <span className="flex max-w-[260px] flex-col gap-1 text-left leading-tight">
-                                  <span className={cn('break-all', typography.codeSmall)}>{projectDirectoryPath}</span>
-                                  <span className={cn(typography.listMeta, 'opacity-75')}>点击复制路径</span>
+                                <span className="block text-left">
+                                  <span className="ui-tooltip-title break-all">{projectDirectoryPath}</span>
+                                  <span className="ui-tooltip-description">点击复制路径</span>
                                 </span>
                               }
                             >
-                              <button
+                              <Button
                                 type="button"
+                                variant="toolbar"
                                 onClick={handleCopyProjectPath}
-                                className="liquid-glass-button flex max-w-[220px] items-center gap-1 rounded-[7px] border border-border/70 bg-background/45 px-1.5 py-0.5 text-muted-foreground hover:text-foreground"
+                                className="h-7 max-w-[220px] gap-1 px-1.5 py-0.5"
                                 aria-label="复制项目路径"
                               >
                                 <FolderOpen className="h-3 w-3 shrink-0" />
                                 <span className="truncate">{projectDirectoryName}</span>
-                              </button>
+                              </Button>
                             </Tooltip>
                           ) : null}
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="liquid-glass-toolbar flex items-center gap-1.5 shrink-0 rounded-[10px] p-1.5">
-                    <button
+                  <div className="liquid-glass-toolbar flex items-center gap-1.5 shrink-0 aiotto-radius-field p-1.5">
+                    <Button
                       type="button"
                       onClick={handleRestoreThread}
                       disabled={!currentThread.restoreAvailable || restoring}
-                      className={cn('h-8 rounded-[8px] bg-primary px-2.5 text-primary-foreground shadow-sm hover:bg-primary/90 disabled:opacity-50 flex items-center gap-1.5', typography.controlText)}
+                      className={cn('h-8 px-2.5', typography.controlText)}
                     >
                       {restoring ? (
                         <AnimatedIcon icon={AnimatedLoaderIcon} className="h-3.5 w-3.5" size={14} animate />
@@ -515,12 +520,13 @@ export function ThreadsContent() {
                         <AnimatedIcon icon={AnimatedPlayIcon} className="h-3.5 w-3.5" size={14} />
                       )}
                       恢复会话
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                       type="button"
+                      variant="destructive"
                       onClick={handleDeleteThread}
                       disabled={deleting}
-                      className={cn('h-8 rounded-[8px] bg-destructive px-2.5 text-destructive-foreground shadow-sm hover:bg-destructive/90 disabled:opacity-50 flex items-center gap-1.5', typography.controlText)}
+                      className={cn('h-8 px-2.5', typography.controlText)}
                     >
                       {deleting ? (
                         <AnimatedIcon icon={AnimatedLoaderIcon} className="h-3.5 w-3.5" size={14} animate />
@@ -528,49 +534,54 @@ export function ThreadsContent() {
                         <AnimatedIcon icon={AnimatedTrash2Icon} className="h-3.5 w-3.5" size={14} />
                       )}
                       {currentThread.trashed ? '清空会话' : '删除会话'}
-                    </button>
+                    </Button>
                   </div>
                 </div>
 
                 <div className="mt-3 grid grid-cols-1 min-[1360px]:grid-cols-[minmax(0,1fr)_minmax(300px,420px)] gap-2">
-                  <div className="liquid-glass-section flex items-center gap-1.5 rounded-[10px] p-1.5">
-                    <code className={cn('min-w-0 flex-1 truncate rounded-[8px] bg-muted/60 px-2.5 py-1.5', typography.codeSmall)}>
+                  <div className="liquid-glass-section flex items-center gap-1.5 aiotto-radius-field p-1.5">
+                    <code className={cn('min-w-0 flex-1 truncate aiotto-radius-button bg-muted/60 px-2.5 py-1.5', typography.codeSmall)}>
                       {commandText || '暂无恢复命令'}
                     </code>
                     <Tooltip content="复制命令">
-                      <button
+                      <Button
                         type="button"
+                        variant="tool"
+                        size="icon"
                         onClick={handleCopyCommand}
                         disabled={!commandCopyText}
-                        className="liquid-glass-button h-8 w-8 rounded-[8px] border border-border text-muted-foreground hover:text-foreground disabled:opacity-50 flex items-center justify-center"
+                        className="h-8 w-8"
                         aria-label="复制命令"
                       >
                         <AnimatedIcon icon={AnimatedClipboardIcon} className="h-3.5 w-3.5" size={14} />
-                      </button>
+                      </Button>
                     </Tooltip>
                     <Tooltip content="刷新详情">
-                      <button
+                      <Button
                         type="button"
+                        variant="tool"
+                        size="icon"
                         onClick={reloadMessages}
-                        className="liquid-glass-button h-8 w-8 rounded-[8px] border border-border text-muted-foreground hover:text-foreground flex items-center justify-center"
+                        className="h-8 w-8"
                         aria-label="刷新详情"
                       >
                         <AnimatedIcon icon={AnimatedRefreshIcon} className="h-3.5 w-3.5" size={14} animate={messagesLoading} />
-                      </button>
+                      </Button>
                     </Tooltip>
                   </div>
 
                   <form className="flex items-center gap-1.5" onSubmit={handleStartRealtimeTurn}>
-                    <input
+                    <Input
                       value={realtimePrompt}
                       onChange={(event) => setRealtimePrompt(event.target.value)}
                       placeholder="通过官方事件流继续这条会话"
-                      className={cn('h-8 min-w-0 flex-1 rounded-[8px] border border-input bg-background/70 px-2.5 outline-none backdrop-blur focus:border-primary/50 focus:ring-2 focus:ring-primary/15', typography.controlText)}
+                      className={cn('h-8 min-w-0 flex-1 aiotto-radius-button border border-input bg-background/70 px-2.5 outline-none backdrop-blur focus:border-primary/50 focus:ring-2 focus:ring-primary/15', typography.controlText)}
                     />
-                    <button
+                    <Button
                       type="submit"
+                      variant="soft"
                       disabled={startingRealtimeTurn || !realtimePrompt.trim()}
-                      className={cn('liquid-glass-button h-8 rounded-[8px] border border-primary/25 bg-primary/10 px-2.5 text-primary hover:bg-primary/15 disabled:opacity-50 flex items-center gap-1.5', typography.controlText)}
+                      className={cn('h-8 px-2.5', typography.controlText)}
                     >
                       {startingRealtimeTurn ? (
                         <AnimatedIcon icon={AnimatedLoaderIcon} className="h-3.5 w-3.5" size={14} animate />
@@ -578,13 +589,13 @@ export function ThreadsContent() {
                         <AnimatedIcon icon={AnimatedMessageSquareIcon} className="h-3.5 w-3.5" size={14} />
                       )}
                       实时继续
-                    </button>
+                    </Button>
                   </form>
                 </div>
 
                 {messagesError ? (
                   <div
-                    className="mt-3 rounded-[8px] border border-destructive/25 bg-destructive/10 px-3 py-2 text-xs text-destructive"
+                    className="mt-3 aiotto-radius-button border border-destructive/25 bg-destructive/10 px-3 py-2 text-xs text-destructive"
                   >
                     {messagesError}
                   </div>
@@ -597,23 +608,16 @@ export function ThreadsContent() {
                   data-shadcn-scroll-panel="threads-detail"
                   className="min-w-0 min-h-0 flex-1 overflow-y-auto px-4 py-3"
                 >
-                  <div className={cn('liquid-glass-section mb-3 flex items-center gap-2 rounded-[10px] px-3 py-1.5', typography.listTitle)}>
+                  <div className={cn('liquid-glass-section mb-3 flex items-center gap-2 aiotto-radius-field px-3 py-1.5', typography.listTitle)}>
                     <MessageSquare className="h-3.5 w-3.5 text-muted-foreground" />
                     <span>对话记录</span>
-                    <span className={cn('rounded-[7px] bg-muted px-2 py-0.5 text-muted-foreground', typography.badgeText)}>
+                    <span className={cn('aiotto-radius-button bg-muted px-2 py-0.5 text-muted-foreground', typography.badgeText)}>
                       {preparedMessages.length || currentThread.messageCount}
                     </span>
                   </div>
 
                   {messagesLoading ? (
-                    <div
-                      data-testid="thread-detail-loading-spinner"
-                      role="status"
-                      aria-label="正在加载详情"
-                      className="flex items-center justify-center py-10 text-muted-foreground"
-                    >
-                      <AnimatedIcon icon={AnimatedLoaderIcon} className="h-5 w-5" size={20} animate />
-                    </div>
+                    <ThreadDetailLoadingSkeleton />
                   ) : null}
 
                   {!messagesLoading && preparedMessages.length === 0 ? (
@@ -665,20 +669,22 @@ export function ThreadsContent() {
                           <div
                             data-message-role={message.role}
                             data-message-tone={message.role}
-                            className={`aiotto-motion-card liquid-glass-section relative max-w-[88%] rounded-[10px] px-3 py-2 pr-11 ${messageSideClass} ${messageToneClass(message.role)}`}
+                            className={`aiotto-motion-card liquid-glass-section relative max-w-[88%] aiotto-radius-field px-3 py-2 pr-11 ${messageSideClass} ${messageToneClass(message.role)}`}
                           >
                             <Tooltip content="复制消息" className="absolute right-2 top-2">
-                              <button
+                              <Button
                                 type="button"
+                                variant="tool"
+                                size="icon"
                                 onClick={() => {
                                   void handleCopyMessage(message.content, messageRoleLabel)
                                 }}
-                                className="liquid-glass-button flex h-7 w-7 items-center justify-center rounded-[8px] border border-border/70 bg-background/75 text-muted-foreground shadow-sm hover:text-foreground"
+                                className="h-7 w-7 border-border/70 bg-background/75"
                                 aria-label={messageCopyLabel}
                                 data-aiotto-message-copy-position="top-right"
                               >
                                 <AnimatedIcon icon={AnimatedClipboardIcon} className="h-3.5 w-3.5" size={14} />
-                              </button>
+                              </Button>
                             </Tooltip>
                             <div className="mb-1.5 flex items-center justify-between gap-4">
                               <span className={cn(typography.badgeText, roleTextClass(message.role))}>
@@ -713,15 +719,16 @@ export function ThreadsContent() {
 
               {!tocDialogOpen ? (
                 <Tooltip content="查看对话目录" className="absolute right-4 bottom-4 z-20">
-                  <button
+                  <Button
                     data-testid="thread-floating-toc"
                     type="button"
+                    size="icon"
                     onClick={() => setTocDialogOpen(true)}
-                    className="h-11 w-11 min-[1360px]:!hidden rounded-full bg-primary text-primary-foreground shadow-xl hover:bg-primary/90 active:scale-95 transition-[background-color,box-shadow,transform] flex items-center justify-center"
+                    className="h-11 w-11 rounded-full shadow-xl min-[1360px]:!hidden"
                     aria-label="查看对话目录"
                   >
                     <AnimatedIcon icon={AnimatedListIcon} className="h-5 w-5" size={20} />
-                  </button>
+                  </Button>
                 </Tooltip>
               ) : null}
 
@@ -729,7 +736,7 @@ export function ThreadsContent() {
           ) : (
             <div
               data-shadcn-scroll-panel="threads-detail"
-              className="min-h-0 flex-1 overflow-y-auto flex items-center justify-center p-6"
+              className="min-h-0 flex-1 overflow-y-auto flex items-center justify-center p-4"
             >
               {loading ? (
                 <PageState
@@ -781,6 +788,50 @@ export function ThreadsContent() {
         onConfirm={() => void confirmDeleteThread()}
         onCancel={() => setDeleteConfirmOpen(false)}
       />
+    </div>
+  )
+}
+
+function ThreadDetailLoadingSkeleton() {
+  const skeletonLineClass = 'aiotto-skeleton-shimmer h-3 aiotto-radius-button bg-muted/70'
+
+  return (
+    <div
+      aria-label="正在加载详情"
+      className="space-y-3 py-2"
+      data-testid="thread-detail-loading-skeleton"
+      role="status"
+    >
+      <div
+        className="flex justify-center pb-0.5"
+        data-aiotto-sync-feedback-anchor="thread-detail-skeleton"
+      >
+        <SyncActivityPill testId="thread-detail-loading-sync-indicator" />
+      </div>
+      {Array.from({ length: 4 }).map((_, index) => {
+        const isUser = index % 2 === 0
+
+        return (
+          <div
+            className={cn(
+              'aiotto-radius-field border border-border/55 bg-card/45 p-3',
+              isUser ? 'ml-auto max-w-[76%]' : 'mr-auto max-w-[82%]',
+            )}
+            data-testid="thread-detail-loading-bubble"
+            key={index}
+          >
+            <div className="mb-3 flex items-center justify-between gap-4">
+              <div className={cn(skeletonLineClass, 'w-16')} />
+              <div className={cn(skeletonLineClass, 'w-20')} />
+            </div>
+            <div className="space-y-2">
+              <div className={cn(skeletonLineClass, 'w-full')} />
+              <div className={cn(skeletonLineClass, 'w-11/12')} />
+              <div className={cn(skeletonLineClass, 'w-2/3')} />
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }

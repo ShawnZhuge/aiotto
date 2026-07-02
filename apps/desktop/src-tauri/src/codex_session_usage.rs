@@ -20,8 +20,8 @@ const TREND_DAY_SECONDS: i64 = 24 * TREND_HOUR_SECONDS;
 const MAX_TREND_BUCKETS: i64 = 400;
 
 static SESSION_USAGE_SYNC_RUNNING: AtomicBool = AtomicBool::new(false);
-const EXTERNAL_MODEL_PATTERN_SQL: &str =
-    "(model LIKE 'aiotto_external_%' OR model LIKE 'legacy_external_%')";
+const LOCAL_MODEL_PATTERN_SQL: &str =
+    "(model LIKE 'local_model_%' OR model LIKE 'local_model_%')";
 
 const MODEL_PRICING_SEEDS: &[(&str, &str, &str, &str, &str, &str)] = &[
     ("gpt-5.5", "GPT 5.5", "5", "30", "0.50", "0"),
@@ -194,7 +194,7 @@ pub struct CodexSessionUsageDashboardQuery {
     pub start_date: Option<i64>,
     pub end_date: Option<i64>,
     pub source_filter: Option<String>,
-    pub provider_id: Option<String>,
+    pub source_id: Option<String>,
     pub model: Option<String>,
     pub page: Option<u32>,
     pub page_size: Option<u32>,
@@ -207,10 +207,10 @@ pub struct CodexSessionUsageDashboardSnapshot {
     pub database_path: String,
     pub summary: CodexSessionUsageDashboardSummary,
     pub trend_points: Vec<CodexSessionUsageTrendPoint>,
-    pub provider_rows: Vec<CodexSessionUsageProviderRow>,
+    pub source_rows: Vec<CodexSessionUsageSourceRow>,
     pub model_rows: Vec<CodexSessionUsageModelRow>,
     pub request_log_page: CodexSessionUsageRequestLogPage,
-    pub available_provider_options: Vec<CodexSessionUsageFilterOption>,
+    pub available_source_options: Vec<CodexSessionUsageFilterOption>,
     pub available_model_options: Vec<CodexSessionUsageFilterOption>,
     pub sync: CodexSessionUsageDashboardSyncMeta,
 }
@@ -246,9 +246,9 @@ pub struct CodexSessionUsageTrendPoint {
 
 #[derive(Debug, Clone, Serialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
-pub struct CodexSessionUsageProviderRow {
-    pub provider_id: String,
-    pub provider_name: String,
+pub struct CodexSessionUsageSourceRow {
+    pub source_id: String,
+    pub source_name: String,
     pub request_count: u64,
     pub total_tokens: u64,
     pub total_cost_usd: String,
@@ -281,8 +281,8 @@ pub struct CodexSessionUsageRequestLogPage {
 #[serde(rename_all = "camelCase")]
 pub struct CodexSessionUsageRequestLogRow {
     pub request_id: String,
-    pub provider_id: String,
-    pub provider_name: String,
+    pub source_id: String,
+    pub source_name: String,
     pub app_type: String,
     pub model: String,
     pub request_model: String,
@@ -496,7 +496,7 @@ fn ensure_usage_schema(conn: &Connection) -> Result<(), String> {
 
         CREATE TABLE IF NOT EXISTS proxy_request_logs (
             request_id TEXT PRIMARY KEY,
-            provider_id TEXT NOT NULL,
+            source_id TEXT NOT NULL,
             app_type TEXT NOT NULL,
             model TEXT NOT NULL,
             request_model TEXT NOT NULL,
@@ -826,7 +826,7 @@ fn insert_usage_entry(
     let rows = conn
         .execute(
             "INSERT OR IGNORE INTO proxy_request_logs (
-                request_id, provider_id, app_type, model, request_model,
+                request_id, source_id, app_type, model, request_model,
                 input_tokens, output_tokens, cache_read_tokens, cache_creation_tokens, total_tokens,
                 total_cost_usd, latency_ms, status_code, error_message, session_id,
                 file_path, line_offset, provider_type, is_streaming, cost_multiplier, created_at, data_source
@@ -920,19 +920,19 @@ pub(crate) fn backfill_legacy_usage_history_rows(
         )
         .map_err(|error| error.to_string())?;
 
-        // The legacy usage database is only a one-way migration source. AIOtto keeps its own
+        // The legacy usage database is only a one-way migration source. Aiotto keeps its own
         // rows as the source of truth and only copies missing historical rows,
         // so uninstalling the legacy app after import does not change statistics.
         conn.execute_batch(
             "INSERT OR IGNORE INTO proxy_request_logs (
-                request_id, provider_id, app_type, model, request_model,
+                request_id, source_id, app_type, model, request_model,
                 input_tokens, output_tokens, cache_read_tokens, cache_creation_tokens, total_tokens,
                 total_cost_usd, latency_ms, status_code, error_message, session_id,
                 file_path, line_offset, provider_type, is_streaming, cost_multiplier, created_at, data_source
             )
             SELECT
                 request_id,
-                COALESCE(NULLIF(provider_id, ''), '_codex_session') AS provider_id,
+                COALESCE(NULLIF(source_id, ''), '_codex_session') AS source_id,
                 app_type,
                 model,
                 COALESCE(NULLIF(request_model, ''), model) AS request_model,
@@ -1449,7 +1449,7 @@ fn lookup_model_pricing(
 
 fn model_pricing_candidates(model_id: &str) -> Vec<String> {
     let cleaned = clean_model_id_for_pricing(model_id);
-    if cleaned.is_empty() || cleaned.contains("_external_") {
+    if cleaned.is_empty() || cleaned.contains("_local_") {
         return Vec::new();
     }
 
@@ -1610,35 +1610,16 @@ fn now_epoch_seconds() -> i64 {
         .unwrap_or(0)
 }
 
-fn load_external_provider_labels(codex_home: &Path) -> BTreeMap<String, String> {
-    let mut labels = BTreeMap::new();
-    let state_path = codex_home.join(".aiotto/external/state.json");
-    let Ok(contents) = fs::read_to_string(state_path) else {
-        return labels;
-    };
-    let Ok(value) = serde_json::from_str::<Value>(&contents) else {
-        return labels;
-    };
-    let Some(providers) = value.get("providers").and_then(Value::as_array) else {
-        return labels;
-    };
-
-    for provider in providers {
-        let Some(id) = read_string(provider, &["id"]) else {
-            continue;
-        };
-        let name = read_string(provider, &["name"]).unwrap_or_else(|| id.clone());
-        labels.insert(id, name);
-    }
-
-    labels
+fn load_public_source_labels(codex_home: &Path) -> BTreeMap<String, String> {
+    let _ = codex_home;
+    BTreeMap::new()
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum UsageDashboardSourceFilter {
     All,
     Codex,
-    External,
+    Local,
     Cache,
 }
 
@@ -1657,7 +1638,7 @@ struct NormalizedDashboardQuery {
     start_date: Option<i64>,
     end_date: Option<i64>,
     source_filter: UsageDashboardSourceFilter,
-    provider_id: Option<String>,
+    source_id: Option<String>,
     model: Option<String>,
     page: u32,
     page_size: u32,
@@ -1672,7 +1653,7 @@ pub fn read_codex_session_usage_dashboard_in(
         query.start_date,
         query.end_date,
         query.source_filter,
-        query.provider_id,
+        query.source_id,
         query.model
     );
     let database_path = codex_session_usage_db_path(codex_home);
@@ -1680,20 +1661,20 @@ pub fn read_codex_session_usage_dashboard_in(
     ensure_usage_schema(&conn)?;
     let backfilled = backfill_missing_usage_costs(&conn)?;
     let normalized_query = normalize_dashboard_query(query);
-    let external_provider_labels = load_external_provider_labels(codex_home);
+    let source_labels = load_public_source_labels(codex_home);
     let summary = query_dashboard_summary(&conn, &normalized_query)?;
     let trend_points = query_dashboard_trend_points(&conn, &normalized_query)?;
-    let provider_rows = query_dashboard_provider_rows(
+    let source_rows = query_dashboard_source_rows(
         &conn,
         &normalized_query,
         summary.total_tokens,
-        &external_provider_labels,
+        &source_labels,
     )?;
     let model_rows = query_dashboard_model_rows(&conn, &normalized_query, summary.total_tokens)?;
     let request_log_page =
-        query_dashboard_request_logs(&conn, &normalized_query, &external_provider_labels)?;
-    let available_provider_options =
-        query_dashboard_provider_options(&conn, &normalized_query, &external_provider_labels)?;
+        query_dashboard_request_logs(&conn, &normalized_query, &source_labels)?;
+    let available_source_options =
+        query_dashboard_provider_options(&conn, &normalized_query, &source_labels)?;
     let available_model_options = query_dashboard_model_options(&conn, &normalized_query)?;
 
     Ok(CodexSessionUsageDashboardSnapshot {
@@ -1701,10 +1682,10 @@ pub fn read_codex_session_usage_dashboard_in(
         database_path: database_path.to_string_lossy().to_string(),
         summary,
         trend_points,
-        provider_rows,
+        source_rows,
         model_rows,
         request_log_page,
-        available_provider_options,
+        available_source_options,
         available_model_options,
         sync: CodexSessionUsageDashboardSyncMeta {
             imported: 0,
@@ -1719,7 +1700,7 @@ pub fn read_codex_session_usage_dashboard_in(
             snapshot.summary.total_tokens,
             snapshot.summary.total_cost_usd,
             backfilled,
-            snapshot.provider_rows.len(),
+            snapshot.source_rows.len(),
             snapshot.model_rows.len(),
             snapshot.request_log_page.rows.len()
         );
@@ -1729,7 +1710,7 @@ pub fn read_codex_session_usage_dashboard_in(
 fn normalize_dashboard_query(query: CodexSessionUsageDashboardQuery) -> NormalizedDashboardQuery {
     let source_filter = match query.source_filter.as_deref().map(str::trim) {
         Some("codex") => UsageDashboardSourceFilter::Codex,
-        Some("external") => UsageDashboardSourceFilter::External,
+        Some("local") => UsageDashboardSourceFilter::Local,
         Some("cache") => UsageDashboardSourceFilter::Cache,
         _ => UsageDashboardSourceFilter::All,
     };
@@ -1745,8 +1726,8 @@ fn normalize_dashboard_query(query: CodexSessionUsageDashboardQuery) -> Normaliz
         start_date: query.start_date.filter(|value| *value > 0),
         end_date: query.end_date.filter(|value| *value > 0),
         source_filter,
-        provider_id: query
-            .provider_id
+        source_id: query
+            .source_id
             .map(|value| value.trim().to_string())
             .filter(|value| !value.is_empty()),
         model: query
@@ -2049,37 +2030,37 @@ fn local_datetime_from_timestamp(timestamp: i64) -> Result<chrono::DateTime<Loca
         .ok_or_else(|| format!("无效统计趋势时间戳: {timestamp}"))
 }
 
-fn query_dashboard_provider_rows(
+fn query_dashboard_source_rows(
     conn: &Connection,
     query: &NormalizedDashboardQuery,
     total_tokens: u64,
-    external_provider_labels: &BTreeMap<String, String>,
-) -> Result<Vec<CodexSessionUsageProviderRow>, String> {
-    let effective_provider_sql = effective_provider_id_sql();
-    let provider_name_sql = provider_name_sql(&effective_provider_sql, external_provider_labels);
+    source_labels: &BTreeMap<String, String>,
+) -> Result<Vec<CodexSessionUsageSourceRow>, String> {
+    let effective_source_sql = effective_source_id_sql();
+    let source_name_sql = source_name_sql(&effective_source_sql, source_labels);
     let (where_sql, params) = build_dashboard_where_clause(query, false, false);
     let real_total_tokens = real_total_tokens_sql("");
     let sql = format!(
         "SELECT
-            {effective_provider_sql} AS effective_provider_id,
-            {provider_name_sql} AS provider_name,
+            {effective_source_sql} AS effective_source_id,
+            {source_name_sql} AS source_name,
             COUNT(*) AS request_count,
             COALESCE(SUM({real_total_tokens}), 0) AS total_tokens,
             COALESCE(SUM(CAST(total_cost_usd AS REAL)), 0.0) AS total_cost_usd,
             COALESCE(SUM(CASE WHEN status_code BETWEEN 200 AND 299 THEN 1 ELSE 0 END), 0) AS success_count,
             COALESCE(AVG(latency_ms), 0.0) AS avg_latency_ms
          FROM proxy_request_logs{where_sql}
-         GROUP BY effective_provider_id
-         ORDER BY total_tokens DESC, request_count DESC, provider_name ASC"
+         GROUP BY effective_source_id
+         ORDER BY total_tokens DESC, request_count DESC, source_name ASC"
     );
     let mut stmt = conn.prepare(&sql).map_err(|error| error.to_string())?;
     let rows = stmt
         .query_map(params_from_iter(params.iter()), |row| {
             let request_count = row.get::<_, i64>(2)? as u64;
             let provider_tokens = row.get::<_, i64>(3)? as u64;
-            Ok(CodexSessionUsageProviderRow {
-                provider_id: row.get(0)?,
-                provider_name: row.get(1)?,
+            Ok(CodexSessionUsageSourceRow {
+                source_id: row.get(0)?,
+                source_name: row.get(1)?,
                 request_count,
                 total_tokens: provider_tokens,
                 total_cost_usd: format_cost(row.get::<_, f64>(4)?),
@@ -2149,10 +2130,10 @@ fn query_dashboard_model_rows(
 fn query_dashboard_request_logs(
     conn: &Connection,
     query: &NormalizedDashboardQuery,
-    external_provider_labels: &BTreeMap<String, String>,
+    source_labels: &BTreeMap<String, String>,
 ) -> Result<CodexSessionUsageRequestLogPage, String> {
-    let effective_provider_sql = effective_provider_id_sql();
-    let provider_name_sql = provider_name_sql(&effective_provider_sql, external_provider_labels);
+    let effective_source_sql = effective_source_id_sql();
+    let source_name_sql = source_name_sql(&effective_source_sql, source_labels);
     let (where_sql, params) = build_dashboard_where_clause(query, false, false);
     let count_sql = format!("SELECT COUNT(*) FROM proxy_request_logs{where_sql}");
     let mut count_stmt = conn
@@ -2168,8 +2149,8 @@ fn query_dashboard_request_logs(
     let logs_sql = format!(
         "SELECT
             request_id,
-            {effective_provider_sql} AS effective_provider_id,
-            {provider_name_sql} AS provider_name,
+            {effective_source_sql} AS effective_source_id,
+            {source_name_sql} AS source_name,
             app_type,
             model,
             request_model,
@@ -2200,8 +2181,8 @@ fn query_dashboard_request_logs(
                 .unwrap_or_else(|| row.get::<_, String>(4).unwrap_or_default());
             Ok(CodexSessionUsageRequestLogRow {
                 request_id: row.get(0)?,
-                provider_id: row.get(1)?,
-                provider_name: row.get(2)?,
+                source_id: row.get(1)?,
+                source_name: row.get(2)?,
                 app_type: row.get(3)?,
                 model: row.get(4)?,
                 request_model,
@@ -2236,19 +2217,19 @@ fn query_dashboard_request_logs(
 fn query_dashboard_provider_options(
     conn: &Connection,
     query: &NormalizedDashboardQuery,
-    external_provider_labels: &BTreeMap<String, String>,
+    source_labels: &BTreeMap<String, String>,
 ) -> Result<Vec<CodexSessionUsageFilterOption>, String> {
-    let effective_provider_sql = effective_provider_id_sql();
-    let provider_name_sql = provider_name_sql(&effective_provider_sql, external_provider_labels);
+    let effective_source_sql = effective_source_id_sql();
+    let source_name_sql = source_name_sql(&effective_source_sql, source_labels);
     let (where_sql, params) = build_dashboard_where_clause(query, true, false);
     let sql = format!(
         "SELECT
-            {effective_provider_sql} AS effective_provider_id,
-            {provider_name_sql} AS provider_name,
+            {effective_source_sql} AS effective_source_id,
+            {source_name_sql} AS source_name,
             COUNT(*) AS request_count
          FROM proxy_request_logs{where_sql}
-         GROUP BY effective_provider_id
-         ORDER BY request_count DESC, provider_name ASC"
+         GROUP BY effective_source_id
+         ORDER BY request_count DESC, source_name ASC"
     );
     let mut stmt = conn.prepare(&sql).map_err(|error| error.to_string())?;
     let rows = stmt
@@ -2312,10 +2293,10 @@ fn build_dashboard_where_clause(
     match query.source_filter {
         UsageDashboardSourceFilter::All => {}
         UsageDashboardSourceFilter::Codex => {
-            clauses.push(format!("NOT {}", external_request_sql()));
+            clauses.push(format!("NOT {}", local_request_sql()));
         }
-        UsageDashboardSourceFilter::External => {
-            clauses.push(external_request_sql());
+        UsageDashboardSourceFilter::Local => {
+            clauses.push(local_request_sql());
         }
         UsageDashboardSourceFilter::Cache => {
             clauses.push("cache_read_tokens > 0".to_string());
@@ -2323,9 +2304,9 @@ fn build_dashboard_where_clause(
     }
 
     if !skip_provider_filter {
-        if let Some(provider_id) = &query.provider_id {
-            clauses.push(format!("{} = ?", effective_provider_id_sql()));
-            params.push(SqlValue::Text(provider_id.clone()));
+        if let Some(source_id) = &query.source_id {
+            clauses.push(format!("{} = ?", effective_source_id_sql()));
+            params.push(SqlValue::Text(source_id.clone()));
         }
     }
 
@@ -2368,31 +2349,31 @@ fn real_total_tokens_sql(alias: &str) -> String {
     )
 }
 
-fn external_request_sql() -> String {
-    format!("(provider_id != '_codex_session' OR {EXTERNAL_MODEL_PATTERN_SQL})")
+fn local_request_sql() -> String {
+    format!("(source_id != '_codex_session' OR {LOCAL_MODEL_PATTERN_SQL})")
 }
 
-fn effective_provider_id_sql() -> String {
+fn effective_source_id_sql() -> String {
     format!(
         "CASE
-            WHEN provider_id = '_codex_session' AND {EXTERNAL_MODEL_PATTERN_SQL} THEN model
-            ELSE provider_id
+            WHEN source_id = '_codex_session' AND {LOCAL_MODEL_PATTERN_SQL} THEN model
+            ELSE source_id
          END"
     )
 }
 
-fn provider_name_sql(
+fn source_name_sql(
     provider_expression: &str,
-    external_provider_labels: &BTreeMap<String, String>,
+    source_labels: &BTreeMap<String, String>,
 ) -> String {
     let mut sql =
         format!("CASE ({provider_expression}) WHEN '_codex_session' THEN 'Codex sessions'");
 
-    for (provider_id, provider_name) in external_provider_labels {
+    for (source_id, source_name) in source_labels {
         sql.push_str(&format!(
             " WHEN '{}' THEN '{}'",
-            escape_sql_text(provider_id),
-            escape_sql_text(provider_name)
+            escape_sql_text(source_id),
+            escape_sql_text(source_name)
         ));
     }
 
@@ -2408,7 +2389,7 @@ fn source_label_for_filter(source_filter: UsageDashboardSourceFilter) -> &'stati
     match source_filter {
         UsageDashboardSourceFilter::All => "真实 request logs",
         UsageDashboardSourceFilter::Codex => "Codex sessions request logs",
-        UsageDashboardSourceFilter::External => "外部 request logs",
+        UsageDashboardSourceFilter::Local => "本地 request logs",
         UsageDashboardSourceFilter::Cache => "缓存命中 request logs",
     }
 }

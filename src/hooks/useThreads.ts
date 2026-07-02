@@ -44,7 +44,7 @@ export function useThreads() {
           unlisten()
         }
       } catch (err) {
-        console.debug('[AIOtto][threads] realtime-subscribe-failed', {
+        console.debug('[Aiotto][threads] realtime-subscribe-failed', {
           error: err instanceof Error ? err.message : String(err),
         })
       }

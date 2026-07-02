@@ -23,6 +23,7 @@ export type AutoUpdatePlatformPackage = {
 export type AutoUpdateManifest = {
   version?: string | null
   pubDate?: string | null
+  pub_date?: string | null
   notes?: string | null
   platforms?: Record<string, AutoUpdatePlatformPackage | undefined> | null
 }
@@ -39,6 +40,16 @@ export type AutoUpdateCheckResult = {
   downloadUrl: string | null
   errorCode?: string | null
   errorMessage?: string | null
+}
+
+export type AutoUpdateInstallResult = {
+  status: Extract<AutoUpdateStatus, 'up_to_date' | 'restart_required' | 'blocked' | 'error'>
+  reason: string | null
+  message: string
+  version: string
+  stagedPackagePath: string
+  receiptPath: string
+  restartRequired: boolean
 }
 
 export type AutoUpdateState = {
@@ -93,6 +104,7 @@ export function evaluateUpdateManifest(input: {
 }): AutoUpdateCheckResult {
   const latestVersion = input.manifest.version?.trim() || null
   const platformPackage = input.manifest.platforms?.[input.currentPlatform] ?? null
+  const checkedAt = input.checkedAt || input.manifest.pub_date || input.manifest.pubDate || ''
 
   if (!latestVersion) {
     return createBlockedResult(input, null, platformPackage, 'missing_version', '更新清单缺少版本号。')
@@ -116,7 +128,7 @@ export function evaluateUpdateManifest(input: {
       status: 'up_to_date',
       currentVersion: input.currentVersion,
       latestVersion,
-      checkedAt: input.checkedAt,
+      checkedAt,
       source: input.source,
       releaseNotes: input.manifest.notes ?? null,
       packageSizeBytes: normalizePackageSize(platformPackage.size),
@@ -129,7 +141,7 @@ export function evaluateUpdateManifest(input: {
     status: 'available',
     currentVersion: input.currentVersion,
     latestVersion,
-    checkedAt: input.checkedAt,
+    checkedAt,
     source: input.source,
     releaseNotes: input.manifest.notes ?? null,
     packageSizeBytes: normalizePackageSize(platformPackage.size),
@@ -298,7 +310,7 @@ function createBlockedResult(
     status: 'blocked',
     currentVersion: input.currentVersion,
     latestVersion,
-    checkedAt: input.checkedAt,
+    checkedAt: input.checkedAt || input.manifest.pub_date || input.manifest.pubDate || '',
     source: input.source,
     releaseNotes: input.manifest.notes ?? null,
     packageSizeBytes: normalizePackageSize(platformPackage?.size),

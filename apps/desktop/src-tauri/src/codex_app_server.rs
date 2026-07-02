@@ -253,7 +253,7 @@ fn start_realtime_bridge(
                 "params": {
                     "clientInfo": {
                         "name": "aiotto",
-                        "title": "AIOtto",
+                        "title": "Aiotto",
                         "version": env!("CARGO_PKG_VERSION")
                     },
                     "capabilities": {
@@ -538,7 +538,7 @@ fn run_codex_app_server_thread_snapshot(
             "params": {
                 "clientInfo": {
                     "name": "aiotto",
-                    "title": "AIOtto",
+                    "title": "Aiotto",
                     "version": env!("CARGO_PKG_VERSION")
                 },
                 "capabilities": {

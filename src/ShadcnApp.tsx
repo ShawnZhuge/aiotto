@@ -70,7 +70,7 @@ export function ShadcnApp() {
           <div className="grid h-11 w-11 place-items-center rounded-[12px] bg-sidebar-primary text-sm font-semibold text-sidebar-primary-foreground shadow">
             AI
           </div>
-          {!sidebarCollapsed ? <div className="text-base font-semibold">AIOtto</div> : null}
+          {!sidebarCollapsed ? <div className="text-base font-semibold">Aiotto</div> : null}
         </div>
 
         <nav className="flex-1 space-y-5 overflow-y-auto px-3 pb-4">

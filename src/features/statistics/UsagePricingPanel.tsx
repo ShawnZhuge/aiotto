@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Check, ChevronDown, ChevronUp, Coins, Loader2, Pencil, Plus, Trash2 } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { Input } from '../../components/ui/input'
+import { NumberField } from '../../components/ui/number-field'
 import {
   Select,
   Tooltip,
@@ -207,10 +208,10 @@ export function UsagePricingPanel() {
   }
 
   return (
-    <section className="overflow-hidden rounded-[20px] border border-border/70 bg-card/45 shadow-sm">
-      <div className="flex items-center justify-between gap-4 border-b border-border/60 bg-muted/20 px-5 py-4">
+    <section className="overflow-hidden aiotto-radius-card border border-border/70 bg-card/45 shadow-sm">
+      <div className="flex items-center justify-between gap-4 border-b border-border/60 bg-muted/20 p-4">
         <div className="flex min-w-0 items-center gap-3">
-          <span className="grid h-8 w-8 place-items-center rounded-[10px] bg-amber-500/10 text-amber-500">
+          <span className="grid h-8 w-8 place-items-center aiotto-radius-field bg-amber-500/10 text-amber-500">
             <Coins aria-hidden="true" className="h-4 w-4" />
           </span>
           <div className="min-w-0">
@@ -234,7 +235,7 @@ export function UsagePricingPanel() {
       </div>
 
       {expanded ? (
-        <div className="flex flex-col gap-6 px-5 py-5">
+        <div className="flex flex-col gap-4 p-4">
           <section className="flex flex-col gap-3">
             <div className="flex items-start justify-between gap-3">
               <div>
@@ -262,7 +263,7 @@ export function UsagePricingPanel() {
                   </span>
                 ) : null}
                 <Button
-                  className={cn('h-8 rounded-[9px] px-4', typography.controlText)}
+                  className={cn('h-8 aiotto-radius-button px-4', typography.controlText)}
                   disabled={savingDefaults || loading}
                   onClick={savePricingState}
                   type="button"
@@ -273,7 +274,7 @@ export function UsagePricingPanel() {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-[14px] border border-border/60 bg-background/35">
+            <div className="overflow-hidden aiotto-radius-inset border border-border/60 bg-background/35">
               <Table>
                 <TableHeader className="[&_tr]:border-border/50">
                   <TableRow className="border-border/50">
@@ -287,16 +288,16 @@ export function UsagePricingPanel() {
                     <TableRow className="border-border/40 hover:bg-muted/30" key={row.appId}>
                       <TableCell className={cn(typography.listTitle, 'text-card-foreground')}>{row.appLabel}</TableCell>
                       <TableCell>
-                        <Input
-                          aria-label={`${row.appLabel} 默认倍率`}
-                          className="h-8 w-24 rounded-[9px] bg-card/70 text-sm"
+                        <NumberField
+                          ariaLabel={`${row.appLabel} 默认倍率`}
+                          containerClassName="h-8 w-24 bg-card/70"
+                          inputClassName="text-sm"
                           disabled={savingDefaults || loading}
                           inputMode="decimal"
                           min="0"
                           step="0.01"
-                          type="number"
                           value={row.multiplier}
-                          onChange={(event) => updateDefaultRow(row.appId, { multiplier: event.target.value })}
+                          onValueChange={(value) => updateDefaultRow(row.appId, { multiplier: value })}
                         />
                       </TableCell>
                       <TableCell>
@@ -305,7 +306,7 @@ export function UsagePricingPanel() {
                           className="!w-[128px]"
                           disabled={savingDefaults || loading}
                           options={pricingModeOptions}
-                          triggerClassName="min-h-8 rounded-[9px] bg-card/70 text-xs shadow-sm"
+                          triggerClassName="min-h-8 aiotto-radius-button bg-card/70 text-xs shadow-sm"
                           value={row.modelSource}
                           onValueChange={(value) =>
                             updateDefaultRow(row.appId, { modelSource: value as UsagePricingModelSource })
@@ -328,7 +329,7 @@ export function UsagePricingPanel() {
               </h3>
               <Button
                 variant="outline"
-                className={cn('h-8 rounded-[9px] px-3', typography.controlText)}
+                className={cn('h-8 aiotto-radius-button px-3', typography.controlText)}
                 disabled={loading}
                 onClick={addPricingRow}
                 type="button"
@@ -338,7 +339,7 @@ export function UsagePricingPanel() {
               </Button>
             </div>
 
-            <div className="overflow-hidden rounded-[14px] border border-border/60 bg-background/35">
+            <div className="overflow-hidden aiotto-radius-inset border border-border/60 bg-background/35">
               <Table>
                 <TableHeader className="[&_tr]:border-border/50">
                   <TableRow className="border-border/50">
@@ -362,7 +363,7 @@ export function UsagePricingPanel() {
                           {isEditing ? (
                             <Input
                               aria-label="模型 ID"
-                              className="h-8 min-w-[180px] rounded-[9px] bg-card/70 font-mono text-[13px]"
+                              className="h-8 min-w-[180px] aiotto-radius-button bg-card/70 font-mono text-[13px]"
                               value={row.modelId}
                               onChange={(event) => updateModelRow(row.rowKey, { modelId: event.target.value })}
                             />
@@ -374,7 +375,7 @@ export function UsagePricingPanel() {
                           {isEditing ? (
                             <Input
                               aria-label={`${row.modelId} 显示名称`}
-                              className="h-8 min-w-[160px] rounded-[9px] bg-card/70 text-sm"
+                              className="h-8 min-w-[160px] aiotto-radius-button bg-card/70 text-sm"
                               value={row.displayName}
                               onChange={(event) => updateModelRow(row.rowKey, { displayName: event.target.value })}
                             />
@@ -484,15 +485,15 @@ function EditablePricingCell({
   return (
     <TableCell className={cn('text-right', typography.tableNumber)}>
       {isEditing ? (
-        <Input
-          aria-label={label}
-          className="ml-auto h-8 w-24 rounded-[9px] bg-card/70 text-right font-mono text-[13px]"
+        <NumberField
+          ariaLabel={label}
+          containerClassName="ml-auto h-8 w-24 bg-card/70"
+          inputClassName="font-mono text-[13px]"
           inputMode="decimal"
           min="0"
           step="0.0001"
-          type="number"
           value={value}
-          onChange={(event) => onChange(event.target.value)}
+          onValueChange={onChange}
         />
       ) : (
         formatPricingUsdPerMillion(value)
@@ -502,7 +503,7 @@ function EditablePricingCell({
 }
 
 const iconButtonClass =
-  'aiotto-motion-control inline-grid h-8 w-8 place-items-center rounded-[9px] text-muted-foreground transition-[background-color,color] duration-200 hover:bg-muted/70 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50'
+  'aiotto-motion-control inline-grid h-8 w-8 place-items-center aiotto-radius-button text-muted-foreground transition-[background-color,color] duration-200 hover:bg-muted/70 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50'
 
 function createDefaultPricingPanelState(): StoredPricingPanelState {
   return toPricingPanelState({

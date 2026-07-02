@@ -16,6 +16,95 @@ type LoadingStep = {
   status: 'queued' | 'active' | 'complete'
 }
 
+type LoadingLayout = 'panel' | 'compact'
+
+const skeletonBlockClass = 'aiotto-skeleton-shimmer aiotto-radius-button bg-muted/70'
+
+export function SyncActivityPill({
+  label = '正在同步',
+  className = '',
+  testId = 'sync-activity-pill',
+}: {
+  label?: string
+  className?: string
+  testId?: string
+}) {
+  return (
+    <span
+      className={`inline-flex h-7 items-center gap-1.5 aiotto-radius-button border border-border/70 bg-card/85 px-2.5 text-[11px] font-medium text-muted-foreground shadow-sm backdrop-blur-md ${className}`}
+      data-testid={testId}
+    >
+      <AnimatedIcon icon={AnimatedLoaderIcon} className="h-3 w-3 text-primary" size={12} animate />
+      {label}
+    </span>
+  )
+}
+
+function LoadingSkeletonBlock({ className }: { className: string }) {
+  return <span className={`${skeletonBlockClass} ${className}`} />
+}
+
+function LoadingStateSkeleton({ layout }: { layout: LoadingLayout }) {
+  if (layout === 'compact') {
+    return (
+      <div
+        aria-hidden="true"
+        className="mt-4 space-y-3"
+        data-testid="loading-state-skeleton"
+      >
+        {Array.from({ length: 3 }).map((_, index) => (
+          <div className="flex items-center gap-3" key={index}>
+            <LoadingSkeletonBlock className="h-8 w-8 shrink-0" />
+            <div className="min-w-0 flex-1 space-y-2">
+              <LoadingSkeletonBlock className="h-3 w-32" />
+              <LoadingSkeletonBlock className="h-2.5 w-full" />
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  return (
+    <div
+      aria-hidden="true"
+      className="mt-4 grid gap-3 sm:grid-cols-2"
+      data-testid="loading-state-skeleton"
+    >
+      {Array.from({ length: 4 }).map((_, index) => (
+        <div className="aiotto-radius-inset border border-border/55 bg-background/45 p-3" key={index}>
+          <LoadingSkeletonBlock className="mb-3 h-3 w-24" />
+          <LoadingSkeletonBlock className="h-7 w-28" />
+          <LoadingSkeletonBlock className="mt-3 h-2.5 w-full" />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export function DrawingFrameLoadingIndicator({
+  label,
+  className = '',
+}: {
+  label: string
+  className?: string
+}) {
+  return (
+    <div
+      aria-label={label}
+      className={`flex min-h-[180px] flex-col items-center justify-center gap-3 text-center ${className}`}
+      data-aiotto-loading-kind="drawing-frame"
+      data-testid="drawing-frame-loading-indicator"
+      role="status"
+    >
+      <span className="grid h-10 w-10 place-items-center rounded-full border border-primary/20 bg-primary/10 text-primary shadow-sm">
+        <AnimatedIcon icon={AnimatedLoaderIcon} className="h-5 w-5" size={20} animate />
+      </span>
+      <span className="text-sm font-medium text-muted-foreground">{label}</span>
+    </div>
+  )
+}
+
 function stateAction({ actionLabel, onAction }: StateActionProps) {
   if (!actionLabel) {
     return null
@@ -57,34 +146,47 @@ export function LoadingState({
   title,
   description,
   steps = [],
+  layout = 'panel',
 }: {
   title: string
   description: string
   steps?: LoadingStep[]
+  layout?: LoadingLayout
 }) {
   return (
-    <div aria-busy="true" aria-label={title} className="ui-state-panel ui-state-panel--loading" role="status">
-      <StateIcon tone="loading">
-        <AnimatedIcon icon={AnimatedLoaderIcon} className="h-5 w-5" size={20} animate />
-      </StateIcon>
+    <div
+      aria-busy="true"
+      aria-label={title}
+      className={`ui-state-panel ui-state-panel--loading aiotto-radius-card border border-border/70 bg-card/70 p-4 shadow-sm ${
+        layout === 'compact' ? 'text-left' : ''
+      }`}
+      data-aiotto-loading-layout={layout}
+      role="status"
+    >
+      <div className="flex items-start gap-3">
+        <StateIcon tone="loading">
+          <AnimatedIcon icon={AnimatedLoaderIcon} className="h-5 w-5" size={20} animate />
+        </StateIcon>
+        <div className="ui-state-content min-w-0 flex-1">
+          <h2 className="text-sm font-semibold text-card-foreground">{title}</h2>
+          <p className="mt-1 text-sm leading-6 text-muted-foreground">{description}</p>
+        </div>
+      </div>
       <div className="ui-state-content">
-        <h2>{title}</h2>
-        <p>{description}</p>
         {steps.length > 0 ? (
-          <div className="ui-state-steps" aria-label={`${title}步骤`}>
+          <div className="ui-state-steps mt-4 flex flex-wrap gap-2" aria-label={`${title}步骤`}>
             {steps.map((step) => (
-              <span className={`ui-state-step ui-state-step--${step.status}`} key={step.label}>
-                {step.status === 'complete' ? <CheckCircle2 /> : <span className="ui-state-step-dot" />}
+              <span
+                className={`ui-state-step ui-state-step--${step.status} inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background/60 px-2.5 py-1 text-xs text-muted-foreground`}
+                key={step.label}
+              >
+                {step.status === 'complete' ? <CheckCircle2 className="h-3 w-3" /> : <span className="ui-state-step-dot h-1.5 w-1.5 rounded-full bg-primary/70" />}
                 {step.label}
               </span>
             ))}
           </div>
         ) : null}
-        <div className="ui-state-skeleton" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
+        <LoadingStateSkeleton layout={layout} />
       </div>
     </div>
   )

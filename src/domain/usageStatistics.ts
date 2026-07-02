@@ -26,9 +26,9 @@ export type UsageStatisticsTrendPoint = {
   totalCostUsd: string
 }
 
-export type UsageStatisticsProviderRow = {
-  providerId: string
-  providerName: string
+export type UsageStatisticsSourceRow = {
+  sourceId: string
+  sourceName: string
   requestCount: number
   totalTokens: number
   totalCostUsd: string
@@ -48,8 +48,8 @@ export type UsageStatisticsModelRow = {
 
 export type UsageStatisticsRequestLogRow = {
   requestId: string
-  providerId: string
-  providerName: string
+  sourceId: string
+  sourceName: string
   appType: string
   model: string
   requestModel: string
@@ -91,10 +91,10 @@ export type UsageStatisticsDashboardSnapshot = {
   databasePath: string | null
   summary: UsageStatisticsSummary
   trendPoints: UsageStatisticsTrendPoint[]
-  providerRows: UsageStatisticsProviderRow[]
+  sourceRows: UsageStatisticsSourceRow[]
   modelRows: UsageStatisticsModelRow[]
   requestLogPage: UsageStatisticsRequestLogPage
-  availableProviderOptions: UsageStatisticsFilterOption[]
+  availableSourceOptions: UsageStatisticsFilterOption[]
   availableModelOptions: UsageStatisticsFilterOption[]
   sync: UsageStatisticsSyncMeta
 }
@@ -105,7 +105,7 @@ export type ReadUsageStatisticsDashboardInput = {
   startDate?: number | null
   endDate?: number | null
   sourceFilter: UsageStatisticsSourceFilter
-  providerId?: string | null
+  sourceId?: string | null
   model?: string | null
   page?: number
   pageSize?: number
@@ -162,7 +162,7 @@ export const emptyUsageStatisticsDashboard: UsageStatisticsDashboardSnapshot = {
     distinctSessionCount: 0,
   },
   trendPoints: [],
-  providerRows: [],
+  sourceRows: [],
   modelRows: [],
   requestLogPage: {
     total: 0,
@@ -170,7 +170,7 @@ export const emptyUsageStatisticsDashboard: UsageStatisticsDashboardSnapshot = {
     pageSize: 20,
     rows: [],
   },
-  availableProviderOptions: [],
+  availableSourceOptions: [],
   availableModelOptions: [],
   sync: {
     imported: 0,
@@ -413,7 +413,7 @@ export async function readCodexSessionUsageDashboardWithFallback(
         startDate,
         endDate,
         sourceFilter: input.sourceFilter,
-        providerId: normalizeString(input.providerId),
+        sourceId: normalizeString(input.sourceId),
         model: normalizeString(input.model)?.toLowerCase(),
         page: input.page ?? 0,
         pageSize: input.pageSize ?? 20,
@@ -607,10 +607,10 @@ function normalizeUsageStatisticsDashboard(value: unknown): UsageStatisticsDashb
     databasePath: readString(value.databasePath),
     summary: normalizeUsageStatisticsSummary(value.summary),
     trendPoints: readArray(value.trendPoints).map(normalizeUsageStatisticsTrendPoint),
-    providerRows: readArray(value.providerRows).map(normalizeUsageStatisticsProviderRow),
+    sourceRows: readArray(value.sourceRows).map(normalizeUsageStatisticsSourceRow),
     modelRows: readArray(value.modelRows).map(normalizeUsageStatisticsModelRow),
     requestLogPage: normalizeUsageStatisticsRequestLogPage(value.requestLogPage),
-    availableProviderOptions: readArray(value.availableProviderOptions).map(normalizeUsageStatisticsFilterOption),
+    availableSourceOptions: readArray(value.availableSourceOptions).map(normalizeUsageStatisticsFilterOption),
     availableModelOptions: readArray(value.availableModelOptions).map(normalizeUsageStatisticsFilterOption),
     sync: normalizeUsageStatisticsSyncMeta(value.sync),
   }
@@ -663,11 +663,11 @@ function normalizeUsageStatisticsTrendPoint(value: unknown): UsageStatisticsTren
   }
 }
 
-function normalizeUsageStatisticsProviderRow(value: unknown): UsageStatisticsProviderRow {
+function normalizeUsageStatisticsSourceRow(value: unknown): UsageStatisticsSourceRow {
   if (!isDashboardPayload(value)) {
     return {
-      providerId: '',
-      providerName: '',
+      sourceId: '',
+      sourceName: '',
       requestCount: 0,
       totalTokens: 0,
       totalCostUsd: '0.0000',
@@ -678,8 +678,8 @@ function normalizeUsageStatisticsProviderRow(value: unknown): UsageStatisticsPro
   }
 
   return {
-    providerId: readString(value.providerId) ?? '',
-    providerName: readString(value.providerName) ?? '',
+    sourceId: readString(value.sourceId) ?? '',
+    sourceName: readString(value.sourceName) ?? '',
     requestCount: readInteger(value.requestCount),
     totalTokens: readInteger(value.totalTokens),
     totalCostUsd: normalizeCostString(value.totalCostUsd),
@@ -728,8 +728,8 @@ function normalizeUsageStatisticsRequestLogRow(value: unknown): UsageStatisticsR
   if (!isDashboardPayload(value)) {
     return {
       requestId: '',
-      providerId: '',
-      providerName: '',
+      sourceId: '',
+      sourceName: '',
       appType: '',
       model: '',
       requestModel: '',
@@ -750,8 +750,8 @@ function normalizeUsageStatisticsRequestLogRow(value: unknown): UsageStatisticsR
 
   return {
     requestId: readString(value.requestId) ?? '',
-    providerId: readString(value.providerId) ?? '',
-    providerName: readString(value.providerName) ?? '',
+    sourceId: readString(value.sourceId) ?? '',
+    sourceName: readString(value.sourceName) ?? '',
     appType: readString(value.appType) ?? '',
     model: readString(value.model) ?? '',
     requestModel: readString(value.requestModel) ?? '',

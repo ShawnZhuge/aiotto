@@ -179,7 +179,7 @@ export function UsageDateRangePicker({
         aria-expanded={open}
         aria-haspopup="dialog"
         aria-label={`日期筛选：${label}`}
-        className={cn('h-9 min-w-[118px] rounded-[10px] bg-card/80 px-3 shadow-sm', typography.controlText)}
+        className={cn('h-9 min-w-[118px] aiotto-radius-field bg-card/80 px-3 shadow-sm', typography.controlText)}
         variant={selection.type === 'custom' ? 'default' : 'outline'}
         type="button"
         onClick={() => {
@@ -200,7 +200,7 @@ export function UsageDateRangePicker({
             <div
               ref={panelRef}
               aria-label="日期范围"
-              className="fixed z-[135] overflow-hidden rounded-[18px] border border-border/70 bg-card/95 p-3 text-card-foreground shadow-2xl backdrop-blur-md"
+              className="aiotto-date-range-popover fixed overflow-hidden aiotto-radius-card border border-border/70 bg-card/95 p-3 text-card-foreground shadow-2xl backdrop-blur-md"
               id={popoverId}
               role="dialog"
               style={panelStyle ?? { visibility: 'hidden' }}
@@ -210,7 +210,7 @@ export function UsageDateRangePicker({
                   <Button
                     key={option.value}
                     aria-pressed={selection.type === 'preset' && selection.range === option.value}
-                    className={cn('h-8 rounded-[9px] px-3', typography.controlText)}
+                    className={cn('h-8 aiotto-radius-button px-3', typography.controlText)}
                     size="sm"
                     type="button"
                     variant={selection.type === 'preset' && selection.range === option.value ? 'default' : 'outline'}
@@ -247,13 +247,13 @@ export function UsageDateRangePicker({
                     }}
                   />
                   {!canApply ? (
-                    <div className={cn('rounded-[12px] border border-destructive/20 bg-destructive/10 px-3 py-2 text-destructive', typography.controlText)}>
+                    <div className={cn('aiotto-radius-inset border border-destructive/20 bg-destructive/10 px-3 py-2 text-destructive', typography.controlText)}>
                       结束时间必须晚于开始时间。
                     </div>
                   ) : null}
                   <div className="mt-auto flex items-center justify-end gap-2">
                     <Button
-                      className="h-8 rounded-[9px] px-4"
+                      className="h-8 aiotto-radius-button px-4"
                       size="sm"
                       type="button"
                       variant="ghost"
@@ -262,7 +262,7 @@ export function UsageDateRangePicker({
                       取消
                     </Button>
                     <Button
-                      className="h-8 rounded-[9px] px-4"
+                      className="h-8 aiotto-radius-button px-4"
                       disabled={!canApply}
                       size="sm"
                       type="button"
@@ -273,11 +273,11 @@ export function UsageDateRangePicker({
                   </div>
                 </div>
 
-                <div className="min-w-0 rounded-[16px] border border-border/60 bg-background/55 p-3">
+                <div className="min-w-0 aiotto-radius-card border border-border/60 bg-background/55 p-3">
                   <div className="mb-3 flex items-center justify-between gap-3">
                     <Button
                       aria-label="上个月"
-                      className="size-8 rounded-[9px]"
+                      className="size-8 aiotto-radius-button"
                       size="icon"
                       type="button"
                       variant="ghost"
@@ -288,7 +288,7 @@ export function UsageDateRangePicker({
                     <div className={cn(typography.cardTitle, 'text-sm')}>{formatMonthTitle(calendarMonth)}</div>
                     <Button
                       aria-label="下个月"
-                      className="size-8 rounded-[9px]"
+                      className="size-8 aiotto-radius-button"
                       size="icon"
                       type="button"
                       variant="ghost"
@@ -314,7 +314,7 @@ export function UsageDateRangePicker({
                         <button
                           aria-label={formatCalendarButtonLabel(cell.date)}
                           className={cn(
-                            'aiotto-motion-control relative h-8 rounded-[9px] transition-[background-color,color,opacity,box-shadow]',
+                            'aiotto-motion-control relative h-8 aiotto-radius-button transition-[background-color,color,opacity,box-shadow]',
                             typography.controlText,
                             cell.inMonth ? 'text-foreground' : 'text-muted-foreground/45',
                             inRange && 'bg-primary/10 text-primary',
@@ -360,14 +360,14 @@ function DateTimeField({
   return (
     <label
       className={cn(
-        'block rounded-[14px] border bg-background/55 p-3 transition-[border-color,box-shadow]',
+        'block aiotto-radius-inset border bg-background/55 p-3 transition-[border-color,box-shadow]',
         active ? 'border-primary/55 shadow-sm shadow-primary/10' : 'border-border/60',
       )}
       htmlFor={id}
     >
       <span className={cn('mb-2 block', typography.sectionDescription, 'font-medium')}>{label}</span>
       <Input
-        className={cn('h-9 rounded-[10px] border-0 bg-transparent px-0 shadow-none focus-visible:ring-0', typography.tableNumber)}
+        className={cn('h-9 aiotto-radius-field border-0 bg-transparent px-0 shadow-none focus-visible:ring-0', typography.tableNumber)}
         id={id}
         step={60}
         type="datetime-local"

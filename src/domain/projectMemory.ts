@@ -21,7 +21,7 @@ export type ProjectMemoryTemplateResult = {
   note: string
 }
 
-export const defaultProjectMemoryPath = '~/Projects/AIOtto'
+export const defaultProjectMemoryPath = '~/Projects/Aiotto'
 
 export const projectMemoryTemplateFields = [
   '项目目标',

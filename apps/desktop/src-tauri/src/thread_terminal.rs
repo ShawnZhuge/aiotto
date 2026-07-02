@@ -213,7 +213,7 @@ fn yaml_quote(value: &str) -> String {
 
 fn build_warp_launch_config(workdir: &str, restore_command: &str) -> String {
     format!(
-        "name: AIOtto Thread Restore\nwindows:\n  - tabs:\n      - title: AIOtto Restore\n        layout:\n          cwd: {}\n        commands:\n          - exec: {}\n",
+        "name: Aiotto Thread Restore\nwindows:\n  - tabs:\n      - title: Aiotto Restore\n        layout:\n          cwd: {}\n        commands:\n          - exec: {}\n",
         yaml_quote(workdir),
         yaml_quote(restore_command.trim())
     )

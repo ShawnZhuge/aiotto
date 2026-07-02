@@ -9,7 +9,7 @@ pub struct AppBootstrapState {
 
 pub fn build_app_bootstrap_state() -> AppBootstrapState {
     AppBootstrapState {
-        product_name: "AIOtto",
+        product_name: "Aiotto",
         platform_scope: "macOS-first",
         mvp_data_boundary: "local-only",
     }

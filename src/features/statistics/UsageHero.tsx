@@ -27,10 +27,10 @@ export function UsageHero({
   const totalTokens = dashboard.summary.totalTokens
 
   return (
-    <section className="liquid-glass-card min-w-0 rounded-[22px] p-5">
-      <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
+    <section className="liquid-glass-card min-w-0 aiotto-radius-card p-4">
+      <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
         <div className="flex min-w-0 items-center gap-4">
-          <div className="grid size-12 shrink-0 place-items-center rounded-[16px] bg-primary/10 text-primary shadow-sm">
+          <div className="grid size-12 shrink-0 place-items-center aiotto-radius-card bg-primary/10 text-primary shadow-sm">
             <AnimatedIcon icon={AnimatedActivityIcon} size={24} />
           </div>
           <div className="min-w-0">
@@ -49,7 +49,7 @@ export function UsageHero({
           </div>
         </div>
 
-        <div className="grid min-w-[260px] grid-cols-2 gap-2 rounded-[18px] border border-border/70 bg-card/55 p-3 shadow-sm">
+        <div className="grid min-w-[260px] grid-cols-2 gap-2 aiotto-radius-card border border-border/70 bg-card/55 p-3 shadow-sm">
           <MiniMetric
             icon={<Sparkles aria-hidden="true" className="size-4 text-primary" />}
             label="总请求数"
@@ -66,7 +66,7 @@ export function UsageHero({
         </div>
       </div>
 
-      <div className="mt-5 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3">
+      <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3">
         <UsageMetricCard
           icon={<ArrowDownToLine aria-hidden="true" className="size-4" />}
           label="新增输入"
@@ -146,7 +146,7 @@ function UsageMetricCard({
   rawValue: number
 }) {
   return (
-    <div className="min-w-0 rounded-[16px] border border-border/70 bg-card/60 p-4 shadow-sm">
+    <div className="min-w-0 aiotto-radius-card border border-border/70 bg-card/60 p-4 shadow-sm">
       <div className={cn('flex min-w-0 items-center gap-2 text-muted-foreground', typography.listTitle)}>
         {icon}
         <span className="truncate">{label}</span>
@@ -173,7 +173,7 @@ function MeterMetricCard({
   accentClassName: string
 }) {
   return (
-    <div className="min-w-0 rounded-[16px] border border-border/70 bg-card/60 p-4 shadow-sm">
+    <div className="min-w-0 aiotto-radius-card border border-border/70 bg-card/60 p-4 shadow-sm">
       <div className="flex min-w-0 items-center justify-between gap-3">
         <div className={cn('truncate text-muted-foreground', typography.listTitle)}>{label}</div>
         <div className={cn('shrink-0', typography.metricSecondary)}>{value}</div>

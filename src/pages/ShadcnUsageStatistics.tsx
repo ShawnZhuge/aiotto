@@ -137,7 +137,7 @@ export function ShadcnUsageStatistics() {
                     dashboard.requestLogPage.rows.map((row) => (
                       <tr key={row.requestId} className="border-b border-border/50">
                         <td className="px-6 py-4 font-mono text-xs text-muted-foreground">{formatRequestTimestamp(row.createdAt)}</td>
-                        <td className="px-6 py-4">{row.providerName || row.appType || 'Codex'}</td>
+                        <td className="px-6 py-4">{row.sourceName || row.appType || 'Codex'}</td>
                         <td className="px-6 py-4 font-mono text-xs">{row.model || row.requestModel || '-'}</td>
                         <td className="px-6 py-4 font-mono">{formatUsageInteger(row.inputTokens)}</td>
                         <td className="px-6 py-4 font-mono">{formatUsageInteger(row.outputTokens)}</td>
