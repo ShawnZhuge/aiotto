@@ -25,7 +25,7 @@
 
 Most users should download the latest macOS installer from [GitHub Releases](https://github.com/ShawnZhuge/aiotto/releases). Release builds provide the complete product experience.
 
-This repository also provides a public source tree for reviewing, building, and contributing to public modules.
+This repository also provides a buildable community shell generated from a strict allowlist for reviewing and improving the public interface. The complete product experience is distributed through GitHub Releases.
 
 ---
 
@@ -66,48 +66,38 @@ Long-running Codex work usually creates the same operational pain: account state
 
 ---
 
-## Tech Stack
+## Community Source
 
-Tauri 2 · React 19 · TypeScript · Vite · Tailwind CSS · shadcn/ui · Rust · macOS system integration
-
----
-
-## Run From Source
-
-**Requirements:** Node.js · pnpm · Rust · [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/)
+The community shell includes the dashboard, session examples, backup examples, and device-local appearance settings. It uses public sample data and does not read or modify local product state.
 
 ```bash
 git clone https://github.com/ShawnZhuge/aiotto.git
 cd aiotto
 pnpm install
-pnpm tauri:dev
+pnpm dev
 ```
+
+Build the desktop shell:
 
 ```bash
 pnpm build
-cargo check --manifest-path apps/desktop/src-tauri/Cargo.toml
+cargo check --locked --manifest-path src-tauri/Cargo.toml
 pnpm tauri:build
 ```
 
----
-
-## Architecture Overview
+Project structure:
 
 ```text
-React UI -> Tauri commands -> Rust runtime -> local Codex data
+src/          React community interface
+src-tauri/    Minimal Tauri shell with no product commands
+assets/       Public brand and product imagery
 ```
 
 ---
 
-## Public Source Notice
+## Community Feedback
 
-This repository is Aiotto's public source tree for reviewing and contributing to public modules. Complete product capabilities are provided by the release builds published on GitHub Releases.
-
----
-
-## Contributing
-
-Issues and pull requests are welcome. For larger changes, please open an issue first. This project reads and writes local Codex data, so contributions must follow local data-safety conventions.
+Issues are welcome for product feedback, bug reports, and feature requests. To protect your privacy, do not upload account details, keys, tokens, or logs and screenshots containing personal data.
 
 ---
 

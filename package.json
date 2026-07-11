@@ -1,45 +1,27 @@
 {
-  "name": "aiotto",
+  "name": "aiotto-community",
   "version": "0.1.0",
+  "private": false,
   "type": "module",
   "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ShawnZhuge/aiotto.git"
-  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "tauri": "pnpm --dir apps/desktop tauri",
-    "tauri:dev": "pnpm --dir apps/desktop tauri dev",
-    "tauri:build": "pnpm --dir apps/desktop tauri build"
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
   },
   "dependencies": {
-    "@animateicons/react": "^0.3.3",
-    "@radix-ui/react-slot": "^1.2.4",
-    "@radix-ui/react-tabs": "^1.1.14",
-    "@tanstack/react-query": "^5.101.0",
-    "@tanstack/react-virtual": "^3.14.3",
-    "@tauri-apps/api": "^2.11.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.40.0",
-    "lucide-react": "^1.17.0",
+    "lucide-react": "^1.23.0",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "recharts": "^3.8.1",
-    "tailwind-merge": "^3.6.0"
+    "react-dom": "^19.2.6"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@tailwindcss/vite": "^4.3.0",
     "@tauri-apps/cli": "^2.11.2",
-    "@types/node": "^24.12.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
-    "tailwindcss": "^4.3.0",
     "typescript": "~6.0.2",
     "vite": "^8.0.12"
   }

@@ -1,0 +1,23 @@
+[package]
+name = "aiotto-community"
+version = "0.1.0"
+description = "Buildable community shell for Aiotto"
+authors = ["ShawnZhuge"]
+license = "Apache-2.0"
+repository = "https://github.com/ShawnZhuge/aiotto"
+edition = "2021"
+
+[lib]
+name = "aiotto_community_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.6.2", features = [] }
+
+[dependencies]
+tauri = { version = "2.11.2", features = [] }
+
+[profile.release]
+strip = "symbols"
+debug = 0
+split-debuginfo = "off"

@@ -1,0 +1,39 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "Aiotto Community",
+  "version": "0.1.0",
+  "identifier": "app.aiotto.community",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://127.0.0.1:4173",
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Aiotto Community",
+        "width": 1180,
+        "height": 760,
+        "minWidth": 960,
+        "minHeight": 640,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["app", "dmg"],
+    "category": "DeveloperTool",
+    "icon": ["icons/icon.png"],
+    "macOS": {
+      "minimumSystemVersion": "12.0"
+    }
+  }
+}
