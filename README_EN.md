@@ -5,7 +5,11 @@
 <h1 align="center">Aiotto</h1>
 
 <p align="center">
-  <strong>A native desktop workbench for OpenAI Codex accounts, quota, relay routing, sessions, usage, and local configuration.</strong>
+  <strong>An all-in-one native desktop workbench for OpenAI Codex</strong>
+</p>
+
+<p align="center">
+  Manage accounts and quota, relay services and smart routing, sessions, usage, extensions, and desktop status in one place.
 </p>
 
 <p align="center">
@@ -13,43 +17,18 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/ShawnZhuge/aiotto/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/ShawnZhuge/aiotto?display_name=tag&label=Release" /></a>
+  <a href="https://github.com/ShawnZhuge/aiotto/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/ShawnZhuge/aiotto/total?label=Downloads" /></a>
   <img alt="Platform" src="https://img.shields.io/badge/macOS-12%2B-black" />
   <img alt="Tauri" src="https://img.shields.io/badge/Tauri-2.x-24C8DB" />
-  <img alt="Rust" src="https://img.shields.io/badge/Rust-stable-orange" />
   <img alt="License" src="https://img.shields.io/badge/License-Apache--2.0-blue" />
 </p>
 
----
-
-## Get Aiotto
-
-Most users should download the latest macOS installer from [GitHub Releases](https://github.com/ShawnZhuge/aiotto/releases). Release builds provide the complete product experience.
-
-This repository also provides a buildable community shell generated from a strict allowlist for reviewing and improving the public interface. The complete product experience is distributed through GitHub Releases.
-
----
-
-## Why Aiotto
-
-Long-running Codex work usually creates the same operational pain: account state is hard to see, quota usage is opaque, model-service configuration is scattered, historical sessions are hard to organize, and local configuration changes need safer backups. Aiotto brings these daily workflows into one desktop app so you spend less time switching, checking, and repairing local state.
-
----
-
-## Full Product Capabilities
-
-| Module | What it helps with |
-| --- | --- |
-| **Account Management** | Review account state, quota, snapshots, and login status in one place |
-| **Auto Account Switch** | Move to an available account and recover the workflow when quota or account state requires it |
-| **Relay Management** | Manage third-party model-service configuration, connectivity, balance, and availability |
-| **Smart Routing** | Use different model services more smoothly inside Codex workflows |
-| **Session Management** | Browse, search, analyze, and organize local Codex sessions |
-| **Usage Statistics** | Review requests, tokens, cache hits, models, and cost trends |
-| **Status Bar** | Check key status and common actions from the macOS status bar |
-| **MCP / Skills** | Inspect local extension entries, health state, and basic metadata |
-| **Backup Center** | Create, review, and restore backups for important local configuration |
-| **Runtime Diagnostics** | Check Codex CLI, directory state, local dependencies, and runtime health |
-| **Settings & Appearance** | Manage theme, language, notifications, updates, and interface preferences |
+<p align="center">
+  <a href="https://github.com/ShawnZhuge/aiotto/releases/latest"><strong>Download the latest release</strong></a>
+  ·
+  <a href="https://github.com/ShawnZhuge/aiotto/issues">Send feedback</a>
+</p>
 
 <p align="center">
   <img src="assets/screenshot-dashboard.png" alt="Aiotto dashboard" width="1100" />
@@ -57,18 +36,80 @@ Long-running Codex work usually creates the same operational pain: account state
 
 ---
 
-## Platforms
+## Why Aiotto
 
-| Platform | Notes |
-| --- | --- |
-| macOS | Apple Silicon + Intel, macOS 12+ |
-| Windows / Linux | Not available |
+As your Codex workflow grows, account state, quota windows, model services, historical sessions, and local configuration become increasingly scattered. Routine work starts to involve switching between multiple screens, files, and tools, making it easier to miss a backup or change the wrong setting.
 
----
+Aiotto brings these daily workflows into one macOS desktop app. Important state stays visible, higher-risk actions include confirmation and recovery guidance, and common actions remain available from the status bar.
 
-## Community Source
+## Full product capabilities
 
-The community shell includes the dashboard, session examples, backup examples, and device-local appearance settings. It uses public sample data and does not read or modify local product state.
+### Accounts and quota
+
+- Review multiple Codex accounts, subscriptions, credential health, five-hour quota, and weekly quota in one place.
+- Save, import, export, and organize local account snapshots, then switch accounts with confirmation and workflow recovery.
+- Use quota refresh, threshold alerts, managed account switching, and five-hour quota schedules to reduce manual recovery after quota exhaustion.
+
+### Relay services and smart routing
+
+- Manage OpenAI-compatible and Anthropic-compatible model services with models, balance, latency, and availability in one view.
+- Add, edit, delete, import, and export relay configurations, with model discovery, connectivity tests, and diagnostic results.
+- Use Codex Smart Routing to choose between official and relay models, with API login mode, image-tool compatibility, and request-log export.
+
+### Sessions, storage, and usage
+
+- Browse, search, filter, pin, and continue local Codex sessions, with archive, trash, restore, and export actions.
+- Review requests, input and output tokens, cache reads and writes, model sources, and cost trends across official and relay usage.
+- Understand local storage and session-file usage, preview safe cleanup recommendations, and reduce accidental deletion through backups and post-action verification.
+
+### Status bar and messages
+
+- Check the current account, quota, provider balance, router state, and recent sessions from the macOS status bar.
+- Customize modules, ordering, appearance, privacy mode, click behavior, and Hotspot, with launch-at-login support.
+- Follow OpenAI, ChatGPT, and Codex service health and incidents, with in-app alerts, macOS notifications, messages, and announcements.
+- Access project-support information through the sponsorship entry.
+
+### Extensions, maintenance, and settings
+
+- Inspect Codex Skills and MCP configuration sources, status, metadata, and health information.
+- Review backup history, restore entry points, and export locations; run system diagnostics, safe cleanup, and common repairs from the maintenance tools.
+- Manage theme, language, launch at login, account networking, refresh frequency, notifications and motion, privacy preferences, and automatic updates.
+
+## Download and install
+
+### Requirements
+
+- macOS 12 Monterey or later
+- Apple Silicon and Intel Macs
+- Universal installer
+
+### Installation
+
+1. Open the [latest release](https://github.com/ShawnZhuge/aiotto/releases/latest).
+2. Download the installer whose filename ends in `_universal.dmg`.
+3. Open the DMG and drag Aiotto into Applications.
+
+The current installer is not yet signed or notarized with an Apple Developer ID. On first launch, right-click Aiotto in Finder and choose **Open**. If macOS still reports that the app is damaged, first verify that the installer came from the official project release, then run:
+
+```bash
+xattr -cr /Applications/Aiotto.app
+```
+
+## Version support
+
+Aiotto is currently in the fast-moving `0.x` stage and only the latest release is maintained. If you encounter a problem, upgrade to the [latest version](https://github.com/ShawnZhuge/aiotto/releases/latest) before reporting it.
+
+Each stable release provides:
+
+- A macOS DMG installer
+- Files required by in-app automatic updates
+- Release notes and upgrade guidance
+
+## Community source
+
+This project provides a separately buildable community desktop application for exploring the product interface, learning desktop application structure, and contributing improvements. Most users should install Aiotto from GitHub Releases.
+
+### Run locally
 
 ```bash
 git clone https://github.com/ShawnZhuge/aiotto.git
@@ -77,7 +118,7 @@ pnpm install
 pnpm dev
 ```
 
-Build the desktop shell:
+### Build checks
 
 ```bash
 pnpm build
@@ -85,28 +126,32 @@ cargo check --locked --manifest-path src-tauri/Cargo.toml
 pnpm tauri:build
 ```
 
-Project structure:
+### Project structure
 
 ```text
 src/          React community interface
-src-tauri/    Minimal Tauri shell with no product commands
-assets/       Public brand and product imagery
+src-tauri/    Tauri desktop application
+assets/       Brand and product imagery
 ```
 
----
+## Security and privacy
 
-## Community Feedback
+- Do not upload account credentials, API keys, tokens, or other personal information in issues, screenshots, or logs.
+- Before switching accounts, changing configuration, restoring data, or running cleanup, review the affected scope and backup status shown by the app.
+- When using third-party model services, review their pricing, data-handling policies, and terms of service.
 
-Issues are welcome for product feedback, bug reports, and feature requests. To protect your privacy, do not upload account details, keys, tokens, or logs and screenshots containing personal data.
+## Feedback and contributions
 
----
+Use [GitHub Issues](https://github.com/ShawnZhuge/aiotto/issues) for bug reports, feature requests, and product feedback. Helpful reports include:
+
+- macOS version and Mac chip type
+- Aiotto version
+- Reproduction steps and redacted error details
 
 ## License
 
 [Apache License 2.0](LICENSE)
 
----
-
 ## Disclaimer
 
-Aiotto is an independent local workflow tool for Codex, not affiliated with, endorsed by, or sponsored by OpenAI. When using third-party services, assess the risks yourself and follow their terms.
+Aiotto is an independent local workflow tool for Codex and is not affiliated with, endorsed by, or sponsored by OpenAI. When using third-party services, evaluate the risks and follow their terms.
