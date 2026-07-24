@@ -5,7 +5,7 @@
 <h1 align="center">Aiotto</h1>
 
 <p align="center">
-  <strong>One macOS workbench for your Codex accounts, models, sessions, and local state.</strong>
+  <strong>One desktop workbench for your Codex accounts, models, sessions, and local state.</strong>
 </p>
 
 <p align="center">
@@ -16,6 +16,7 @@
   <a href="https://github.com/ShawnZhuge/aiotto/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/ShawnZhuge/aiotto?display_name=tag&label=Release" /></a>
   <a href="https://github.com/ShawnZhuge/aiotto/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/ShawnZhuge/aiotto/total?label=Downloads" /></a>
   <img alt="Platform" src="https://img.shields.io/badge/macOS-12%2B-black" />
+  <img alt="Platform" src="https://img.shields.io/badge/Windows-10%2F11_x64-0078D4" />
   <img alt="Tauri" src="https://img.shields.io/badge/Tauri-2.x-24C8DB" />
   <img alt="License" src="https://img.shields.io/badge/License-Apache--2.0-blue" />
 </p>
@@ -149,20 +150,27 @@ Accounts, model services, Skills, MCP, and maintenance touch different state. Ai
 
 ## Download and install
 
-Aiotto currently supports macOS 12 Monterey or later with one Universal installer for Apple Silicon and Intel Macs.
+Aiotto currently supports macOS 12 Monterey or later and Windows 10/11 x64.
 
 1. Open the [latest release](https://github.com/ShawnZhuge/aiotto/releases/latest).
-2. Download the installer whose filename ends in `_universal.dmg`.
-3. Open the DMG and drag Aiotto into Applications.
+2. On macOS, download the installer whose filename ends in `_universal.dmg`, open it, and drag Aiotto into Applications.
+3. On Windows, download the installer whose filename ends in `Windows-x64-Setup.exe` and follow the installer.
 
 <details>
 <summary><strong>macOS says the app cannot be verified or is damaged</strong></summary>
 
-The current installer is not yet signed and notarized with an Apple Developer ID. First verify that the file came from this project's GitHub Release, then right-click Aiotto in Finder and choose **Open**. If macOS still blocks it, run:
+A system security prompt may appear the first time you open Aiotto. First verify that the file came from this project's GitHub Release, then right-click Aiotto in Finder and choose **Open**. If macOS still blocks it, run:
 
 ```bash
 xattr -cr /Applications/Aiotto.app
 ```
+
+</details>
+
+<details>
+<summary><strong>Windows shows a security prompt on first launch</strong></summary>
+
+A system security prompt may appear the first time you open Aiotto. First verify that the file came from this project's GitHub Release. If Windows blocks it, open **More info**, confirm the application name, and choose to continue.
 
 </details>
 
@@ -185,14 +193,14 @@ Yes. Smart Routing has explicit enable and disable flows. Disabling it returns t
 <details>
 <summary><strong>Why does Aiotto keep running after I close the window?</strong></summary>
 
-The status bar, quota alerts, and Smart Routing need to remain available in the background. Closing the window only hides the main interface; use **Quit Aiotto** from the status bar or press `Command + Q` to exit completely.
+Quota alerts and Smart Routing need to remain available in the background. Closing the window only hides the main interface; use **Quit Aiotto** from the macOS status bar or Windows system tray. On macOS, you can also press `Command + Q`.
 
 </details>
 
 <details>
-<summary><strong>Is Windows or Linux supported?</strong></summary>
+<summary><strong>Which desktop systems are supported?</strong></summary>
 
-Not currently. Aiotto provides a Universal installer for macOS 12 and later.
+Aiotto currently provides a Universal installer for macOS 12+ and an x64 installer for Windows 10/11. Linux packages are not currently available.
 
 </details>
 
