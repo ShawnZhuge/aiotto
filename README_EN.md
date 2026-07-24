@@ -5,7 +5,11 @@
 <h1 align="center">Aiotto</h1>
 
 <p align="center">
-  <strong>One desktop workbench for your Codex accounts, models, sessions, and local state.</strong>
+  <strong>Account and multi-relay management for Codex</strong>
+</p>
+
+<p align="center">
+  See quota in one place, switch accounts quickly, and keep official and relay models in the same list.
 </p>
 
 <p align="center">
@@ -17,7 +21,6 @@
   <a href="https://github.com/ShawnZhuge/aiotto/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/ShawnZhuge/aiotto/total?label=Downloads" /></a>
   <img alt="Platform" src="https://img.shields.io/badge/macOS-12%2B-black" />
   <img alt="Platform" src="https://img.shields.io/badge/Windows-10%2F11_x64-0078D4" />
-  <img alt="Tauri" src="https://img.shields.io/badge/Tauri-2.x-24C8DB" />
   <img alt="License" src="https://img.shields.io/badge/License-Apache--2.0-blue" />
 </p>
 
@@ -25,215 +28,138 @@
   <a href="https://github.com/ShawnZhuge/aiotto/releases/latest"><strong>Download the latest release</strong></a>
   ·
   <a href="https://github.com/ShawnZhuge/aiotto/issues">Report an issue</a>
-  ·
-  <a href="#run-from-source">Run from source</a>
 </p>
 
-<p align="center">
-  <img src="assets/readme-hero-v2.png" alt="Aiotto brand visual for accounts, routing, sessions, and usage" width="1200" />
-</p>
+## Feature overview
 
-## Why Aiotto
-
-After using Codex for a while, the model is rarely the only thing you need to manage. Account quota, model services, session history, disk usage, and extensions live in different places, so a failed task can turn into a long search for the actual cause.
-
-Aiotto brings that state into one desktop app. It helps you understand what is happening before you switch, clean, or restore anything, then shows the result after the action.
-
-<table>
-  <tr>
-    <td width="50%"><strong>Quota runs out mid-task</strong><br />Compare five-hour and weekly quota, set alerts and schedules, and switch to an available account when needed.</td>
-    <td width="50%"><strong>A model service is configured but unverified</strong><br />Check models, balance, and latency; test connectivity before enabling Smart Routing.</td>
-  </tr>
-  <tr>
-    <td><strong>Session history keeps growing</strong><br />Search, continue, archive, and restore sessions, then use real storage data to decide what should be cleaned.</td>
-    <td><strong>Token usage is hard to explain</strong><br />Review requests, cache activity, tokens, and cost by time range, model, and source.</td>
-  </tr>
-  <tr>
-    <td colspan="2"><strong>Configuration changes feel risky</strong><br />Backups, restore previews, read-only diagnostics, and follow-up checks reduce the risk of switching accounts, changing settings, or cleaning data.</td>
-  </tr>
-</table>
-
-<details>
-<summary><strong>Open the detailed problem-and-solution notes</strong></summary>
-
-### 1. Several accounts have quota, but work still stops unexpectedly
-
-Five-hour and weekly windows reset on different schedules, while every account has its own subscription and login state. Aiotto puts them on one page, adds threshold alerts and quota schedules, explains the impact before a switch, and refreshes the result afterward.
-
-### 2. Model-service errors appear only after a real task starts
-
-An endpoint, key, protocol, or model-name mismatch can break a request. Aiotto can discover models, check balance and latency, test connectivity, and explain common errors before Smart Routing is enabled. There is also a clear disable path when the service is no longer needed.
-
-### 3. Sessions become hard to find, read, and clean safely
-
-Aiotto can search, filter, pin, and continue sessions, with a table of contents and clearer roles for long conversations. Storage actions start with real usage and cleanup candidates, while archive, trash, restore, and export remain explicit choices.
-
-### 4. Heavy usage does not explain where tokens and cost went
-
-Usage statistics place input, output, cache activity, requests, model source, and cost on the same timeline, with official and relay traffic separated. The OpenAI status page tracks external incidents so they are not mistaken for local configuration problems.
-
-### 5. Scattered settings make every change feel difficult to undo
-
-Accounts, model services, Skills, MCP, and maintenance touch different state. Aiotto provides backup history, restore previews, and read-only diagnostics, then asks for scope confirmation before changes and checks the result afterward.
-
-</details>
-
-## See today's Codex state in one place
-
-<p align="center">
-  <img src="assets/screenshot-dashboard.png" alt="Aiotto dashboard" width="1100" />
-</p>
-
-<p align="center"><sub>Accounts, quota, requests, sessions, storage, and trends in one dashboard. The screenshot uses demo data.</sub></p>
-
-## Core capabilities
-
-| What you need to handle | What Aiotto provides |
+| Feature | What it gives you |
 | --- | --- |
-| Accounts and quota | Account snapshots, subscription and credential health, quota comparison, alerts, and quota schedules |
-| Models and routing | Compatible model services, model discovery, balance and latency checks, connectivity tests, and Smart Routing |
-| Sessions and storage | Search, continue, pin, archive, trash, restore, export, storage analysis, and cleanup guidance |
-| Usage and service status | Requests, tokens, cache activity, model source, cost, and OpenAI, ChatGPT, and Codex service health |
-| macOS status bar | Account quota, model service state, recent sessions, service status, and quick navigation without opening the main window |
-| Extensions and maintenance | Skills, MCP, backups, diagnostics, safe cleanup, update checks, and common recovery actions |
+| Account management | Complete setup once and save an account snapshot; compare five-hour and weekly quota, then switch to the next available account with one click |
+| Quota alerts | Set an alert by remaining-quota percentage and get a reminder when it is time to switch |
+| Multi-relay aggregation | Manage several relays together; with a ChatGPT account, official and relay models appear in the same Codex model list |
+| No-account mode | Use configured relay models even when you do not have a ChatGPT account |
+| Mobile remote use | Configure the relay on your computer once; when remotely controlling that computer's Codex session from the same ChatGPT account on your phone, relay models remain selectable |
+| Quota warm-up | Schedule automatic warm-up tasks so the quota window better matches your working hours |
+| macOS menu bar | Check account quota, service state, relays, and recent sessions without opening the main window |
+| Sessions and usage | Review session history, tokens, cache activity, requests, and estimated cost |
+| Storage and maintenance | Review local storage, backups and restores, OpenAI status, Skills, MCP, updates, and common maintenance actions |
 
-## Three everyday workflows
+## The problems Aiotto focuses on
 
-1. **Quota handoff:** review quota → set an alert or schedule → choose an available account → confirm and switch.
-2. **Add a model service:** add the service → discover models → test connectivity and balance → enable routing; disable it when no longer needed.
-3. **Organize sessions:** find old work → review storage → preview cleanup scope → back up, process, and rescan.
+### 1. Multiple accounts make quota hard to see and switching slow
 
-<details>
-<summary><strong>Open the complete feature list</strong></summary>
+Five-hour quota, weekly quota, and reset times differ across accounts. Checking each account separately takes time, and it is easy to start work on an account that is already close to its limit.
 
-### Accounts and quota
+Aiotto puts those accounts on one page:
 
-- Review account identity, subscription, active-login state, credential health, and recent refresh results.
-- Track five-hour and weekly quota, reset times, and reset-credit status.
-- Save, import, export, sort, remove, and switch account snapshots.
-- Configure quota thresholds, refresh intervals, switching policy, and five-hour quota schedules.
-- Use guided logout, login recovery, and post-switch confirmation without submitting passwords or verification codes to Aiotto.
+- Complete account setup once and save a reusable snapshot.
+- See the plan, login state, quota, and reset time on each card.
+- Click an account card to switch, or move quickly to the next available account.
+- Set a remaining-quota percentage and get a reminder when it is time to switch.
 
-### Relay management and Smart Routing
+<p align="center">
+  <img src="assets/readme-accounts.png" alt="Aiotto account management with quota and quick account switching" width="1100" />
+</p>
 
-- Manage OpenAI-compatible and Anthropic-compatible model services.
-- Discover and select models; review balance, latency, protocol, network mode, and enabled state.
-- Test connectivity, understand common errors, and import, export, or preview configurations.
-- Move between official and relay models, with a clear path back to the official workflow.
-- Configure model labels, API login mode, and image-tool compatibility.
+<p align="center"><sub>Account identifiers are masked. Quota, state, and switching controls use the real interface layout.</sub></p>
 
-### Sessions, storage, and backups
+### 2. A relay should not be limited to one active configuration
 
-- Search, filter, pin, continue, archive, trash, restore, and export local sessions.
-- Use a table of contents for long sessions, clearer message roles, and responsive reading layouts.
-- Review local Codex storage, session usage, and cleanup candidates.
-- Active, pinned, running, and recently updated sessions are not offered as direct cleanup candidates.
-- Review backup history, restore previews, and export locations; protect current state before restore and verify afterward.
+Many tools keep one current relay configuration. Moving to another relay means editing the endpoint, model, or related settings again. Once several relays are involved, configuration switching becomes its own task.
 
-### Usage, status, and alerts
+Aiotto aggregates them:
 
-- Review requests, input and output tokens, cache activity, cost, and model source across time ranges.
-- Separate official and relay usage to understand where most consumption came from.
-- Track OpenAI, ChatGPT, and Codex service health, incident progress, and recovery.
-- Use in-app alerts, macOS notifications, messages, and announcements.
-- Show account quota, relay balance, Smart Routing, recent sessions, and common actions in the status bar.
+- With a ChatGPT account, official models and several relay models share one model list.
+- Without a ChatGPT account, no-account mode lets you work directly through a configured relay model.
+- Before enabling a relay, you can review its models, balance, and latency, then run a connection test.
+- When a relay is no longer needed, disable routing and return to the normal official-model workflow.
 
-### Skills, MCP, maintenance, and settings
+| Situation | How selection works |
+| --- | --- |
+| You have a ChatGPT account | Official models, Relay A, Relay B, and others appear together in the Codex model list |
+| You do not have a ChatGPT account | Enable no-account mode and select a relay model directly |
+| You continue a computer task from your phone | Aiotto manages relays on the computer; use the same ChatGPT account to remotely control that computer's Codex session and select a relay model from the list |
 
-- Review Skills and MCP sources, state, metadata, and health results.
-- Run system diagnostics, safe cleanup, Codex process actions, and common recovery tools.
-- Use system, light, or dark appearance, multiple accents, and Chinese or English UI.
-- Configure launch at login, window behavior, account networking, refresh intervals, notification motion, and privacy options.
-- Check and install updates, then access feedback, announcements, and project-support entry points.
+There is no need to enter relay endpoints and keys again on the phone. Aiotto keeps relay management on the computer while the phone remotely controls the Codex session running there.
 
-</details>
+## Other everyday problems
+
+### The quota window is not ready when work starts
+
+Quota warm-up can start a scheduled task in advance, bringing the five-hour window closer to your regular working hours. It is useful when you rely on Codex at a fixed time and do not want to wait for the window to recover.
+
+### Checking quota should not require the main window
+
+On macOS, the menu-bar view shows the current account, quota, reset time, relay state, service state, and recent sessions. Common actions are available there as well.
+
+### Session history grows, but token usage remains unclear
+
+Search, continue, pin, archive, restore, and export previous sessions. Usage statistics break down input, output, cache activity, requests, model source, and estimated cost over time.
+
+### Local data keeps growing, but cleaning it feels risky
+
+Aiotto shows the composition of local Codex storage and session usage, with backups, restore previews, and cleanup guidance. OpenAI status, Skills, MCP, update checks, and common maintenance actions are also available in the app.
+
+## One dashboard for the full picture
+
+<p align="center">
+  <img src="assets/readme-dashboard.png" alt="Aiotto dashboard for accounts, relays, sessions, storage, and usage" width="1100" />
+</p>
+
+<p align="center"><sub>Accounts, quota, relays, sessions, storage, tokens, and cost trends in one place. Account identifiers are masked.</sub></p>
 
 ## Download and install
 
-Aiotto currently supports macOS 12 Monterey or later and Windows 10/11 x64.
+Aiotto supports macOS 12 Monterey or later and Windows 10/11 x64.
+
+### macOS
 
 1. Open the [latest release](https://github.com/ShawnZhuge/aiotto/releases/latest).
-2. On macOS, download the installer whose filename ends in `_universal.dmg`, open it, and drag Aiotto into Applications.
-3. On Windows, download the installer whose filename ends in `Windows-x64-Setup.exe` and follow the installer.
+2. Download the installer whose filename ends in `_universal.dmg`.
+3. Open the DMG and drag Aiotto into Applications.
 
-<details>
-<summary><strong>macOS says the app cannot be verified or is damaged</strong></summary>
-
-A system security prompt may appear the first time you open Aiotto. First verify that the file came from this project's GitHub Release, then right-click Aiotto in Finder and choose **Open**. If macOS still blocks it, run:
+A system security prompt may appear the first time you open Aiotto. First confirm that the file came from this project's GitHub Release, then right-click Aiotto in Finder and choose **Open**. If macOS still blocks it, run:
 
 ```bash
 xattr -cr /Applications/Aiotto.app
 ```
 
-</details>
+### Windows
 
-<details>
-<summary><strong>Windows shows a security prompt on first launch</strong></summary>
+1. Open the [latest release](https://github.com/ShawnZhuge/aiotto/releases/latest).
+2. Download the installer whose filename ends in `Windows-x64-Setup.exe`.
+3. Follow the installer prompts.
 
-A system security prompt may appear the first time you open Aiotto. First verify that the file came from this project's GitHub Release. If Windows blocks it, open **More info**, confirm the application name, and choose to continue.
-
-</details>
+A system security prompt may appear the first time you open Aiotto. If Windows blocks it, open **More info**, confirm the application name and download source, then continue.
 
 ## Frequently asked questions
 
-<details>
-<summary><strong>Does Aiotto log in to Codex for me?</strong></summary>
+### Can I use Aiotto without a ChatGPT account?
 
-No. Complete the normal Codex login flow first, then let Aiotto save the account state. Aiotto does not ask you to submit passwords, verification codes, or cookies.
+Yes. Add an available relay in Aiotto, complete the connection test, and enable no-account mode.
 
-</details>
+### Can I keep using official models when I have an account?
 
-<details>
-<summary><strong>Can I return to official models after using a relay?</strong></summary>
+Yes. When routing is enabled, official and relay models appear together. Disable routing to return to the normal official-model workflow.
 
-Yes. Smart Routing has explicit enable and disable flows. Disabling it returns to the official workflow. Review the impact shown by the confirmation screen before switching.
+### Why can relay models also appear on my phone?
 
-</details>
+Aiotto manages relays on the computer. When the same ChatGPT account remotely controls that computer's Codex session from a phone, the model list includes the relay models already configured on the computer.
 
-<details>
-<summary><strong>Why does Aiotto keep running after I close the window?</strong></summary>
+### Does Aiotto ask me to submit my account password?
 
-Quota alerts and Smart Routing need to remain available in the background. Closing the window only hides the main interface; use **Quit Aiotto** from the macOS status bar or Windows system tray. On macOS, you can also press `Command + Q`.
+No. Complete the normal ChatGPT or Codex login flow first, then let Aiotto save the account snapshot. Never send passwords, verification codes, or cookies to a third party.
 
-</details>
+### Why does Aiotto keep running after I close the window?
 
-<details>
-<summary><strong>Which desktop systems are supported?</strong></summary>
+Quota alerts and routing need to remain available in the background. Closing the window hides the main interface; use **Quit Aiotto** from the macOS menu bar or Windows system tray to stop the app completely.
 
-Aiotto currently provides a Universal installer for macOS 12+ and an x64 installer for Windows 10/11. Linux packages are not currently available.
-
-</details>
-
-## Run from source
-
-Most users should install a Release. To inspect the interface or contribute a change, run it locally:
-
-```bash
-git clone https://github.com/ShawnZhuge/aiotto.git
-cd aiotto
-pnpm install
-pnpm dev
-```
-
-<details>
-<summary><strong>Build checks</strong></summary>
-
-```bash
-pnpm build
-cargo check --locked --manifest-path src-tauri/Cargo.toml
-pnpm tauri:build
-```
-
-</details>
-
-## Security and privacy
+## Safety and feedback
 
 - Never post account credentials, API keys, tokens, or personal information in issues, screenshots, or logs.
-- Before switching accounts, changing configuration, restoring data, or cleaning files, review the impact and backup state shown in the app.
-- When using a third-party model service, review its billing, data-processing policy, and terms.
+- Before using a third-party relay, review its pricing, data-processing policy, and terms.
+- Report problems through [GitHub Issues](https://github.com/ShawnZhuge/aiotto/issues).
 
-## Feedback and license
-
-Use [GitHub Issues](https://github.com/ShawnZhuge/aiotto/issues) for bugs and feature requests. The project is licensed under the [Apache License 2.0](LICENSE).
+The project uses the [Apache License 2.0](LICENSE).
 
 Aiotto is an independent local workflow tool for Codex and is not affiliated with, endorsed by, or sponsored by OpenAI.
