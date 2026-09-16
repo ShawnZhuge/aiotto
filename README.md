@@ -1,12 +1,4 @@
-<p align="center">
-  <img src="assets/app-icon.png" alt="Aiotto" width="112" height="112" />
-</p>
-
-<h1 align="center">Aiotto</h1>
-
-<p align="center">
-  <strong>把你常用的模型，接进 Codex。</strong>
-</p>
+<h1 align="center">把你常用的模型，接进 Codex。</h1>
 
 <p align="center">
   Aiotto 是配合 Codex 桌面端使用的模型接入与账号管理工具。接入已有的 Coding Plan、Token Plan 或 API，在熟悉的界面里使用已适配的工具继续任务；账号额度、用量和历史会话，也能集中管理。
@@ -231,93 +223,194 @@ Responses 下分官方账号与第三方接入两条路径；它们属于同一�
 
 ### 按厂商查看能力
 
-在同一张表中，依次查看中国厂商、美国厂商和接入平台。同厂商共用名称，套餐/API 与协议分别列行；排序方便查找，不代表能力高低。编号对应下方对齐排列的型号与使用条件。
+总览中直接列出全部厂商，保留中国厂商、美国厂商和接入平台分区。同厂商的不同套餐/API 分别列行；Chat 表示 Chat Completions，Messages 表示 Anthropic Messages。带编号的标记有使用条件，详见下方型号表；排列顺序不代表能力高低。
 
 <table id="provider-capability-matrix">
-<caption>厂商能力总表 · 可横向滚动查看全部能力</caption>
-<colgroup><col width="112"><col width="116"><col width="120"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"></colgroup>
-<thead>
-<tr><th rowspan="2" scope="col">厂商</th><th rowspan="2" scope="col">套餐 / API</th><th rowspan="2" scope="col">协议</th><th colspan="4" scope="colgroup">常用工具</th><th colspan="6" scope="colgroup">协作与桌面操作</th><th colspan="4" scope="colgroup">推理与多模态</th></tr>
-<tr><th scope="col">文件 / Shell</th><th scope="col">代码补丁</th><th scope="col">Skills</th><th scope="col">MCP 工具</th><th scope="col">浏览器</th><th scope="col">电脑操作</th><th scope="col">子任务</th><th scope="col">多轮对话</th><th scope="col">代码审查</th><th scope="col">网站工具</th><th scope="col">推理档位</th><th scope="col">图片理解</th><th scope="col">PDF 直接输入</th><th scope="col">搜索与来源引用</th></tr>
-</thead>
-<tbody class="region-heading"><tr><th colspan="17">中国厂商</th></tr></tbody>
+<thead><tr><th>厂商</th><th>接入</th><th>文件</th><th>补丁</th><th>MCP</th><th>子任务</th><th>图片</th><th>续聊</th></tr></thead>
+<tbody><tr><th colspan="8">中国厂商</th></tr></tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="2"><strong>DeepSeek</strong></th><td>API <sup><a href="#provider-scope-1" aria-label="查看适用范围 1">1</a></sup></td><td>Chat Completions</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>接口</small></td><td><span>🚫</span> <small>该已测文本型号</small></td><td><span>🚫</span> <small>标准直接路径</small></td><td><span>⬜</span> <small>搜索使用未确认</small></td></tr>
-<tr><td>API <sup><a href="#provider-scope-2" aria-label="查看适用范围 2">2</a></sup></td><td>Responses</td><td><span>🔄</span> <small>工具桥接</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>工具与认证有差异</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span> <small>独立档位验证</small></td><td><span>🚫</span> <small>该已测文本型号</small></td><td><span>⚠️</span> <small>未确认可用</small></td><td><span>⬜</span> <small>搜索使用未确认</small></td></tr>
+<tr><th scope="rowgroup" rowspan="2"><strong>DeepSeek</strong></th><td>API <sup><a href="#provider-scope-1" aria-label="查看适用范围 1">1</a></sup><br><sub>Chat</sub></td><td>🔄</td><td>🔄</td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-1">1</a></sup></td><td>🚫<sup><a href="#provider-scope-1">1</a></sup></td><td>🔄</td></tr>
+<tr><td>API <sup><a href="#provider-scope-2" aria-label="查看适用范围 2">2</a></sup><br><sub>Responses</sub></td><td>🔄<sup><a href="#provider-scope-2">2</a></sup></td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-2">2</a></sup></td><td>⚠️<sup><a href="#provider-scope-2">2</a></sup></td><td>🚫<sup><a href="#provider-scope-2">2</a></sup></td><td>🔄</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="2"><strong>阿里千问</strong></th><td>Token Plan <sup><a href="#provider-scope-3" aria-label="查看适用范围 3">3</a></sup></td><td>Responses</td><td><span>🔄</span> <small>工具桥接</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>🔄</span> <small>跨模型链</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>分档验证</small></td><td><span>✅</span> <small>桌面读图</small></td><td><span>⬜</span></td><td><span>⬜</span></td></tr>
-<tr><td>第三方 API <sup><a href="#provider-scope-4" aria-label="查看适用范围 4">4</a></sup></td><td>Responses</td><td><span>⚠️</span> <small>上游阻塞</small></td><td><span>⚠️</span> <small>上游阻塞</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>上游阻塞</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>历史接口通过；后续阻塞</small></td><td><span>⚠️</span> <small>历史接口通过；后续阻塞</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="2"><strong>阿里千问</strong></th><td>Token Plan <sup><a href="#provider-scope-3" aria-label="查看适用范围 3">3</a></sup><br><sub>Responses</sub></td><td>🔄<sup><a href="#provider-scope-3">3</a></sup></td><td>🔄</td><td>⬜</td><td>⬜</td><td>✅<sup><a href="#provider-scope-3">3</a></sup></td><td>🔄<sup><a href="#provider-scope-3">3</a></sup></td></tr>
+<tr><td>第三方 API <sup><a href="#provider-scope-4" aria-label="查看适用范围 4">4</a></sup><br><sub>Responses</sub></td><td>⚠️<sup><a href="#provider-scope-4">4</a></sup></td><td>⚠️<sup><a href="#provider-scope-4">4</a></sup></td><td>⬜</td><td>⬜</td><td>⚠️<sup><a href="#provider-scope-4">4</a></sup></td><td>⚠️<sup><a href="#provider-scope-4">4</a></sup></td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>智谱</strong></th><td>Coding Plan <sup><a href="#provider-scope-5" aria-label="查看适用范围 5">5</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>✅</span> <small>接口</small></td><td><span>⚠️</span> <small>内容识别未通过</small></td><td><span>⚠️</span> <small>内容识别未通过</small></td><td><span>⬜</span> <small>搜索使用未确认</small></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>智谱</strong></th><td>Coding Plan <sup><a href="#provider-scope-5" aria-label="查看适用范围 5">5</a></sup><br><sub>Responses</sub></td><td>✅</td><td>✅</td><td>✅</td><td>⚠️<sup><a href="#provider-scope-5">5</a></sup></td><td>⚠️<sup><a href="#provider-scope-5">5</a></sup></td><td>✅</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>月之暗面</strong></th><td>API <sup><a href="#provider-scope-6" aria-label="查看适用范围 6">6</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>🔄</span></td><td><span>✅</span> <small>接口</small></td><td><span>✅</span> <small>接口</small></td><td><span>⚠️</span> <small>上游拒绝</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>月之暗面</strong></th><td>API <sup><a href="#provider-scope-6" aria-label="查看适用范围 6">6</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>🔄</td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-6">6</a></sup></td><td>✅<sup><a href="#provider-scope-6">6</a></sup></td><td>🔄</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>小米</strong></th><td>Token Plan <sup><a href="#provider-scope-7" aria-label="查看适用范围 7">7</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>⬜</span> <small>桌面使用未确认</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>✅</span> <small>接口</small></td><td><span>⚠️</span> <small>上游拒绝</small></td><td><span>⚠️</span> <small>上游拒绝</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>小米</strong></th><td>Token Plan <sup><a href="#provider-scope-7" aria-label="查看适用范围 7">7</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⬜<sup><a href="#provider-scope-7">7</a></sup></td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-7">7</a></sup></td><td>⚠️<sup><a href="#provider-scope-7">7</a></sup></td><td>🔄</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>MiniMax</strong></th><td>Token Plan <sup><a href="#provider-scope-8" aria-label="查看适用范围 8">8</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>限已测工具</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>⚠️</span> <small>high 通过；none 有偏差</small></td><td><span>🔄</span> <small>桌面；大图受限</small></td><td><span>🔄</span> <small>接口</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>MiniMax</strong></th><td>Token Plan <sup><a href="#provider-scope-8" aria-label="查看适用范围 8">8</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>🔄</td><td>🔄<sup><a href="#provider-scope-8">8</a></sup></td><td>⚠️<sup><a href="#provider-scope-8">8</a></sup></td><td>🔄<sup><a href="#provider-scope-8">8</a></sup></td><td>🔄</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>火山引擎</strong></th><td>Coding Plan <sup><a href="#provider-scope-9" aria-label="查看适用范围 9">9</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分补丁任务已通过</small></td><td><span>🔄</span></td><td><span>🔄</span> <small>限已测工具</small></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>✅</span> <small>接口；实际推理档位未确认</small></td><td><span>⬜</span> <small>该入口未确认</small></td><td><span>✅</span> <small>接口</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>火山引擎</strong></th><td>Coding Plan <sup><a href="#provider-scope-9" aria-label="查看适用范围 9">9</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-9">9</a></sup></td><td>🔄<sup><a href="#provider-scope-9">9</a></sup></td><td>⚠️<sup><a href="#provider-scope-9">9</a></sup></td><td>⬜<sup><a href="#provider-scope-9">9</a></sup></td><td>🔄</td></tr>
 </tbody>
-<tbody class="region-heading"><tr><th colspan="17">美国厂商</th></tr></tbody>
+<tbody><tr><th colspan="8">美国厂商</th></tr></tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="2"><strong>OpenAI</strong></th><td>官方账号 <sup><a href="#provider-scope-10" aria-label="查看适用范围 10">10</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span> <small>按连接</small></td><td><span>✅</span> <small>按入口</small></td><td><span>✅</span> <small>按入口</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span> <small>按入口</small></td><td><span>✅</span> <small>按模型</small></td><td><span>✅</span> <small>按模型</small></td><td><span>✅</span> <small>按入口</small></td><td><span>✅</span> <small>按服务</small></td></tr>
-<tr><td>第三方 API <sup><a href="#provider-scope-11" aria-label="查看适用范围 11">11</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>⬜</span> <small>桌面使用未确认</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>⚠️</span> <small>高档存在偏差</small></td><td><span>✅</span> <small>接口</small></td><td><span>✅</span> <small>接口</small></td><td><span>⬜</span> <small>搜索使用未确认</small></td></tr>
-</tbody>
-<tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>Anthropic</strong></th><td>第三方 API <sup><a href="#provider-scope-12" aria-label="查看适用范围 12">12</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>网关有差异</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>🔄</span> <small>接口映射</small></td><td><span>🔄</span> <small>接口</small></td><td><span>🔄</span> <small>接口</small></td><td><span>🔄</span> <small>已测搜索链；按网关</small></td></tr>
+<tr><th scope="rowgroup" rowspan="2"><strong>OpenAI</strong></th><td>官方账号 <sup><a href="#provider-scope-10" aria-label="查看适用范围 10">10</a></sup><br><sub>Responses</sub></td><td>✅</td><td>✅</td><td>✅<sup><a href="#provider-scope-10">10</a></sup></td><td>✅</td><td>✅<sup><a href="#provider-scope-10">10</a></sup></td><td>✅</td></tr>
+<tr><td>第三方 API <sup><a href="#provider-scope-11" aria-label="查看适用范围 11">11</a></sup><br><sub>Responses</sub></td><td>✅</td><td>⬜<sup><a href="#provider-scope-11">11</a></sup></td><td>✅</td><td>⚠️<sup><a href="#provider-scope-11">11</a></sup></td><td>✅<sup><a href="#provider-scope-11">11</a></sup></td><td>✅</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>Google</strong></th><td>第三方 API <sup><a href="#provider-scope-13" aria-label="查看适用范围 13">13</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span> <small>历史记录</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>🔄</span> <small>历史记录</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>🔄</span> <small>历史记录</small></td><td><span>⬜</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>🔄</span> <small>历史记录</small></td><td><span>🔄</span> <small>历史记录</small></td><td><span>⬜</span></td><td><span>🔄</span> <small>接口；网关受限</small></td><td><span>🔄</span> <small>接口；网关受限</small></td><td><span>⚠️</span> <small>内容识别未通过</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>Anthropic</strong></th><td>第三方 API <sup><a href="#provider-scope-12" aria-label="查看适用范围 12">12</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-12">12</a></sup></td><td>⚠️<sup><a href="#provider-scope-12">12</a></sup></td><td>🔄<sup><a href="#provider-scope-12">12</a></sup></td><td>🔄</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>xAI</strong></th><td>第三方 API <sup><a href="#provider-scope-14" aria-label="查看适用范围 14">14</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>⚠️</span> <small>桌面未通过</small></td><td><span>⚠️</span> <small>有限制</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>✅</span> <small>接口</small></td><td><span>✅</span> <small>接口</small></td><td><span>⚠️</span> <small>上游拒绝</small></td><td><span>⚠️</span> <small>按网关与搜索路径</small></td></tr>
-</tbody>
-<tbody class="region-heading"><tr><th colspan="17">接入平台</th></tr></tbody>
-<tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>CommandCode</strong><br><small>接入平台</small></th><td>API <sup><a href="#provider-scope-15" aria-label="查看适用范围 15">15</a></sup></td><td>Chat Completions</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>🔄</span> <small>跨模型链</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>分档验证</small></td><td><span>🔄</span> <small>桌面读图</small></td><td><span>🚫</span> <small>标准直接路径</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>Google</strong></th><td>第三方 API <sup><a href="#provider-scope-13" aria-label="查看适用范围 13">13</a></sup><br><sub>Messages</sub></td><td>🔄<sup><a href="#provider-scope-13">13</a></sup></td><td>⚠️<sup><a href="#provider-scope-13">13</a></sup></td><td>⚠️<sup><a href="#provider-scope-13">13</a></sup></td><td>⚠️<sup><a href="#provider-scope-13">13</a></sup></td><td>🔄<sup><a href="#provider-scope-13">13</a></sup></td><td>🔄<sup><a href="#provider-scope-13">13</a></sup></td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>opencode</strong><br><small>接入平台</small></th><td>API <sup><a href="#provider-scope-16" aria-label="查看适用范围 16">16</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>跨模型链</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>分档验证</small></td><td><span>⬜</span> <small>独立读图</small></td><td><span>⬜</span></td><td><span>🔄</span> <small>独立搜索执行器</small></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>xAI</strong></th><td>第三方 API <sup><a href="#provider-scope-14" aria-label="查看适用范围 14">14</a></sup><br><sub>Responses</sub></td><td>✅</td><td>⚠️<sup><a href="#provider-scope-14">14</a></sup></td><td>⚠️<sup><a href="#provider-scope-14">14</a></sup></td><td>⚠️<sup><a href="#provider-scope-14">14</a></sup></td><td>✅<sup><a href="#provider-scope-14">14</a></sup></td><td>✅</td></tr>
+</tbody>
+<tbody><tr><th colspan="8">接入平台</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>CommandCode</strong><br><small>接入平台</small></th><td>API <sup><a href="#provider-scope-15" aria-label="查看适用范围 15">15</a></sup><br><sub>Chat</sub></td><td>🔄</td><td>🔄</td><td>⬜</td><td>⬜</td><td>🔄<sup><a href="#provider-scope-15">15</a></sup></td><td>🔄<sup><a href="#provider-scope-15">15</a></sup></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>opencode</strong><br><small>接入平台</small></th><td>API <sup><a href="#provider-scope-16" aria-label="查看适用范围 16">16</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>🔄</td><td>🔄</td><td>🔄</td><td>⬜<sup><a href="#provider-scope-16">16</a></sup></td><td>🔄<sup><a href="#provider-scope-16">16</a></sup></td></tr>
 </tbody>
 </table>
 
+<details>
+<summary>查看其余能力：所有厂商统一对照</summary>
+
+**工具与桌面操作**
+
+<table id="provider-tools-matrix">
+<thead><tr><th>厂商</th><th>接入</th><th>Skills</th><th>浏览器</th><th>电脑操作</th><th>审查</th></tr></thead>
+<tbody><tr><th colspan="6">中国厂商</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>DeepSeek</strong></th><td>API <sup><a href="#provider-scope-1" aria-label="查看适用范围 1">1</a></sup><br><sub>Chat</sub></td><td>🔄</td><td>⚠️<br><sub>部分</sub></td><td>🔄</td><td>🔄</td></tr>
+<tr><td>API <sup><a href="#provider-scope-2" aria-label="查看适用范围 2">2</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⚠️<br><sub>部分</sub></td><td>🔄</td><td>🔄</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>阿里千问</strong></th><td>Token Plan <sup><a href="#provider-scope-3" aria-label="查看适用范围 3">3</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⬜</td><td>⬜</td><td>⬜</td></tr>
+<tr><td>第三方 API <sup><a href="#provider-scope-4" aria-label="查看适用范围 4">4</a></sup><br><sub>Responses</sub></td><td>⬜</td><td>⬜</td><td>⬜</td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>智谱</strong></th><td>Coding Plan <sup><a href="#provider-scope-5" aria-label="查看适用范围 5">5</a></sup><br><sub>Responses</sub></td><td>✅</td><td>⬜</td><td>⚠️<br><sub>未通过</sub></td><td>✅</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>月之暗面</strong></th><td>API <sup><a href="#provider-scope-6" aria-label="查看适用范围 6">6</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>🔄</td><td>⚠️<br><sub>未通过</sub></td><td>⚠️<br><sub>未通过</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>小米</strong></th><td>Token Plan <sup><a href="#provider-scope-7" aria-label="查看适用范围 7">7</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⚠️<br><sub>未通过</sub></td><td>⚠️<br><sub>未通过</sub></td><td>🔄</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>MiniMax</strong></th><td>Token Plan <sup><a href="#provider-scope-8" aria-label="查看适用范围 8">8</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>🔄</td><td>⚠️<br><sub>部分</sub></td><td>⚠️<br><sub>未通过</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>火山引擎</strong></th><td>Coding Plan <sup><a href="#provider-scope-9" aria-label="查看适用范围 9">9</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⬜</td><td>🔄</td><td>⚠️<br><sub>部分</sub></td></tr>
+</tbody>
+<tbody><tr><th colspan="6">美国厂商</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>OpenAI</strong></th><td>官方账号 <sup><a href="#provider-scope-10" aria-label="查看适用范围 10">10</a></sup><br><sub>Responses</sub></td><td>✅</td><td>✅<br><sub>按入口</sub></td><td>✅<br><sub>按入口</sub></td><td>✅</td></tr>
+<tr><td>第三方 API <sup><a href="#provider-scope-11" aria-label="查看适用范围 11">11</a></sup><br><sub>Responses</sub></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Anthropic</strong></th><td>第三方 API <sup><a href="#provider-scope-12" aria-label="查看适用范围 12">12</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>🔄</td><td>⚠️<br><sub>部分</sub></td><td>⚠️<br><sub>未通过</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Google</strong></th><td>第三方 API <sup><a href="#provider-scope-13" aria-label="查看适用范围 13">13</a></sup><br><sub>Messages</sub></td><td>🔄<br><sub>历史记录</sub></td><td>🔄<br><sub>历史记录</sub></td><td>⬜</td><td>🔄<br><sub>历史记录</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>xAI</strong></th><td>第三方 API <sup><a href="#provider-scope-14" aria-label="查看适用范围 14">14</a></sup><br><sub>Responses</sub></td><td>⚠️<br><sub>有限制</sub></td><td>✅</td><td>✅</td><td>✅</td></tr>
+</tbody>
+<tbody><tr><th colspan="6">接入平台</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>CommandCode</strong><br><small>接入平台</small></th><td>API <sup><a href="#provider-scope-15" aria-label="查看适用范围 15">15</a></sup><br><sub>Chat</sub></td><td>🔄</td><td>🔄</td><td>🔄</td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>opencode</strong><br><small>接入平台</small></th><td>API <sup><a href="#provider-scope-16" aria-label="查看适用范围 16">16</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>⬜</td><td>⬜</td><td>⬜</td></tr>
+</tbody>
+</table>
+
+**发现、推理与搜索**
+
+<table id="provider-media-matrix">
+<thead><tr><th>厂商</th><th>接入</th><th>网站工具</th><th>推理</th><th>PDF</th><th>搜索</th></tr></thead>
+<tbody><tr><th colspan="6">中国厂商</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>DeepSeek</strong></th><td>API <sup><a href="#provider-scope-1" aria-label="查看适用范围 1">1</a></sup><br><sub>Chat</sub></td><td>🔄</td><td>🔄<br><sub>接口</sub></td><td>🚫<br><sub>标准直接路径</sub></td><td>⬜<br><sub>搜索使用未确认</sub></td></tr>
+<tr><td>API <sup><a href="#provider-scope-2" aria-label="查看适用范围 2">2</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⬜<br><sub>独立档位验证</sub></td><td>⚠️<br><sub>未确认可用</sub></td><td>⬜<br><sub>搜索使用未确认</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>阿里千问</strong></th><td>Token Plan <sup><a href="#provider-scope-3" aria-label="查看适用范围 3">3</a></sup><br><sub>Responses</sub></td><td>⬜</td><td>⬜<br><sub>分档验证</sub></td><td>⬜</td><td>⬜</td></tr>
+<tr><td>第三方 API <sup><a href="#provider-scope-4" aria-label="查看适用范围 4">4</a></sup><br><sub>Responses</sub></td><td>⬜</td><td>⚠️<br><sub>历史接口通过；后续阻塞</sub></td><td>⚠️<br><sub>未通过</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>智谱</strong></th><td>Coding Plan <sup><a href="#provider-scope-5" aria-label="查看适用范围 5">5</a></sup><br><sub>Responses</sub></td><td>⚠️<br><sub>未通过</sub></td><td>✅<br><sub>接口</sub></td><td>⚠️<br><sub>内容识别未通过</sub></td><td>⬜<br><sub>搜索使用未确认</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>月之暗面</strong></th><td>API <sup><a href="#provider-scope-6" aria-label="查看适用范围 6">6</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>✅<br><sub>接口</sub></td><td>⚠️<br><sub>上游拒绝</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>小米</strong></th><td>Token Plan <sup><a href="#provider-scope-7" aria-label="查看适用范围 7">7</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>✅<br><sub>接口</sub></td><td>⚠️<br><sub>上游拒绝</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>MiniMax</strong></th><td>Token Plan <sup><a href="#provider-scope-8" aria-label="查看适用范围 8">8</a></sup><br><sub>Messages</sub></td><td>⚠️<br><sub>部分</sub></td><td>⚠️<br><sub>high 通过；none 有偏差</sub></td><td>🔄<br><sub>接口</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>火山引擎</strong></th><td>Coding Plan <sup><a href="#provider-scope-9" aria-label="查看适用范围 9">9</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>✅<br><sub>接口；实际推理档位未确认</sub></td><td>✅<br><sub>接口</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody><tr><th colspan="6">美国厂商</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>OpenAI</strong></th><td>官方账号 <sup><a href="#provider-scope-10" aria-label="查看适用范围 10">10</a></sup><br><sub>Responses</sub></td><td>✅<br><sub>按入口</sub></td><td>✅<br><sub>按模型</sub></td><td>✅<br><sub>按入口</sub></td><td>✅<br><sub>按服务</sub></td></tr>
+<tr><td>第三方 API <sup><a href="#provider-scope-11" aria-label="查看适用范围 11">11</a></sup><br><sub>Responses</sub></td><td>⚠️<br><sub>部分</sub></td><td>⚠️<br><sub>高档存在偏差</sub></td><td>✅<br><sub>接口</sub></td><td>⬜<br><sub>搜索使用未确认</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Anthropic</strong></th><td>第三方 API <sup><a href="#provider-scope-12" aria-label="查看适用范围 12">12</a></sup><br><sub>Messages</sub></td><td>⚠️<br><sub>未通过</sub></td><td>🔄<br><sub>接口映射</sub></td><td>🔄<br><sub>接口</sub></td><td>🔄<br><sub>已测搜索链；按网关</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Google</strong></th><td>第三方 API <sup><a href="#provider-scope-13" aria-label="查看适用范围 13">13</a></sup><br><sub>Messages</sub></td><td>⬜</td><td>🔄<br><sub>接口；网关受限</sub></td><td>⚠️<br><sub>内容识别未通过</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>xAI</strong></th><td>第三方 API <sup><a href="#provider-scope-14" aria-label="查看适用范围 14">14</a></sup><br><sub>Responses</sub></td><td>⚠️<br><sub>部分</sub></td><td>✅<br><sub>接口</sub></td><td>⚠️<br><sub>上游拒绝</sub></td><td>⚠️<br><sub>按网关与搜索路径</sub></td></tr>
+</tbody>
+<tbody><tr><th colspan="6">接入平台</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>CommandCode</strong><br><small>接入平台</small></th><td>API <sup><a href="#provider-scope-15" aria-label="查看适用范围 15">15</a></sup><br><sub>Chat</sub></td><td>⬜</td><td>⬜<br><sub>分档验证</sub></td><td>🚫<br><sub>标准直接路径</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>opencode</strong><br><small>接入平台</small></th><td>API <sup><a href="#provider-scope-16" aria-label="查看适用范围 16">16</a></sup><br><sub>Messages</sub></td><td>⬜</td><td>⬜<br><sub>分档验证</sub></td><td>⬜</td><td>🔄<br><sub>独立搜索执行器</sub></td></tr>
+</tbody>
+</table>
+
+</details>
+
 **已验证型号与使用条件**
 
-各行只对应以下组合和已测平台，不代表厂商全部型号。单元格中的“接口”“历史记录”等限定仍然有效。
+编号与总览标记对应，条件是能力结论的一部分。结果只覆盖所列型号和已测平台，不代表厂商全部型号；“接口通过”不等于完整桌面流程通过，“历史记录”不保证当前服务可用。
 
 <table id="provider-scope-table">
-<colgroup><col width="48"><col width="100"><col width="115"><col width="125"><col width="210"><col></colgroup>
-<thead><tr><th scope="col">编号</th><th scope="col">厂商 / 平台</th><th scope="col">套餐 / API</th><th scope="col">协议</th><th scope="col">已验证型号</th><th scope="col">使用条件</th></tr></thead>
-<tbody class="region-heading"><tr><th colspan="6">中国厂商</th></tr></tbody>
+<thead><tr><th>编号</th><th>厂商 / 接入</th><th>已验证型号</th><th>使用条件</th></tr></thead>
+<tbody><tr><th colspan="4">中国厂商</th></tr></tbody>
 <tbody>
-<tr id="provider-scope-1"><td>1</td><td>DeepSeek</td><td>API</td><td>Chat Completions</td><td><code>deepseek-v4-pro</code></td><td>按上表各项能力的标注范围使用。</td></tr>
-<tr id="provider-scope-2"><td>2</td><td>DeepSeek</td><td>API</td><td>Responses</td><td><code>deepseek-v4-pro</code></td><td>按上表各项能力的标注范围使用。</td></tr>
-<tr id="provider-scope-3"><td>3</td><td>阿里千问</td><td>Token Plan</td><td>Responses</td><td><code>qwen3.8-flash</code></td><td>Token Plan 与第三方 API 分别判断。第三方网关的请求拒绝记录，不适用于 Token Plan。</td></tr>
-<tr id="provider-scope-4"><td>4</td><td>阿里千问</td><td>第三方 API</td><td>Responses</td><td><code>qwen3.7-plus</code></td><td>按上表各项能力的标注范围使用。</td></tr>
-<tr id="provider-scope-5"><td>5</td><td>智谱</td><td>Coding Plan</td><td>Responses</td><td><code>glm-5.3</code></td><td>按上表各项能力的标注范围使用。</td></tr>
-<tr id="provider-scope-6"><td>6</td><td>月之暗面</td><td>API</td><td>Responses</td><td><code>kimi-k2.7-code-highspeed</code></td><td>按上表各项能力的标注范围使用。</td></tr>
-<tr id="provider-scope-7"><td>7</td><td>小米</td><td>Token Plan</td><td>Responses</td><td><code>mimo-v2.5-pro</code></td><td>图片历史恢复只证明对话可以继续，不算图片理解通过。</td></tr>
-<tr id="provider-scope-8"><td>8</td><td>MiniMax</td><td>Token Plan</td><td>Anthropic Messages</td><td><code>MiniMax-M3</code></td><td>桌面小图用例已通过；大图另有上游限制，不把小图结果扩大到所有图片。</td></tr>
-<tr id="provider-scope-9"><td>9</td><td>火山引擎</td><td>Coding Plan</td><td>Responses</td><td><code>ark-code-latest</code></td><td>按上表各项能力的标注范围使用。</td></tr>
+<tr id="provider-scope-1"><td>1</td><td><strong>DeepSeek</strong><br>API<br><sub>Chat Completions</sub></td><td><code>deepseek-v4-pro</code></td><td>按上表各项能力的标注范围使用。<br><sub>总览说明：子任务：部分；图片：该已测文本型号。</sub></td></tr>
+<tr id="provider-scope-2"><td>2</td><td><strong>DeepSeek</strong><br>API<br><sub>Responses</sub></td><td><code>deepseek-v4-pro</code></td><td>按上表各项能力的标注范围使用。<br><sub>总览说明：文件：工具桥接；MCP：工具与认证有差异；子任务：部分；图片：该已测文本型号。</sub></td></tr>
+<tr id="provider-scope-3"><td>3</td><td><strong>阿里千问</strong><br>Token Plan<br><sub>Responses</sub></td><td><code>qwen3.8-flash</code></td><td>Token Plan 与第三方 API 分别判断。第三方网关的请求拒绝记录，不适用于 Token Plan。<br><sub>总览说明：文件：工具桥接；图片：桌面读图；续聊：跨模型链。</sub></td></tr>
+<tr id="provider-scope-4"><td>4</td><td><strong>阿里千问</strong><br>第三方 API<br><sub>Responses</sub></td><td><code>qwen3.7-plus</code></td><td>按上表各项能力的标注范围使用。<br><sub>总览说明：文件：上游阻塞；补丁：上游阻塞；图片：历史接口通过；后续阻塞；续聊：上游阻塞。</sub></td></tr>
+<tr id="provider-scope-5"><td>5</td><td><strong>智谱</strong><br>Coding Plan<br><sub>Responses</sub></td><td><code>glm-5.3</code></td><td>按上表各项能力的标注范围使用。<br><sub>总览说明：子任务：部分；图片：内容识别未通过。</sub></td></tr>
+<tr id="provider-scope-6"><td>6</td><td><strong>月之暗面</strong><br>API<br><sub>Responses</sub></td><td><code>kimi-k2.7-code-highspeed</code></td><td>按上表各项能力的标注范围使用。<br><sub>总览说明：子任务：部分；图片：接口。</sub></td></tr>
+<tr id="provider-scope-7"><td>7</td><td><strong>小米</strong><br>Token Plan<br><sub>Responses</sub></td><td><code>mimo-v2.5-pro</code></td><td>图片历史恢复只证明对话可以继续，不算图片理解通过。<br><sub>总览说明：补丁：桌面使用未确认；子任务：部分；图片：上游拒绝。</sub></td></tr>
+<tr id="provider-scope-8"><td>8</td><td><strong>MiniMax</strong><br>Token Plan<br><sub>Anthropic Messages</sub></td><td><code>MiniMax-M3</code></td><td>桌面小图用例已通过；大图另有上游限制，不把小图结果扩大到所有图片。<br><sub>总览说明：MCP：限已测工具；子任务：部分；图片：桌面；大图受限。</sub></td></tr>
+<tr id="provider-scope-9"><td>9</td><td><strong>火山引擎</strong><br>Coding Plan<br><sub>Responses</sub></td><td><code>ark-code-latest</code></td><td>按上表各项能力的标注范围使用。<br><sub>总览说明：补丁：部分补丁任务已通过；MCP：限已测工具；子任务：部分；图片：该入口未确认。</sub></td></tr>
 </tbody>
-<tbody class="region-heading"><tr><th colspan="6">美国厂商</th></tr></tbody>
+<tbody><tr><th colspan="4">美国厂商</th></tr></tbody>
 <tbody>
-<tr id="provider-scope-10"><td>10</td><td>OpenAI</td><td>官方账号</td><td>Responses</td><td>账号可用型号</td><td>按上表各项能力的标注范围使用。</td></tr>
-<tr id="provider-scope-11"><td>11</td><td>OpenAI</td><td>第三方 API</td><td>Responses</td><td><code>gpt-5.6-sol</code></td><td>按上表各项能力的标注范围使用。</td></tr>
-<tr id="provider-scope-12"><td>12</td><td>Anthropic</td><td>第三方 API</td><td>Anthropic Messages</td><td><code>claude-sonnet-4-6</code></td><td>这里记录的是第三方网关中的 Claude 接入。不同网关的 MCP 与搜索结果存在差异，不作为 Anthropic 官方 API 的能力结论。</td></tr>
-<tr id="provider-scope-13"><td>13</td><td>Google</td><td>第三方 API</td><td>Anthropic Messages</td><td><code>gemini-3.1-pro</code></td><td>保留已测网关的历史通过项；该网关另有额度 / 限流阻塞，历史结果不保证当前服务始终可用。</td></tr>
-<tr id="provider-scope-14"><td>14</td><td>xAI</td><td>第三方 API</td><td>Responses</td><td><code>grok-4.6</code></td><td>按上表各项能力的标注范围使用。</td></tr>
+<tr id="provider-scope-10"><td>10</td><td><strong>OpenAI</strong><br>官方账号<br><sub>Responses</sub></td><td>账号可用型号</td><td>按上表各项能力的标注范围使用。<br><sub>总览说明：MCP：按连接；图片：按模型。</sub></td></tr>
+<tr id="provider-scope-11"><td>11</td><td><strong>OpenAI</strong><br>第三方 API<br><sub>Responses</sub></td><td><code>gpt-5.6-sol</code></td><td>按上表各项能力的标注范围使用。<br><sub>总览说明：补丁：桌面使用未确认；子任务：部分；图片：接口。</sub></td></tr>
+<tr id="provider-scope-12"><td>12</td><td><strong>Anthropic</strong><br>第三方 API<br><sub>Anthropic Messages</sub></td><td><code>claude-sonnet-4-6</code></td><td>这里记录的是第三方网关中的 Claude 接入。不同网关的 MCP 与搜索结果存在差异，不作为 Anthropic 官方 API 的能力结论。<br><sub>总览说明：MCP：网关有差异；子任务：部分；图片：接口。</sub></td></tr>
+<tr id="provider-scope-13"><td>13</td><td><strong>Google</strong><br>第三方 API<br><sub>Anthropic Messages</sub></td><td><code>gemini-3.1-pro</code></td><td>保留已测网关的历史通过项；该网关另有额度 / 限流阻塞，历史结果不保证当前服务始终可用。<br><sub>总览说明：文件：历史记录；补丁：未通过；MCP：未通过；子任务：未通过；图片：接口；网关受限；续聊：历史记录。</sub></td></tr>
+<tr id="provider-scope-14"><td>14</td><td><strong>xAI</strong><br>第三方 API<br><sub>Responses</sub></td><td><code>grok-4.6</code></td><td>按上表各项能力的标注范围使用。<br><sub>总览说明：补丁：桌面未通过；MCP：未通过；子任务：未通过；图片：接口。</sub></td></tr>
 </tbody>
-<tbody class="region-heading"><tr><th colspan="6">接入平台</th></tr></tbody>
+<tbody><tr><th colspan="4">接入平台</th></tr></tbody>
 <tbody>
-<tr id="provider-scope-15"><td>15</td><td>CommandCode</td><td>API</td><td>Chat Completions</td><td><code>z-ai/glm-5.3-flash</code></td><td>图片续聊成功不代表子任务通过；电脑操作仅覆盖已测的计算器任务。</td></tr>
-<tr id="provider-scope-16"><td>16</td><td>opencode</td><td>API</td><td>Anthropic Messages</td><td><code>qwen3.8-flash</code></td><td>已测接入完成了父任务等待与子任务结果汇总，另有停止流式生成后恢复的记录。搜索由独立执行器完成，不据此宣称供应商原生搜索。</td></tr>
+<tr id="provider-scope-15"><td>15</td><td><strong>CommandCode</strong><br>API<br><sub>Chat Completions</sub></td><td><code>z-ai/glm-5.3-flash</code></td><td>图片续聊成功不代表子任务通过；电脑操作仅覆盖已测的计算器任务。<br><sub>总览说明：图片：桌面读图；续聊：跨模型链。</sub></td></tr>
+<tr id="provider-scope-16"><td>16</td><td><strong>opencode</strong><br>API<br><sub>Anthropic Messages</sub></td><td><code>qwen3.8-flash</code></td><td>已测接入完成了父任务等待与子任务结果汇总，另有停止流式生成后恢复的记录。搜索由独立执行器完成，不据此宣称供应商原生搜索。<br><sub>总览说明：图片：独立读图；续聊：跨模型链。</sub></td></tr>
 </tbody>
 </table>
 

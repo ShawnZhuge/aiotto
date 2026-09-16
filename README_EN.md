@@ -1,12 +1,4 @@
-<p align="center">
-  <img src="assets/app-icon.png" alt="Aiotto" width="112" height="112" />
-</p>
-
-<h1 align="center">Aiotto</h1>
-
-<p align="center">
-  <strong>Bring your usual models into Codex.</strong>
-</p>
+<h1 align="center">Bring your usual models into Codex.</h1>
 
 <p align="center">
   Aiotto connects model services and manages accounts alongside Codex Desktop. Use your existing Coding Plan, Token Plan, or API with adapted tools in the interface you know, and keep account quota, usage, and past sessions in one place.
@@ -231,93 +223,194 @@ Local file search, connected MCP tools, Shell, and upstream-hosted services are 
 
 ### Capabilities by provider
 
-One table, grouped into China-based providers, US-based providers, and connection platforms. Vendors share a name cell while plans/APIs and protocols keep separate rows. The order is for navigation, not a capability ranking. Numbers link to the aligned model and conditions table below.
+All providers remain visible in the overview, grouped by China-based providers, US-based providers, and connection platforms. Each plan/API keeps its own row. Chat means Chat Completions; Messages means Anthropic Messages. Numbered markers have conditions in the model table below; the order is not a capability ranking.
 
 <table id="provider-capability-matrix">
-<caption>Provider capabilities · scroll horizontally for all columns</caption>
-<colgroup><col width="112"><col width="116"><col width="120"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"></colgroup>
-<thead>
-<tr><th rowspan="2" scope="col">Provider</th><th rowspan="2" scope="col">Plan / API</th><th rowspan="2" scope="col">Protocol</th><th colspan="4" scope="colgroup">Everyday tools</th><th colspan="6" scope="colgroup">Collaboration and desktop use</th><th colspan="4" scope="colgroup">Reasoning and multimodal</th></tr>
-<tr><th scope="col">Files / Shell</th><th scope="col">Apply Patch</th><th scope="col">Skills</th><th scope="col">MCP tools</th><th scope="col">Browser</th><th scope="col">Computer use</th><th scope="col">Subtasks</th><th scope="col">History</th><th scope="col">Code review</th><th scope="col">Site tools</th><th scope="col">Reasoning levels</th><th scope="col">Image understanding</th><th scope="col">Direct PDF input</th><th scope="col">Search and citations</th></tr>
-</thead>
-<tbody class="region-heading"><tr><th colspan="17">China-based providers</th></tr></tbody>
+<thead><tr><th>Provider</th><th>Connection</th><th>Files</th><th>Patch</th><th>MCP</th><th>Subtasks</th><th>Images</th><th>History</th></tr></thead>
+<tbody><tr><th colspan="8">China-based providers</th></tr></tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="2"><strong>DeepSeek</strong></th><td>API <sup><a href="#provider-scope-1" aria-label="Verified scope 1">1</a></sup></td><td>Chat Completions</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>API</small></td><td><span>🚫</span> <small>Tested text-only model</small></td><td><span>🚫</span> <small>Standard direct path</small></td><td><span>⬜</span> <small>Search use unconfirmed</small></td></tr>
-<tr><td>API <sup><a href="#provider-scope-2" aria-label="Verified scope 2">2</a></sup></td><td>Responses</td><td><span>🔄</span> <small>Tool bridge</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Tool / authentication differences</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span> <small>Separate level checks</small></td><td><span>🚫</span> <small>Tested text-only model</small></td><td><span>⚠️</span> <small>Usability unconfirmed</small></td><td><span>⬜</span> <small>Search use unconfirmed</small></td></tr>
+<tr><th scope="rowgroup" rowspan="2"><strong>DeepSeek</strong></th><td>API <sup><a href="#provider-scope-1" aria-label="Verified scope 1">1</a></sup><br><sub>Chat</sub></td><td>🔄</td><td>🔄</td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-1">1</a></sup></td><td>🚫<sup><a href="#provider-scope-1">1</a></sup></td><td>🔄</td></tr>
+<tr><td>API <sup><a href="#provider-scope-2" aria-label="Verified scope 2">2</a></sup><br><sub>Responses</sub></td><td>🔄<sup><a href="#provider-scope-2">2</a></sup></td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-2">2</a></sup></td><td>⚠️<sup><a href="#provider-scope-2">2</a></sup></td><td>🚫<sup><a href="#provider-scope-2">2</a></sup></td><td>🔄</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="2"><strong>Qwen</strong></th><td>Token Plan <sup><a href="#provider-scope-3" aria-label="Verified scope 3">3</a></sup></td><td>Responses</td><td><span>🔄</span> <small>Tool bridge</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>🔄</span> <small>Cross-model chain</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>Per-level checks</small></td><td><span>✅</span> <small>Desktop image reading</small></td><td><span>⬜</span></td><td><span>⬜</span></td></tr>
-<tr><td>Third-party API <sup><a href="#provider-scope-4" aria-label="Verified scope 4">4</a></sup></td><td>Responses</td><td><span>⚠️</span> <small>Upstream blocked</small></td><td><span>⚠️</span> <small>Upstream blocked</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>Upstream blocked</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>Historical API pass; later blocked</small></td><td><span>⚠️</span> <small>Historical API pass; later blocked</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="2"><strong>Qwen</strong></th><td>Token Plan <sup><a href="#provider-scope-3" aria-label="Verified scope 3">3</a></sup><br><sub>Responses</sub></td><td>🔄<sup><a href="#provider-scope-3">3</a></sup></td><td>🔄</td><td>⬜</td><td>⬜</td><td>✅<sup><a href="#provider-scope-3">3</a></sup></td><td>🔄<sup><a href="#provider-scope-3">3</a></sup></td></tr>
+<tr><td>Third-party API <sup><a href="#provider-scope-4" aria-label="Verified scope 4">4</a></sup><br><sub>Responses</sub></td><td>⚠️<sup><a href="#provider-scope-4">4</a></sup></td><td>⚠️<sup><a href="#provider-scope-4">4</a></sup></td><td>⬜</td><td>⬜</td><td>⚠️<sup><a href="#provider-scope-4">4</a></sup></td><td>⚠️<sup><a href="#provider-scope-4">4</a></sup></td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>Zhipu</strong></th><td>Coding Plan <sup><a href="#provider-scope-5" aria-label="Verified scope 5">5</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>✅</span> <small>API</small></td><td><span>⚠️</span> <small>Content check not passed</small></td><td><span>⚠️</span> <small>Content check not passed</small></td><td><span>⬜</span> <small>Search use unconfirmed</small></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>Zhipu</strong></th><td>Coding Plan <sup><a href="#provider-scope-5" aria-label="Verified scope 5">5</a></sup><br><sub>Responses</sub></td><td>✅</td><td>✅</td><td>✅</td><td>⚠️<sup><a href="#provider-scope-5">5</a></sup></td><td>⚠️<sup><a href="#provider-scope-5">5</a></sup></td><td>✅</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>Moonshot</strong></th><td>API <sup><a href="#provider-scope-6" aria-label="Verified scope 6">6</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>🔄</span></td><td><span>✅</span> <small>API</small></td><td><span>✅</span> <small>API</small></td><td><span>⚠️</span> <small>Upstream rejected</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>Moonshot</strong></th><td>API <sup><a href="#provider-scope-6" aria-label="Verified scope 6">6</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>🔄</td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-6">6</a></sup></td><td>✅<sup><a href="#provider-scope-6">6</a></sup></td><td>🔄</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>Xiaomi</strong></th><td>Token Plan <sup><a href="#provider-scope-7" aria-label="Verified scope 7">7</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>⬜</span> <small>Desktop use unconfirmed</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>✅</span> <small>API</small></td><td><span>⚠️</span> <small>Upstream rejected</small></td><td><span>⚠️</span> <small>Upstream rejected</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>Xiaomi</strong></th><td>Token Plan <sup><a href="#provider-scope-7" aria-label="Verified scope 7">7</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⬜<sup><a href="#provider-scope-7">7</a></sup></td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-7">7</a></sup></td><td>⚠️<sup><a href="#provider-scope-7">7</a></sup></td><td>🔄</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>MiniMax</strong></th><td>Token Plan <sup><a href="#provider-scope-8" aria-label="Verified scope 8">8</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>Tested tools only</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>⚠️</span> <small>high passed; none had deviations</small></td><td><span>🔄</span> <small>Desktop; large-image limit</small></td><td><span>🔄</span> <small>API</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>MiniMax</strong></th><td>Token Plan <sup><a href="#provider-scope-8" aria-label="Verified scope 8">8</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>🔄</td><td>🔄<sup><a href="#provider-scope-8">8</a></sup></td><td>⚠️<sup><a href="#provider-scope-8">8</a></sup></td><td>🔄<sup><a href="#provider-scope-8">8</a></sup></td><td>🔄</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>Volcengine</strong></th><td>Coding Plan <sup><a href="#provider-scope-9" aria-label="Verified scope 9">9</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>⚠️</span> <small>Patching passed in some tested tasks</small></td><td><span>🔄</span></td><td><span>🔄</span> <small>Tested tools only</small></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>✅</span> <small>API; actual reasoning level unconfirmed</small></td><td><span>⬜</span> <small>Entry unconfirmed</small></td><td><span>✅</span> <small>API</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>Volcengine</strong></th><td>Coding Plan <sup><a href="#provider-scope-9" aria-label="Verified scope 9">9</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-9">9</a></sup></td><td>🔄<sup><a href="#provider-scope-9">9</a></sup></td><td>⚠️<sup><a href="#provider-scope-9">9</a></sup></td><td>⬜<sup><a href="#provider-scope-9">9</a></sup></td><td>🔄</td></tr>
 </tbody>
-<tbody class="region-heading"><tr><th colspan="17">US-based providers</th></tr></tbody>
+<tbody><tr><th colspan="8">US-based providers</th></tr></tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="2"><strong>OpenAI</strong></th><td>Official account <sup><a href="#provider-scope-10" aria-label="Verified scope 10">10</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span> <small>Per connection</small></td><td><span>✅</span> <small>Per entry</small></td><td><span>✅</span> <small>Per entry</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span> <small>Per entry</small></td><td><span>✅</span> <small>Per model</small></td><td><span>✅</span> <small>Per model</small></td><td><span>✅</span> <small>Per entry</small></td><td><span>✅</span> <small>Per service</small></td></tr>
-<tr><td>Third-party API <sup><a href="#provider-scope-11" aria-label="Verified scope 11">11</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>⬜</span> <small>Desktop use unconfirmed</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>⚠️</span> <small>Higher-level deviations</small></td><td><span>✅</span> <small>API</small></td><td><span>✅</span> <small>API</small></td><td><span>⬜</span> <small>Search use unconfirmed</small></td></tr>
-</tbody>
-<tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>Anthropic</strong></th><td>Third-party API <sup><a href="#provider-scope-12" aria-label="Verified scope 12">12</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Varies by gateway</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>🔄</span> <small>API mapping</small></td><td><span>🔄</span> <small>API</small></td><td><span>🔄</span> <small>API</small></td><td><span>🔄</span> <small>Tested search chain; per gateway</small></td></tr>
+<tr><th scope="rowgroup" rowspan="2"><strong>OpenAI</strong></th><td>Official account <sup><a href="#provider-scope-10" aria-label="Verified scope 10">10</a></sup><br><sub>Responses</sub></td><td>✅</td><td>✅</td><td>✅<sup><a href="#provider-scope-10">10</a></sup></td><td>✅</td><td>✅<sup><a href="#provider-scope-10">10</a></sup></td><td>✅</td></tr>
+<tr><td>Third-party API <sup><a href="#provider-scope-11" aria-label="Verified scope 11">11</a></sup><br><sub>Responses</sub></td><td>✅</td><td>⬜<sup><a href="#provider-scope-11">11</a></sup></td><td>✅</td><td>⚠️<sup><a href="#provider-scope-11">11</a></sup></td><td>✅<sup><a href="#provider-scope-11">11</a></sup></td><td>✅</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>Google</strong></th><td>Third-party API <sup><a href="#provider-scope-13" aria-label="Verified scope 13">13</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span> <small>Historical</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>🔄</span> <small>Historical</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>🔄</span> <small>Historical</small></td><td><span>⬜</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>🔄</span> <small>Historical</small></td><td><span>🔄</span> <small>Historical</small></td><td><span>⬜</span></td><td><span>🔄</span> <small>API; gateway limited</small></td><td><span>🔄</span> <small>API; gateway limited</small></td><td><span>⚠️</span> <small>Content check not passed</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>Anthropic</strong></th><td>Third-party API <sup><a href="#provider-scope-12" aria-label="Verified scope 12">12</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>🔄</td><td>⚠️<sup><a href="#provider-scope-12">12</a></sup></td><td>⚠️<sup><a href="#provider-scope-12">12</a></sup></td><td>🔄<sup><a href="#provider-scope-12">12</a></sup></td><td>🔄</td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>xAI</strong></th><td>Third-party API <sup><a href="#provider-scope-14" aria-label="Verified scope 14">14</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>⚠️</span> <small>Desktop not passed</small></td><td><span>⚠️</span> <small>Limited</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>✅</span> <small>API</small></td><td><span>✅</span> <small>API</small></td><td><span>⚠️</span> <small>Upstream rejected</small></td><td><span>⚠️</span> <small>Per gateway and search path</small></td></tr>
-</tbody>
-<tbody class="region-heading"><tr><th colspan="17">Connection platforms</th></tr></tbody>
-<tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>CommandCode</strong><br><small>Platform</small></th><td>API <sup><a href="#provider-scope-15" aria-label="Verified scope 15">15</a></sup></td><td>Chat Completions</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>🔄</span> <small>Cross-model chain</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>Per-level checks</small></td><td><span>🔄</span> <small>Desktop image reading</small></td><td><span>🚫</span> <small>Standard direct path</small></td><td><span>⬜</span></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>Google</strong></th><td>Third-party API <sup><a href="#provider-scope-13" aria-label="Verified scope 13">13</a></sup><br><sub>Messages</sub></td><td>🔄<sup><a href="#provider-scope-13">13</a></sup></td><td>⚠️<sup><a href="#provider-scope-13">13</a></sup></td><td>⚠️<sup><a href="#provider-scope-13">13</a></sup></td><td>⚠️<sup><a href="#provider-scope-13">13</a></sup></td><td>🔄<sup><a href="#provider-scope-13">13</a></sup></td><td>🔄<sup><a href="#provider-scope-13">13</a></sup></td></tr>
 </tbody>
 <tbody>
-<tr><th scope="rowgroup" rowspan="1"><strong>opencode</strong><br><small>Platform</small></th><td>API <sup><a href="#provider-scope-16" aria-label="Verified scope 16">16</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>Cross-model chain</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>Per-level checks</small></td><td><span>⬜</span> <small>Independent image reading</small></td><td><span>⬜</span></td><td><span>🔄</span> <small>Separate search executor</small></td></tr>
+<tr><th scope="rowgroup" rowspan="1"><strong>xAI</strong></th><td>Third-party API <sup><a href="#provider-scope-14" aria-label="Verified scope 14">14</a></sup><br><sub>Responses</sub></td><td>✅</td><td>⚠️<sup><a href="#provider-scope-14">14</a></sup></td><td>⚠️<sup><a href="#provider-scope-14">14</a></sup></td><td>⚠️<sup><a href="#provider-scope-14">14</a></sup></td><td>✅<sup><a href="#provider-scope-14">14</a></sup></td><td>✅</td></tr>
+</tbody>
+<tbody><tr><th colspan="8">Connection platforms</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>CommandCode</strong><br><small>Platform</small></th><td>API <sup><a href="#provider-scope-15" aria-label="Verified scope 15">15</a></sup><br><sub>Chat</sub></td><td>🔄</td><td>🔄</td><td>⬜</td><td>⬜</td><td>🔄<sup><a href="#provider-scope-15">15</a></sup></td><td>🔄<sup><a href="#provider-scope-15">15</a></sup></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>opencode</strong><br><small>Platform</small></th><td>API <sup><a href="#provider-scope-16" aria-label="Verified scope 16">16</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>🔄</td><td>🔄</td><td>🔄</td><td>⬜<sup><a href="#provider-scope-16">16</a></sup></td><td>🔄<sup><a href="#provider-scope-16">16</a></sup></td></tr>
 </tbody>
 </table>
 
+<details>
+<summary>More capabilities — compare all providers together</summary>
+
+**Tools and desktop use**
+
+<table id="provider-tools-matrix">
+<thead><tr><th>Provider</th><th>Connection</th><th>Skills</th><th>Browser</th><th>Computer use</th><th>Review</th></tr></thead>
+<tbody><tr><th colspan="6">China-based providers</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>DeepSeek</strong></th><td>API <sup><a href="#provider-scope-1" aria-label="Verified scope 1">1</a></sup><br><sub>Chat</sub></td><td>🔄</td><td>⚠️<br><sub>Partial</sub></td><td>🔄</td><td>🔄</td></tr>
+<tr><td>API <sup><a href="#provider-scope-2" aria-label="Verified scope 2">2</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⚠️<br><sub>Partial</sub></td><td>🔄</td><td>🔄</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>Qwen</strong></th><td>Token Plan <sup><a href="#provider-scope-3" aria-label="Verified scope 3">3</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⬜</td><td>⬜</td><td>⬜</td></tr>
+<tr><td>Third-party API <sup><a href="#provider-scope-4" aria-label="Verified scope 4">4</a></sup><br><sub>Responses</sub></td><td>⬜</td><td>⬜</td><td>⬜</td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Zhipu</strong></th><td>Coding Plan <sup><a href="#provider-scope-5" aria-label="Verified scope 5">5</a></sup><br><sub>Responses</sub></td><td>✅</td><td>⬜</td><td>⚠️<br><sub>Not passed</sub></td><td>✅</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Moonshot</strong></th><td>API <sup><a href="#provider-scope-6" aria-label="Verified scope 6">6</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>🔄</td><td>⚠️<br><sub>Not passed</sub></td><td>⚠️<br><sub>Not passed</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Xiaomi</strong></th><td>Token Plan <sup><a href="#provider-scope-7" aria-label="Verified scope 7">7</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⚠️<br><sub>Not passed</sub></td><td>⚠️<br><sub>Not passed</sub></td><td>🔄</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>MiniMax</strong></th><td>Token Plan <sup><a href="#provider-scope-8" aria-label="Verified scope 8">8</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>🔄</td><td>⚠️<br><sub>Partial</sub></td><td>⚠️<br><sub>Not passed</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Volcengine</strong></th><td>Coding Plan <sup><a href="#provider-scope-9" aria-label="Verified scope 9">9</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⬜</td><td>🔄</td><td>⚠️<br><sub>Partial</sub></td></tr>
+</tbody>
+<tbody><tr><th colspan="6">US-based providers</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>OpenAI</strong></th><td>Official account <sup><a href="#provider-scope-10" aria-label="Verified scope 10">10</a></sup><br><sub>Responses</sub></td><td>✅</td><td>✅<br><sub>Per entry</sub></td><td>✅<br><sub>Per entry</sub></td><td>✅</td></tr>
+<tr><td>Third-party API <sup><a href="#provider-scope-11" aria-label="Verified scope 11">11</a></sup><br><sub>Responses</sub></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Anthropic</strong></th><td>Third-party API <sup><a href="#provider-scope-12" aria-label="Verified scope 12">12</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>🔄</td><td>⚠️<br><sub>Partial</sub></td><td>⚠️<br><sub>Not passed</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Google</strong></th><td>Third-party API <sup><a href="#provider-scope-13" aria-label="Verified scope 13">13</a></sup><br><sub>Messages</sub></td><td>🔄<br><sub>Historical</sub></td><td>🔄<br><sub>Historical</sub></td><td>⬜</td><td>🔄<br><sub>Historical</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>xAI</strong></th><td>Third-party API <sup><a href="#provider-scope-14" aria-label="Verified scope 14">14</a></sup><br><sub>Responses</sub></td><td>⚠️<br><sub>Limited</sub></td><td>✅</td><td>✅</td><td>✅</td></tr>
+</tbody>
+<tbody><tr><th colspan="6">Connection platforms</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>CommandCode</strong><br><small>Platform</small></th><td>API <sup><a href="#provider-scope-15" aria-label="Verified scope 15">15</a></sup><br><sub>Chat</sub></td><td>🔄</td><td>🔄</td><td>🔄</td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>opencode</strong><br><small>Platform</small></th><td>API <sup><a href="#provider-scope-16" aria-label="Verified scope 16">16</a></sup><br><sub>Messages</sub></td><td>🔄</td><td>⬜</td><td>⬜</td><td>⬜</td></tr>
+</tbody>
+</table>
+
+**Discovery, reasoning, and search**
+
+<table id="provider-media-matrix">
+<thead><tr><th>Provider</th><th>Connection</th><th>Site tools</th><th>Reasoning</th><th>PDF</th><th>Search</th></tr></thead>
+<tbody><tr><th colspan="6">China-based providers</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>DeepSeek</strong></th><td>API <sup><a href="#provider-scope-1" aria-label="Verified scope 1">1</a></sup><br><sub>Chat</sub></td><td>🔄</td><td>🔄<br><sub>API</sub></td><td>🚫<br><sub>Standard direct path</sub></td><td>⬜<br><sub>Search use unconfirmed</sub></td></tr>
+<tr><td>API <sup><a href="#provider-scope-2" aria-label="Verified scope 2">2</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>⬜<br><sub>Separate level checks</sub></td><td>⚠️<br><sub>Usability unconfirmed</sub></td><td>⬜<br><sub>Search use unconfirmed</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>Qwen</strong></th><td>Token Plan <sup><a href="#provider-scope-3" aria-label="Verified scope 3">3</a></sup><br><sub>Responses</sub></td><td>⬜</td><td>⬜<br><sub>Per-level checks</sub></td><td>⬜</td><td>⬜</td></tr>
+<tr><td>Third-party API <sup><a href="#provider-scope-4" aria-label="Verified scope 4">4</a></sup><br><sub>Responses</sub></td><td>⬜</td><td>⚠️<br><sub>Historical API pass; later blocked</sub></td><td>⚠️<br><sub>Not passed</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Zhipu</strong></th><td>Coding Plan <sup><a href="#provider-scope-5" aria-label="Verified scope 5">5</a></sup><br><sub>Responses</sub></td><td>⚠️<br><sub>Not passed</sub></td><td>✅<br><sub>API</sub></td><td>⚠️<br><sub>Content check not passed</sub></td><td>⬜<br><sub>Search use unconfirmed</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Moonshot</strong></th><td>API <sup><a href="#provider-scope-6" aria-label="Verified scope 6">6</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>✅<br><sub>API</sub></td><td>⚠️<br><sub>Upstream rejected</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Xiaomi</strong></th><td>Token Plan <sup><a href="#provider-scope-7" aria-label="Verified scope 7">7</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>✅<br><sub>API</sub></td><td>⚠️<br><sub>Upstream rejected</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>MiniMax</strong></th><td>Token Plan <sup><a href="#provider-scope-8" aria-label="Verified scope 8">8</a></sup><br><sub>Messages</sub></td><td>⚠️<br><sub>Partial</sub></td><td>⚠️<br><sub>high passed; none had deviations</sub></td><td>🔄<br><sub>API</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Volcengine</strong></th><td>Coding Plan <sup><a href="#provider-scope-9" aria-label="Verified scope 9">9</a></sup><br><sub>Responses</sub></td><td>🔄</td><td>✅<br><sub>API; actual reasoning level unconfirmed</sub></td><td>✅<br><sub>API</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody><tr><th colspan="6">US-based providers</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>OpenAI</strong></th><td>Official account <sup><a href="#provider-scope-10" aria-label="Verified scope 10">10</a></sup><br><sub>Responses</sub></td><td>✅<br><sub>Per entry</sub></td><td>✅<br><sub>Per model</sub></td><td>✅<br><sub>Per entry</sub></td><td>✅<br><sub>Per service</sub></td></tr>
+<tr><td>Third-party API <sup><a href="#provider-scope-11" aria-label="Verified scope 11">11</a></sup><br><sub>Responses</sub></td><td>⚠️<br><sub>Partial</sub></td><td>⚠️<br><sub>Higher-level deviations</sub></td><td>✅<br><sub>API</sub></td><td>⬜<br><sub>Search use unconfirmed</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Anthropic</strong></th><td>Third-party API <sup><a href="#provider-scope-12" aria-label="Verified scope 12">12</a></sup><br><sub>Messages</sub></td><td>⚠️<br><sub>Not passed</sub></td><td>🔄<br><sub>API mapping</sub></td><td>🔄<br><sub>API</sub></td><td>🔄<br><sub>Tested search chain; per gateway</sub></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Google</strong></th><td>Third-party API <sup><a href="#provider-scope-13" aria-label="Verified scope 13">13</a></sup><br><sub>Messages</sub></td><td>⬜</td><td>🔄<br><sub>API; gateway limited</sub></td><td>⚠️<br><sub>Content check not passed</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>xAI</strong></th><td>Third-party API <sup><a href="#provider-scope-14" aria-label="Verified scope 14">14</a></sup><br><sub>Responses</sub></td><td>⚠️<br><sub>Partial</sub></td><td>✅<br><sub>API</sub></td><td>⚠️<br><sub>Upstream rejected</sub></td><td>⚠️<br><sub>Per gateway and search path</sub></td></tr>
+</tbody>
+<tbody><tr><th colspan="6">Connection platforms</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>CommandCode</strong><br><small>Platform</small></th><td>API <sup><a href="#provider-scope-15" aria-label="Verified scope 15">15</a></sup><br><sub>Chat</sub></td><td>⬜</td><td>⬜<br><sub>Per-level checks</sub></td><td>🚫<br><sub>Standard direct path</sub></td><td>⬜</td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>opencode</strong><br><small>Platform</small></th><td>API <sup><a href="#provider-scope-16" aria-label="Verified scope 16">16</a></sup><br><sub>Messages</sub></td><td>⬜</td><td>⬜<br><sub>Per-level checks</sub></td><td>⬜</td><td>🔄<br><sub>Separate search executor</sub></td></tr>
+</tbody>
+</table>
+
+</details>
+
 **Verified models and conditions**
 
-Rows apply only to these combinations and the tested platforms, not every model from a vendor. “API” or “historical” qualifiers in cells retain their original limits.
+The numbered conditions belong to the overview markers. Results apply only to these models and tested platforms, not every model from a vendor. API-level checks do not establish full desktop support; historical results do not guarantee current availability.
 
 <table id="provider-scope-table">
-<colgroup><col width="48"><col width="100"><col width="115"><col width="125"><col width="210"><col></colgroup>
-<thead><tr><th scope="col">No.</th><th scope="col">Provider / platform</th><th scope="col">Plan / API</th><th scope="col">Protocol</th><th scope="col">Verified model</th><th scope="col">Conditions</th></tr></thead>
-<tbody class="region-heading"><tr><th colspan="6">China-based providers</th></tr></tbody>
+<thead><tr><th>No.</th><th>Provider / connection</th><th>Verified model</th><th>Conditions</th></tr></thead>
+<tbody><tr><th colspan="4">China-based providers</th></tr></tbody>
 <tbody>
-<tr id="provider-scope-1"><td>1</td><td>DeepSeek</td><td>API</td><td>Chat Completions</td><td><code>deepseek-v4-pro</code></td><td>See the capability limits in the table above.</td></tr>
-<tr id="provider-scope-2"><td>2</td><td>DeepSeek</td><td>API</td><td>Responses</td><td><code>deepseek-v4-pro</code></td><td>See the capability limits in the table above.</td></tr>
-<tr id="provider-scope-3"><td>3</td><td>Qwen</td><td>Token Plan</td><td>Responses</td><td><code>qwen3.8-flash</code></td><td>Token Plan and third-party API are separate connections. Request rejection on the third-party gateway is not a result for Token Plan.</td></tr>
-<tr id="provider-scope-4"><td>4</td><td>Qwen</td><td>Third-party API</td><td>Responses</td><td><code>qwen3.7-plus</code></td><td>See the capability limits in the table above.</td></tr>
-<tr id="provider-scope-5"><td>5</td><td>Zhipu</td><td>Coding Plan</td><td>Responses</td><td><code>glm-5.3</code></td><td>See the capability limits in the table above.</td></tr>
-<tr id="provider-scope-6"><td>6</td><td>Moonshot</td><td>API</td><td>Responses</td><td><code>kimi-k2.7-code-highspeed</code></td><td>See the capability limits in the table above.</td></tr>
-<tr id="provider-scope-7"><td>7</td><td>Xiaomi</td><td>Token Plan</td><td>Responses</td><td><code>mimo-v2.5-pro</code></td><td>Recovery from image history proves conversation continuation, not image understanding.</td></tr>
-<tr id="provider-scope-8"><td>8</td><td>MiniMax</td><td>Token Plan</td><td>Anthropic Messages</td><td><code>MiniMax-M3</code></td><td>Small-image desktop cases passed; larger images have a separate upstream limit.</td></tr>
-<tr id="provider-scope-9"><td>9</td><td>Volcengine</td><td>Coding Plan</td><td>Responses</td><td><code>ark-code-latest</code></td><td>See the capability limits in the table above.</td></tr>
+<tr id="provider-scope-1"><td>1</td><td><strong>DeepSeek</strong><br>API<br><sub>Chat Completions</sub></td><td><code>deepseek-v4-pro</code></td><td>See the capability limits in the table above.<br><sub>Overview notes: Subtasks：Partial; Images：Tested text-only model.</sub></td></tr>
+<tr id="provider-scope-2"><td>2</td><td><strong>DeepSeek</strong><br>API<br><sub>Responses</sub></td><td><code>deepseek-v4-pro</code></td><td>See the capability limits in the table above.<br><sub>Overview notes: Files：Tool bridge; MCP：Tool / authentication differences; Subtasks：Partial; Images：Tested text-only model.</sub></td></tr>
+<tr id="provider-scope-3"><td>3</td><td><strong>Qwen</strong><br>Token Plan<br><sub>Responses</sub></td><td><code>qwen3.8-flash</code></td><td>Token Plan and third-party API are separate connections. Request rejection on the third-party gateway is not a result for Token Plan.<br><sub>Overview notes: Files：Tool bridge; Images：Desktop image reading; History：Cross-model chain.</sub></td></tr>
+<tr id="provider-scope-4"><td>4</td><td><strong>Qwen</strong><br>Third-party API<br><sub>Responses</sub></td><td><code>qwen3.7-plus</code></td><td>See the capability limits in the table above.<br><sub>Overview notes: Files：Upstream blocked; Patch：Upstream blocked; Images：Historical API pass; later blocked; History：Upstream blocked.</sub></td></tr>
+<tr id="provider-scope-5"><td>5</td><td><strong>Zhipu</strong><br>Coding Plan<br><sub>Responses</sub></td><td><code>glm-5.3</code></td><td>See the capability limits in the table above.<br><sub>Overview notes: Subtasks：Partial; Images：Content check not passed.</sub></td></tr>
+<tr id="provider-scope-6"><td>6</td><td><strong>Moonshot</strong><br>API<br><sub>Responses</sub></td><td><code>kimi-k2.7-code-highspeed</code></td><td>See the capability limits in the table above.<br><sub>Overview notes: Subtasks：Partial; Images：API.</sub></td></tr>
+<tr id="provider-scope-7"><td>7</td><td><strong>Xiaomi</strong><br>Token Plan<br><sub>Responses</sub></td><td><code>mimo-v2.5-pro</code></td><td>Recovery from image history proves conversation continuation, not image understanding.<br><sub>Overview notes: Patch：Desktop use unconfirmed; Subtasks：Partial; Images：Upstream rejected.</sub></td></tr>
+<tr id="provider-scope-8"><td>8</td><td><strong>MiniMax</strong><br>Token Plan<br><sub>Anthropic Messages</sub></td><td><code>MiniMax-M3</code></td><td>Small-image desktop cases passed; larger images have a separate upstream limit.<br><sub>Overview notes: MCP：Tested tools only; Subtasks：Partial; Images：Desktop; large-image limit.</sub></td></tr>
+<tr id="provider-scope-9"><td>9</td><td><strong>Volcengine</strong><br>Coding Plan<br><sub>Responses</sub></td><td><code>ark-code-latest</code></td><td>See the capability limits in the table above.<br><sub>Overview notes: Patch：Patching passed in some tested tasks; MCP：Tested tools only; Subtasks：Partial; Images：Entry unconfirmed.</sub></td></tr>
 </tbody>
-<tbody class="region-heading"><tr><th colspan="6">US-based providers</th></tr></tbody>
+<tbody><tr><th colspan="4">US-based providers</th></tr></tbody>
 <tbody>
-<tr id="provider-scope-10"><td>10</td><td>OpenAI</td><td>Official account</td><td>Responses</td><td>Account-available models</td><td>See the capability limits in the table above.</td></tr>
-<tr id="provider-scope-11"><td>11</td><td>OpenAI</td><td>Third-party API</td><td>Responses</td><td><code>gpt-5.6-sol</code></td><td>See the capability limits in the table above.</td></tr>
-<tr id="provider-scope-12"><td>12</td><td>Anthropic</td><td>Third-party API</td><td>Anthropic Messages</td><td><code>claude-sonnet-4-6</code></td><td>These results are from third-party Claude gateways. MCP and search results vary by gateway and do not certify Anthropic's official API.</td></tr>
-<tr id="provider-scope-13"><td>13</td><td>Google</td><td>Third-party API</td><td>Anthropic Messages</td><td><code>gemini-3.1-pro</code></td><td>Historical successes are retained for the tested gateway, which also had quota / rate-limit blocks. They do not guarantee current availability.</td></tr>
-<tr id="provider-scope-14"><td>14</td><td>xAI</td><td>Third-party API</td><td>Responses</td><td><code>grok-4.6</code></td><td>See the capability limits in the table above.</td></tr>
+<tr id="provider-scope-10"><td>10</td><td><strong>OpenAI</strong><br>Official account<br><sub>Responses</sub></td><td>Account-available models</td><td>See the capability limits in the table above.<br><sub>Overview notes: MCP：Per connection; Images：Per model.</sub></td></tr>
+<tr id="provider-scope-11"><td>11</td><td><strong>OpenAI</strong><br>Third-party API<br><sub>Responses</sub></td><td><code>gpt-5.6-sol</code></td><td>See the capability limits in the table above.<br><sub>Overview notes: Patch：Desktop use unconfirmed; Subtasks：Partial; Images：API.</sub></td></tr>
+<tr id="provider-scope-12"><td>12</td><td><strong>Anthropic</strong><br>Third-party API<br><sub>Anthropic Messages</sub></td><td><code>claude-sonnet-4-6</code></td><td>These results are from third-party Claude gateways. MCP and search results vary by gateway and do not certify Anthropic's official API.<br><sub>Overview notes: MCP：Varies by gateway; Subtasks：Partial; Images：API.</sub></td></tr>
+<tr id="provider-scope-13"><td>13</td><td><strong>Google</strong><br>Third-party API<br><sub>Anthropic Messages</sub></td><td><code>gemini-3.1-pro</code></td><td>Historical successes are retained for the tested gateway, which also had quota / rate-limit blocks. They do not guarantee current availability.<br><sub>Overview notes: Files：Historical; Patch：Not passed; MCP：Not passed; Subtasks：Not passed; Images：API; gateway limited; History：Historical.</sub></td></tr>
+<tr id="provider-scope-14"><td>14</td><td><strong>xAI</strong><br>Third-party API<br><sub>Responses</sub></td><td><code>grok-4.6</code></td><td>See the capability limits in the table above.<br><sub>Overview notes: Patch：Desktop not passed; MCP：Not passed; Subtasks：Not passed; Images：API.</sub></td></tr>
 </tbody>
-<tbody class="region-heading"><tr><th colspan="6">Connection platforms</th></tr></tbody>
+<tbody><tr><th colspan="4">Connection platforms</th></tr></tbody>
 <tbody>
-<tr id="provider-scope-15"><td>15</td><td>CommandCode</td><td>API</td><td>Chat Completions</td><td><code>z-ai/glm-5.3-flash</code></td><td>The image continuation result does not establish subtask support. Computer-use evidence is limited to the tested Calculator task.</td></tr>
-<tr id="provider-scope-16"><td>16</td><td>opencode</td><td>API</td><td>Anthropic Messages</td><td><code>qwen3.8-flash</code></td><td>The tested connection completed parent waiting and child-result aggregation, and separately passed stream cancellation and recovery. Search uses a separate executor, not proven native provider search.</td></tr>
+<tr id="provider-scope-15"><td>15</td><td><strong>CommandCode</strong><br>API<br><sub>Chat Completions</sub></td><td><code>z-ai/glm-5.3-flash</code></td><td>The image continuation result does not establish subtask support. Computer-use evidence is limited to the tested Calculator task.<br><sub>Overview notes: Images：Desktop image reading; History：Cross-model chain.</sub></td></tr>
+<tr id="provider-scope-16"><td>16</td><td><strong>opencode</strong><br>API<br><sub>Anthropic Messages</sub></td><td><code>qwen3.8-flash</code></td><td>The tested connection completed parent waiting and child-result aggregation, and separately passed stream cancellation and recovery. Search uses a separate executor, not proven native provider search.<br><sub>Overview notes: Images：Independent image reading; History：Cross-model chain.</sub></td></tr>
 </tbody>
 </table>
 
