@@ -5,11 +5,11 @@
 <h1 align="center">Aiotto</h1>
 
 <p align="center">
-  <strong>Account and multi-relay management for Codex</strong>
+  <strong>Bring your usual models into Codex.</strong>
 </p>
 
 <p align="center">
-  See quota in one place, switch accounts quickly, and keep official models and relay models that use different protocols in the same list.
+  Aiotto connects model services and manages accounts alongside Codex Desktop. Use your existing Coding Plan, Token Plan, or API with adapted tools in the interface you know, and keep account quota, usage, and past sessions in one place.
 </p>
 
 <p align="center">
@@ -25,112 +25,347 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ShawnZhuge/aiotto/releases/latest"><strong>Download the latest release</strong></a>
+  <a href="https://github.com/ShawnZhuge/aiotto/releases/latest"><strong>Download Aiotto</strong></a>
   ·
-  <a href="https://github.com/ShawnZhuge/aiotto/issues">Report an issue</a>
+  <a href="#in-action">See it in action</a>
 </p>
+
+<p align="center">
+  <img src="assets/readme-hero-routing.png" alt="Aiotto: bring more models into your Codex workflow" width="1100" />
+</p>
+
+<p align="center"><sub>The cover illustrates an earlier interface; see the capability tables below for model support and scope.</sub></p>
+
+> Available for macOS and Windows. This page describes released features; see [release notes](https://github.com/ShawnZhuge/aiotto/releases) for updates. Model capabilities depend on the plan, protocol, and verified model.
+
+[In action](#in-action) · [Features](#features) · [Accounts and testing](#accounts) · [Capabilities](#capabilities) · [Get started](#start)
+
+<a id="in-action"></a>
+
+## Use your model services in Codex
+
+Already have a Coding Plan, Token Plan, or API? Add the matching provider in Aiotto and select its connected models from the Codex model list.
+
+- **Keep official and third-party models together.** Choose a connected model for the task in front of you.
+- **Switch models within the same task.** Continue with the messages and tool results that can be carried across; see the [capability tables](#capabilities) for scope.
+- **Keep using adapted tools.** Read files, run commands, and edit code, with tool results returned to the conversation.
+
+<p align="center">
+  <img src="assets/readme-model-routing.png" alt="Official and third-party models in Codex, with model switching in one conversation" width="1100" />
+</p>
+
+<p align="center"><sub>Real interface example from an earlier version. Available models and menus depend on the account, provider configuration, and installed version.</sub></p>
+
+With a ChatGPT account, use official and provider models together. Without one, use a configured provider in no-account mode. If an explicitly selected provider fails, Aiotto reports the reason without silently switching providers or spending official quota.
+
+<a id="features"></a>
 
 ## Feature overview
 
-| Feature | What it gives you |
+If you use Codex every day, Aiotto helps with the work around it: less configuration when changing models, quota visibility before switching accounts, and usage records without digging through logs.
+
+| Feature | What you can do |
 | --- | --- |
-| Account management | Save an account snapshot once; compare five-hour, weekly, or monthly quota with exact reset times and countdowns, then switch accounts with one click |
-| Quota alerts | Set an alert by remaining-quota percentage and get a reminder when it is time to switch |
-| Multi-relay aggregation | Manage several relays and their models together; with a ChatGPT account, official and relay models appear in the same Codex model list |
-| Mixed-model sessions | Continue an existing session across official, relay Codex, Claude, and other compatible models while preserving the visible conversation context |
-| No-account mode | Use configured relay models even when you do not have a ChatGPT account |
-| Mobile remote use | Configure the relay on your computer once; when remotely controlling that computer's Codex session from the same ChatGPT account on your phone, relay models remain selectable |
-| Quota warm-up | Schedule and test warm-up plans, review conflicts, the next run, and recent results, and align the quota window with your working hours |
-| macOS menu bar | Check account quota, reset countdowns, recent sessions, and each relay's state, protocol, network mode, and latency without opening the main window |
-| Sessions and usage | Manage history and filter request-level tokens, cache, latency, and estimated cost by official or relay source, model, and date |
-| Storage and diagnostics | Find large files through a treemap and ranking, clean them safely, and diagnose account, relay, and runtime issues before requesting support |
-| Other tools | Review OpenAI service status, Skills, MCP, application updates, and common maintenance actions |
+| Model connections | **Choose official and third-party models together in Codex**; use three protocols, model search and filtering, bulk selection, and provider import/export |
+| Tools and continuity | Read files, run commands, and edit code with adapted models; keep portable history and tool results when **changing models within a task** |
+| No-account mode | Without a ChatGPT account, start tasks through configured provider models in no-account mode |
+| Remote use from a phone | Configure providers on the computer, then use the same ChatGPT account on your phone to remotely operate that computer's Codex session and select its connected models |
+| Account management | Save account snapshots and view plans, login status, and available five-hour, weekly, or monthly windows; see **remaining quota and reset countdowns** together, sort accounts, and switch with a click |
+| Groups and migration | Group, filter, and organize accounts in bulk; preview and select JSON imports, skip duplicates by default, and keep the current account unchanged |
+| macOS menu bar | Check account quota, reset countdowns, recent sessions, and provider status, protocols, network modes, and latency without opening the main window |
+| Connection tests | Run real streaming requests to check connectivity and latency; test providers with configured models in sequence and compare that run's results |
+| Pelican testing | Choose accounts, models, reasoning levels, and concurrency; watch generation, review history, cancel, retry failures, and export results |
+| Usage statistics | Filter official and provider traffic by model and date; inspect tokens, cache, latency, status, and estimated cost per request. macOS also offers in-conversation token and context statistics |
+| Session management | Search by content, directory, or ID; navigate long conversations with an outline, pin, continue, bulk-archive, restore, and export |
+| Alerts and warm-ups | Set remaining-quota percentage thresholds for switch reminders; bind warm-up plans to accounts and models, test plans, check conflicts, and view the next run and recent results |
+| Backup and cleanup | Inspect storage treemaps and large-file rankings; create and restore snapshots, with safety backups before permanent cleanup and protection for active and recent sessions |
+| Status and maintenance | View OpenAI service status, check Aiotto updates and account/provider/runtime health, inspect local Skills / MCP inventories, and export or send sanitized diagnostics |
 
-## The problems Aiotto focuses on
+<a id="accounts"></a>
 
-### 1. Multiple accounts make quota hard to see and switching slow
+## Keep accounts easy to find and compare
 
-Five-hour, weekly, or monthly quota and reset times differ across accounts. Checking each account separately takes time, and it is easy to start work on an account that is already close to its limit.
+See which account has quota left, when it resets, and which one to use next, all in one place.
 
-Aiotto puts those accounts on one page:
-
-- Complete account setup once and save a reusable snapshot.
-- See the plan, login state, available quota, exact reset time, and live countdown on each card.
-- Click an account card to switch, or move quickly to the next available account.
-- Set a remaining-quota percentage and get a reminder when it is time to switch.
-
-<p align="center">
-  <img src="assets/readme-accounts.png" alt="Aiotto account management with quota and quick account switching" width="1100" />
-</p>
-
-<p align="center"><sub>Account identifiers are masked. Quota, state, and switching controls use the real interface layout.</sub></p>
-
-### 2. Relays should not require constant reconfiguration when models change
-
-Many tools keep one current relay configuration. Moving to another relay or model means editing the endpoint, model, or protocol again. Once several relays and models are involved, maintaining the configuration becomes its own task.
-
-Aiotto aggregates them:
-
-- With a ChatGPT account, official models and several relay models share one model list.
-- Without a ChatGPT account, no-account mode lets you work directly through a configured relay model.
-- One relay can contain several models, with GPT, OpenAI-compatible, or Claude protocols selected per model instead of duplicating the relay endpoint.
-- When an existing session moves among official, relay Codex, Claude, and other compatible models, Aiotto handles incompatible state while preserving the visible conversation context.
-- If the selected target is unavailable, Aiotto identifies the relay, model, and reason instead of silently moving the request to an official model or another relay.
-
-When you select an official model, official capabilities remain available according to the current account's entitlement and official service status. Before saving a relay, you can fetch its models and run a real streaming test; after adding it, you can review balance, latency, protocol, and network mode.
-
-<p align="center">
-  <img src="assets/readme-relays.png" alt="Aiotto relay management with model counts, protocols, connection state, and latency" width="1100" />
-</p>
-
-<p align="center"><sub>Manage several relays together and review model counts, protocols, connection state, and latency.</sub></p>
-
-<p align="center">
-  <img src="assets/readme-model-routing.png" alt="Switching among official GPT, relay Claude, and relay GPT models in one Codex session" width="1100" />
-</p>
-
-<p align="center"><sub>One Codex session uses official GPT, relay Claude, and relay GPT in sequence, while official and relay models remain available in the same list.</sub></p>
-
-| Situation | How selection works |
+| Your question | How Aiotto helps |
 | --- | --- |
-| You have a ChatGPT account | Official models, Relay A, Relay B, and others appear together in the Codex model list |
-| You do not have a ChatGPT account | Enable no-account mode and select a relay model directly |
-| You switch models in an existing session | Visible conversation context is preserved while incompatible internal state is isolated |
-| You continue a computer task from your phone | Aiotto manages relays on the computer; use the same ChatGPT account to remotely control that computer's Codex session and select a relay model from the list |
-
-There is no need to enter relay endpoints and keys again on the phone. Aiotto keeps relay management on the computer while the phone remotely controls the Codex session running there.
-
-After Smart Routing is disabled, relay models stop immediately. Aiotto restores the native official workflow once any required session cleanup is complete.
-
-## Other everyday problems
-
-### The quota window is not ready when work starts
-
-Quota warm-up can start a scheduled task in advance, bringing the five-hour window closer to your regular working hours. You can schedule several times, test a plan, review conflicts and the next run, and confirm the outcome from recent records.
-
-### Checking quota should not require the main window
-
-On macOS, the menu-bar view shows quota, exact reset times, live countdowns, and recent sessions for the current and other accounts. It also shows each relay's availability, protocol, network mode, and latency. Privacy mode hides sensitive details while retaining the account count, current account, and switching controls.
-
-### Session history grows, but token usage remains unclear
-
-Search, continue, pin, archive, restore, and export previous sessions. Filter usage by official or relay source, relay service, model, and date, then inspect each request's input, output, cache, total tokens, latency, status, and estimated cost. If a history record is anomalous, confirmed data remains visible with a clear affected range.
-
-### Local data keeps growing, but cleaning it feels risky
-
-An interactive treemap and session ranking show the size, share, and last update time of local Codex data. Move a session to Trash first when appropriate; permanent cleanup creates a safety backup and protects active, pinned, running, and recent sessions.
-
-### It is hard to tell whether an issue comes from an account, relay, or Codex
-
-Maintenance tools can check account, relay, session, and runtime state first, with safe actions for issues that can be confirmed. When more help is needed, export or send redacted diagnostics and keep the returned diagnostic ID for follow-up.
-
-## One dashboard for the full picture
+| How much quota is left? | View the account's available five-hour, weekly, or monthly quota windows with precise reset times and countdowns; set percentage thresholds for switch reminders |
+| Need another account? | Save snapshots of authenticated accounts, click a card to switch, or move to the next available account |
+| Too many accounts? | Filter by group and sort by quota, reset time, subscription expiry, or custom order |
+| Need bulk organization? | Manage group membership in bulk; removing an account from a group does not delete it |
+| Moving existing accounts? | Preview and select JSON imports, skip duplicates by default, and keep the current account unchanged |
 
 <p align="center">
-  <img src="assets/readme-dashboard.png" alt="Aiotto dashboard for accounts, relays, sessions, storage, and usage" width="1100" />
+  <img src="assets/readme-accounts.png" alt="Aiotto accounts with quota, reset times, and account switching" width="1100" />
 </p>
 
-<p align="center"><sub>Accounts, quota, relays, sessions, storage, tokens, and cost trends in one place. Account identifiers are masked.</sub></p>
+<p align="center"><sub>Earlier interface example with account identifiers masked; newer layouts, including groups, depend on the installed app.</sub></p>
+
+Preview account JSON before selecting entries to import. Duplicates are skipped by default, and importing does not switch the current account. Supported formats include Aiotto backups and selected Codex / ChatGPT OAuth credentials from Codex, New API, Sub2API, and Cockpit Tools. Actual usability still requires successful authentication.
+
+### 🦩 Pelican: keep the test process and results together
+
+Choose saved ChatGPT OAuth accounts, a model, reasoning level, and concurrency. Watch generation, inspect result details, and review history. Cancel runs, retry failed items, or export results for later comparison.
+
+Tests make real requests and consume the corresponding quota. Expired credentials need renewed authorization; results describe the tested task only.
+
+### ⏰ Schedule warm-ups per account, then check the outcome
+
+Bind plans to accounts, choose automatic or fixed models, and arrange group schedules. Test plans, check time conflicts, and view the next run and recent results. Execution details show before-and-after quota-window samples, distinguishing confirmed, started, and pending states.
+
+Keep Aiotto running and the computer awake and online. **Warm-ups do not guarantee that quota refreshes, extends, or resets; the service determines window changes.**
+
+<details>
+<summary>📦 Provider management, usage, and everyday maintenance</summary>
+
+### Find models in a large catalog
+
+Search by name or ID, filter by namespace or selected models, and bulk-select the current results. Import and export provider settings; new imported entries stay disabled until reviewed and enabled.
+
+Connection tests make real streaming requests. Test providers with configured models in sequence and see the fastest result in that run. Testing may consume quota. Subscription quota, API balance, and locally estimated costs remain separate.
+
+<p align="center">
+  <img src="assets/readme-relays.png" alt="Aiotto providers with models, connection status, and latency" width="1100" />
+</p>
+
+### Review usage and cache records
+
+Filter official and provider traffic by model and date, then inspect input, output, total tokens, cache, latency, status, and estimated cost for each request. Statistics errors and quota-cache cleanup have status feedback; the provider’s bill remains authoritative.
+
+On macOS, optionally show per-turn tokens, cache, and context usage inside Codex. Restart Codex to enable the enhancement, and restart again after disabling it to turn it off completely.
+
+### Organize sessions and local data
+
+Search by content, directory, or ID and use the conversation outline to navigate. Pin, continue, bulk-archive, restore, or export sessions. If archive or restore reports incomplete directory synchronization, do not repeat the operation.
+
+Storage treemaps and rankings help locate large files. Permanent cleanup creates a safety backup and protects active, pinned, running, and recent sessions. Inspect snapshots and restore the paths they cover in the backup center.
+
+### Check status and diagnostics
+
+Without opening the main window, use the macOS menu bar to check current and other accounts' quota, precise reset times, countdowns, and recent sessions, plus provider status, protocols, network modes, and latency. Privacy mode hides sensitive details while keeping switching available.
+
+Maintenance tools inspect accounts, providers, and runtime status, and can export or send sanitized diagnostics with a follow-up ID. Skills / MCP pages show local inventories, sources, configuration, and status.
+
+The OpenAI service status page shows official service degradation, outages, and incident updates. The app update entry checks for new Aiotto releases.
+
+</details>
+
+<a id="capabilities"></a>
+
+## Which models connect, and what can they do?
+
+Aiotto supports Responses, Chat Completions, and Anthropic Messages. Choose the matching protocol, then check the model’s tool and multimodal support.
+
+**✅ Native preservation　🔄 Working bridge　⚠️ Limited or not passed　⬜ Not confirmed　🚫 Not provided on this path**
+
+Native connections and bridges can both complete their verified tasks; check the notes for limitations. ⚠️ and ⬜ are not support promises, and ⬜ does not mean unsupported. Choose your provider and plan, then compare its protocol and capabilities.
+
+### Three-protocol capability overview
+
+Responses has two paths below: the official account path and third-party connections. They use the same protocol but can expose different capabilities.
+
+<table>
+<thead>
+<tr><th rowspan="2" scope="col">Capability</th><th colspan="2" scope="colgroup">Responses</th><th rowspan="2" scope="col">Chat Completions</th><th rowspan="2" scope="col">Anthropic Messages</th></tr>
+<tr><th scope="col">Official account · passthrough</th><th scope="col">Third-party connection</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">Text conversations</th><td>✅</td><td>✅</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">Streaming and terminal states</th><td>✅</td><td>✅</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">Reasoning levels</th><td>✅ Per official model</td><td>✅ / 🔄 Per model</td><td>🔄 Per model</td><td>🔄 Per model</td></tr>
+<tr><th scope="row">Function calls and results</th><td>✅</td><td>✅ / 🔄 Per target</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">Parallel tool calls</th><td>✅ Per model</td><td>✅ / 🔄 Selected targets</td><td>🔄 Selected targets</td><td>🔄 Selected targets</td></tr>
+<tr><th scope="row">Apply Patch</th><td>✅</td><td>✅ / 🔄 Selected targets</td><td>🔄 Selected targets</td><td>🔄 Selected targets</td></tr>
+<tr><th scope="row">Tool groups (Namespace)</th><td>✅</td><td>✅ / 🔄 Per target</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">Dynamic discovery (Tool Search)</th><td>✅ Per entry point</td><td>✅ / 🔄 Selected targets</td><td>⚠️ Tool discovery varies by model</td><td>🔄 Selected targets</td></tr>
+<tr><th scope="row">JSON answers</th><td>✅ Per model</td><td>✅ Verified targets</td><td>🔄 Per model</td><td>🔄 Per model</td></tr>
+<tr><th scope="row">Strict structured output (JSON Schema)</th><td>✅ Per model</td><td>⚠️ Per target and entry</td><td>⚠️ Some upstreams reject it</td><td>⚠️ Per target and entry</td></tr>
+<tr><th scope="row">Image understanding</th><td>✅ Per model</td><td>✅ Verified targets</td><td>🔄 Verified targets</td><td>🔄 Verified targets</td></tr>
+<tr><th scope="row">Direct PDF input</th><td>✅ Per entry point</td><td>⚠️ Selected API checks</td><td>🚫 Standard direct path</td><td>⚠️ Selected bridged API checks</td></tr>
+<tr><th scope="row">Web search and citations</th><td>✅ Per service</td><td>✅ / 🔄 Per search service</td><td>🔄 Per search service</td><td>🔄 Per search service</td></tr>
+<tr><th scope="row">Multi-turn conversations</th><td>✅</td><td>✅ / 🔄</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">Visible history across models</th><td>✅ Between official models</td><td>🔄</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">Private reasoning and encrypted state</th><td>✅ Within the same model</td><td>⚠️ Within the tested connection</td><td>🚫 Cross-protocol transfer</td><td>⚠️ Within the tested connection</td></tr>
+<tr><th scope="row">Resume after cancellation; return errors</th><td>✅</td><td>✅ / 🔄 Per target</td><td>🔄 Per target</td><td>🔄 Per target</td></tr>
+<tr><th scope="row">Token / cache usage reporting</th><td>✅ Upstream-provided fields</td><td>✅ / 🔄 Upstream fields</td><td>🔄 Upstream fields</td><td>🔄 Upstream fields</td></tr>
+<tr><th scope="row">Official image generation / editing entry</th><td>✅ Separate service</td><td>🚫</td><td>🚫</td><td>🚫</td></tr>
+<tr><th scope="row">Official realtime voice entry</th><td>⚠️ Passthrough; service limited</td><td>🚫</td><td>🚫</td><td>🚫</td></tr>
+</tbody>
+</table>
+
+The official column describes preservation of the account's native path; availability depends on entitlements, Codex entry points, and service status. Third-party columns describe adapted scopes, not every model. A correct JSON answer does not prove strict JSON Schema support, and an image attachment entry does not prove image understanding.
+
+<details>
+<summary>🛠️ Desktop tools, collaboration, and extensions</summary>
+
+Codex or connected tools execute these capabilities. Aiotto carries calls, results, and task context. They require host entry points, permissions, and services; they are not built-in server tools of the model.
+
+<table>
+<thead>
+<tr><th rowspan="2" scope="col">Capability</th><th colspan="2" scope="colgroup">Responses</th><th rowspan="2" scope="col">Chat Completions</th><th rowspan="2" scope="col">Anthropic Messages</th></tr>
+<tr><th scope="col">Official account · passthrough</th><th scope="col">Third-party connection</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">Local files, code search, and Shell</th><td>✅</td><td>✅ / 🔄</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">Skills and project rules</th><td>✅</td><td>✅ / 🔄 Selected targets</td><td>🔄 Selected targets</td><td>🔄 Selected targets</td></tr>
+<tr><th scope="row">MCP / plugin tool calls</th><td>✅ Per connection</td><td>✅ / 🔄 Selected targets</td><td>🔄 Selected targets</td><td>🔄 Selected targets</td></tr>
+<tr><th scope="row">Browser navigation, reading, and screenshots</th><td>✅ Per entry point</td><td>✅ / 🔄 Selected targets</td><td>🔄 Selected targets</td><td>🔄 Selected targets</td></tr>
+<tr><th scope="row">Computer use (such as Calculator)</th><td>✅ Per entry point</td><td>✅ / 🔄 Selected targets</td><td>🔄 Selected targets</td><td>⚠️ Per target</td></tr>
+<tr><th scope="row">Site tools (WebMCP)</th><td>✅ Per entry point</td><td>✅ / 🔄 Selected targets</td><td>🔄 Selected targets</td><td>⚠️ Per target</td></tr>
+<tr><th scope="row">Subtask creation, waiting, and returned results</th><td>✅</td><td>🔄 Selected targets</td><td>🔄 Selected targets</td><td>🔄 Selected targets</td></tr>
+<tr><th scope="row">PTY interruption and recovery</th><td>✅</td><td>✅ / 🔄 Selected targets</td><td>🔄 Selected targets</td><td>⚠️ Per target</td></tr>
+<tr><th scope="row">Read-only code review</th><td>✅</td><td>✅ / 🔄 Selected targets</td><td>🔄 Selected targets</td><td>🔄 Selected targets</td></tr>
+<tr><th scope="row">Goal tasks</th><td>✅ Per entry point</td><td>⚠️ Selected lifecycle checks</td><td>⚠️ Selected lifecycle checks</td><td>⚠️ Selected lifecycle checks</td></tr>
+<tr><th scope="row">Automation creation and scheduled execution</th><td>✅ Per entry point</td><td>⬜ Scheduled execution unconfirmed</td><td>⚠️ Creation verified; scheduling unconfirmed</td><td>⚠️ Scheduled execution unconfirmed</td></tr>
+<tr><th scope="row">Approvals, sandboxing, and rejection</th><td>✅ Per host policy</td><td>⚠️ Per tested task</td><td>⚠️ Per tested task</td><td>⚠️ Per tested task</td></tr>
+<tr><th scope="row">Plan / Worktree UI entry points</th><td>✅ Per host version</td><td>⬜ No per-model promise</td><td>⬜ No per-model promise</td><td>⬜ No per-model promise</td></tr>
+<tr><th scope="row">Memory / Hooks</th><td>✅ Per host configuration</td><td>⬜ No per-model promise</td><td>⬜ No per-model promise</td><td>⬜ No per-model promise</td></tr>
+<tr><th scope="row">Generated files and clickable previews</th><td>✅ Per host entry</td><td>⚠️ File creation is not preview proof</td><td>⚠️ File creation is not preview proof</td><td>⚠️ File creation is not preview proof</td></tr>
+<tr><th scope="row">Upstream-hosted File Search / Remote MCP / Code Execution</th><td>✅ Per official entry</td><td>⬜ Verify upstream separately</td><td>🚫 No equivalent mapping</td><td>🚫 No equivalent mapping</td></tr>
+</tbody>
+</table>
+
+Local file search, connected MCP tools, Shell, and upstream-hosted services are separate paths. 🚫 does not exclude independent tools. An automation review card proves neither persistence nor scheduled execution.
+
+</details>
+
+### Capabilities by provider
+
+One table, grouped into China-based providers, US-based providers, and connection platforms. Vendors share a name cell while plans/APIs and protocols keep separate rows. The order is for navigation, not a capability ranking. Numbers link to the aligned model and conditions table below.
+
+<table id="provider-capability-matrix">
+<caption>Provider capabilities · scroll horizontally for all columns</caption>
+<colgroup><col width="112"><col width="116"><col width="120"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"></colgroup>
+<thead>
+<tr><th rowspan="2" scope="col">Provider</th><th rowspan="2" scope="col">Plan / API</th><th rowspan="2" scope="col">Protocol</th><th colspan="4" scope="colgroup">Everyday tools</th><th colspan="6" scope="colgroup">Collaboration and desktop use</th><th colspan="4" scope="colgroup">Reasoning and multimodal</th></tr>
+<tr><th scope="col">Files / Shell</th><th scope="col">Apply Patch</th><th scope="col">Skills</th><th scope="col">MCP tools</th><th scope="col">Browser</th><th scope="col">Computer use</th><th scope="col">Subtasks</th><th scope="col">History</th><th scope="col">Code review</th><th scope="col">Site tools</th><th scope="col">Reasoning levels</th><th scope="col">Image understanding</th><th scope="col">Direct PDF input</th><th scope="col">Search and citations</th></tr>
+</thead>
+<tbody class="region-heading"><tr><th colspan="17">China-based providers</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>DeepSeek</strong></th><td>API <sup><a href="#provider-scope-1" aria-label="Verified scope 1">1</a></sup></td><td>Chat Completions</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>API</small></td><td><span>🚫</span> <small>Tested text-only model</small></td><td><span>🚫</span> <small>Standard direct path</small></td><td><span>⬜</span> <small>Search use unconfirmed</small></td></tr>
+<tr><td>API <sup><a href="#provider-scope-2" aria-label="Verified scope 2">2</a></sup></td><td>Responses</td><td><span>🔄</span> <small>Tool bridge</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Tool / authentication differences</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span> <small>Separate level checks</small></td><td><span>🚫</span> <small>Tested text-only model</small></td><td><span>⚠️</span> <small>Usability unconfirmed</small></td><td><span>⬜</span> <small>Search use unconfirmed</small></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>Qwen</strong></th><td>Token Plan <sup><a href="#provider-scope-3" aria-label="Verified scope 3">3</a></sup></td><td>Responses</td><td><span>🔄</span> <small>Tool bridge</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>🔄</span> <small>Cross-model chain</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>Per-level checks</small></td><td><span>✅</span> <small>Desktop image reading</small></td><td><span>⬜</span></td><td><span>⬜</span></td></tr>
+<tr><td>Third-party API <sup><a href="#provider-scope-4" aria-label="Verified scope 4">4</a></sup></td><td>Responses</td><td><span>⚠️</span> <small>Upstream blocked</small></td><td><span>⚠️</span> <small>Upstream blocked</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>Upstream blocked</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>Historical API pass; later blocked</small></td><td><span>⚠️</span> <small>Historical API pass; later blocked</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Zhipu</strong></th><td>Coding Plan <sup><a href="#provider-scope-5" aria-label="Verified scope 5">5</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>✅</span> <small>API</small></td><td><span>⚠️</span> <small>Content check not passed</small></td><td><span>⚠️</span> <small>Content check not passed</small></td><td><span>⬜</span> <small>Search use unconfirmed</small></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Moonshot</strong></th><td>API <sup><a href="#provider-scope-6" aria-label="Verified scope 6">6</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>🔄</span></td><td><span>✅</span> <small>API</small></td><td><span>✅</span> <small>API</small></td><td><span>⚠️</span> <small>Upstream rejected</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Xiaomi</strong></th><td>Token Plan <sup><a href="#provider-scope-7" aria-label="Verified scope 7">7</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>⬜</span> <small>Desktop use unconfirmed</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>✅</span> <small>API</small></td><td><span>⚠️</span> <small>Upstream rejected</small></td><td><span>⚠️</span> <small>Upstream rejected</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>MiniMax</strong></th><td>Token Plan <sup><a href="#provider-scope-8" aria-label="Verified scope 8">8</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>Tested tools only</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>⚠️</span> <small>high passed; none had deviations</small></td><td><span>🔄</span> <small>Desktop; large-image limit</small></td><td><span>🔄</span> <small>API</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Volcengine</strong></th><td>Coding Plan <sup><a href="#provider-scope-9" aria-label="Verified scope 9">9</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>⚠️</span> <small>Patching passed in some tested tasks</small></td><td><span>🔄</span></td><td><span>🔄</span> <small>Tested tools only</small></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>✅</span> <small>API; actual reasoning level unconfirmed</small></td><td><span>⬜</span> <small>Entry unconfirmed</small></td><td><span>✅</span> <small>API</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody class="region-heading"><tr><th colspan="17">US-based providers</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>OpenAI</strong></th><td>Official account <sup><a href="#provider-scope-10" aria-label="Verified scope 10">10</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span> <small>Per connection</small></td><td><span>✅</span> <small>Per entry</small></td><td><span>✅</span> <small>Per entry</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span> <small>Per entry</small></td><td><span>✅</span> <small>Per model</small></td><td><span>✅</span> <small>Per model</small></td><td><span>✅</span> <small>Per entry</small></td><td><span>✅</span> <small>Per service</small></td></tr>
+<tr><td>Third-party API <sup><a href="#provider-scope-11" aria-label="Verified scope 11">11</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>⬜</span> <small>Desktop use unconfirmed</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>⚠️</span> <small>Higher-level deviations</small></td><td><span>✅</span> <small>API</small></td><td><span>✅</span> <small>API</small></td><td><span>⬜</span> <small>Search use unconfirmed</small></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Anthropic</strong></th><td>Third-party API <sup><a href="#provider-scope-12" aria-label="Verified scope 12">12</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Varies by gateway</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>⚠️</span> <small>Partial</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>🔄</span> <small>API mapping</small></td><td><span>🔄</span> <small>API</small></td><td><span>🔄</span> <small>API</small></td><td><span>🔄</span> <small>Tested search chain; per gateway</small></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Google</strong></th><td>Third-party API <sup><a href="#provider-scope-13" aria-label="Verified scope 13">13</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span> <small>Historical</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>🔄</span> <small>Historical</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>🔄</span> <small>Historical</small></td><td><span>⬜</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>🔄</span> <small>Historical</small></td><td><span>🔄</span> <small>Historical</small></td><td><span>⬜</span></td><td><span>🔄</span> <small>API; gateway limited</small></td><td><span>🔄</span> <small>API; gateway limited</small></td><td><span>⚠️</span> <small>Content check not passed</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>xAI</strong></th><td>Third-party API <sup><a href="#provider-scope-14" aria-label="Verified scope 14">14</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>⚠️</span> <small>Desktop not passed</small></td><td><span>⚠️</span> <small>Limited</small></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>Not passed</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>Partial</small></td><td><span>✅</span> <small>API</small></td><td><span>✅</span> <small>API</small></td><td><span>⚠️</span> <small>Upstream rejected</small></td><td><span>⚠️</span> <small>Per gateway and search path</small></td></tr>
+</tbody>
+<tbody class="region-heading"><tr><th colspan="17">Connection platforms</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>CommandCode</strong><br><small>Platform</small></th><td>API <sup><a href="#provider-scope-15" aria-label="Verified scope 15">15</a></sup></td><td>Chat Completions</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>🔄</span> <small>Cross-model chain</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>Per-level checks</small></td><td><span>🔄</span> <small>Desktop image reading</small></td><td><span>🚫</span> <small>Standard direct path</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>opencode</strong><br><small>Platform</small></th><td>API <sup><a href="#provider-scope-16" aria-label="Verified scope 16">16</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>Cross-model chain</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>Per-level checks</small></td><td><span>⬜</span> <small>Independent image reading</small></td><td><span>⬜</span></td><td><span>🔄</span> <small>Separate search executor</small></td></tr>
+</tbody>
+</table>
+
+**Verified models and conditions**
+
+Rows apply only to these combinations and the tested platforms, not every model from a vendor. “API” or “historical” qualifiers in cells retain their original limits.
+
+<table id="provider-scope-table">
+<colgroup><col width="48"><col width="100"><col width="115"><col width="125"><col width="210"><col></colgroup>
+<thead><tr><th scope="col">No.</th><th scope="col">Provider / platform</th><th scope="col">Plan / API</th><th scope="col">Protocol</th><th scope="col">Verified model</th><th scope="col">Conditions</th></tr></thead>
+<tbody class="region-heading"><tr><th colspan="6">China-based providers</th></tr></tbody>
+<tbody>
+<tr id="provider-scope-1"><td>1</td><td>DeepSeek</td><td>API</td><td>Chat Completions</td><td><code>deepseek-v4-pro</code></td><td>See the capability limits in the table above.</td></tr>
+<tr id="provider-scope-2"><td>2</td><td>DeepSeek</td><td>API</td><td>Responses</td><td><code>deepseek-v4-pro</code></td><td>See the capability limits in the table above.</td></tr>
+<tr id="provider-scope-3"><td>3</td><td>Qwen</td><td>Token Plan</td><td>Responses</td><td><code>qwen3.8-flash</code></td><td>Token Plan and third-party API are separate connections. Request rejection on the third-party gateway is not a result for Token Plan.</td></tr>
+<tr id="provider-scope-4"><td>4</td><td>Qwen</td><td>Third-party API</td><td>Responses</td><td><code>qwen3.7-plus</code></td><td>See the capability limits in the table above.</td></tr>
+<tr id="provider-scope-5"><td>5</td><td>Zhipu</td><td>Coding Plan</td><td>Responses</td><td><code>glm-5.3</code></td><td>See the capability limits in the table above.</td></tr>
+<tr id="provider-scope-6"><td>6</td><td>Moonshot</td><td>API</td><td>Responses</td><td><code>kimi-k2.7-code-highspeed</code></td><td>See the capability limits in the table above.</td></tr>
+<tr id="provider-scope-7"><td>7</td><td>Xiaomi</td><td>Token Plan</td><td>Responses</td><td><code>mimo-v2.5-pro</code></td><td>Recovery from image history proves conversation continuation, not image understanding.</td></tr>
+<tr id="provider-scope-8"><td>8</td><td>MiniMax</td><td>Token Plan</td><td>Anthropic Messages</td><td><code>MiniMax-M3</code></td><td>Small-image desktop cases passed; larger images have a separate upstream limit.</td></tr>
+<tr id="provider-scope-9"><td>9</td><td>Volcengine</td><td>Coding Plan</td><td>Responses</td><td><code>ark-code-latest</code></td><td>See the capability limits in the table above.</td></tr>
+</tbody>
+<tbody class="region-heading"><tr><th colspan="6">US-based providers</th></tr></tbody>
+<tbody>
+<tr id="provider-scope-10"><td>10</td><td>OpenAI</td><td>Official account</td><td>Responses</td><td>Account-available models</td><td>See the capability limits in the table above.</td></tr>
+<tr id="provider-scope-11"><td>11</td><td>OpenAI</td><td>Third-party API</td><td>Responses</td><td><code>gpt-5.6-sol</code></td><td>See the capability limits in the table above.</td></tr>
+<tr id="provider-scope-12"><td>12</td><td>Anthropic</td><td>Third-party API</td><td>Anthropic Messages</td><td><code>claude-sonnet-4-6</code></td><td>These results are from third-party Claude gateways. MCP and search results vary by gateway and do not certify Anthropic's official API.</td></tr>
+<tr id="provider-scope-13"><td>13</td><td>Google</td><td>Third-party API</td><td>Anthropic Messages</td><td><code>gemini-3.1-pro</code></td><td>Historical successes are retained for the tested gateway, which also had quota / rate-limit blocks. They do not guarantee current availability.</td></tr>
+<tr id="provider-scope-14"><td>14</td><td>xAI</td><td>Third-party API</td><td>Responses</td><td><code>grok-4.6</code></td><td>See the capability limits in the table above.</td></tr>
+</tbody>
+<tbody class="region-heading"><tr><th colspan="6">Connection platforms</th></tr></tbody>
+<tbody>
+<tr id="provider-scope-15"><td>15</td><td>CommandCode</td><td>API</td><td>Chat Completions</td><td><code>z-ai/glm-5.3-flash</code></td><td>The image continuation result does not establish subtask support. Computer-use evidence is limited to the tested Calculator task.</td></tr>
+<tr id="provider-scope-16"><td>16</td><td>opencode</td><td>API</td><td>Anthropic Messages</td><td><code>qwen3.8-flash</code></td><td>The tested connection completed parent waiting and child-result aggregation, and separately passed stream cancellation and recovery. Search uses a separate executor, not proven native provider search.</td></tr>
+</tbody>
+</table>
+
+<details>
+<summary>How to read the capability results</summary>
+
+- Results apply only to the model, plan, gateway, and tested platform listed for each connection. “Historical” retains the scope of the earlier result; it does not guarantee availability now.
+- “API” means a real upstream request passed, not that the full Codex Desktop flow passed. Image and PDF checks cover tested content only; direct PDF input is distinct from local file tools.
+- Conversation history covers tested lightweight context or cross-model chains, not unlimited context. Computer use refers to tested Calculator cases, not arbitrary desktop applications.
+- Subtasks include creation, execution, returned results, and target inheritance. Partial success stays ⚠️. Separate search services can return sources to the selected model without establishing native provider search.
+
+PTY interruption and recovery have records for both DeepSeek protocols, GLM, third-party GPT, and Volcengine targets. Stream cancellation is a separate scenario. Unconfirmed scheduled triggers, voice delegation, persistent memory, and complete artifact previews are not per-provider promises.
+
+Strict structured output, dynamic discovery, hosted tools, and private state depend on the exact connection; consult the protocol tables. These tables and Pelican results do not rank model intelligence.
+
+</details>
+
+## Frequently asked questions
+
+### Can I use Aiotto without a ChatGPT account?
+
+Yes. Add an available relay in Aiotto, complete the connection test, and enable no-account mode.
+
+### Can I keep using official models and capabilities when I have an account?
+
+Yes. When Smart Routing is enabled, official and relay models appear together. Official capabilities remain available according to the current account's entitlement and official service status. If a selected relay is unavailable, Aiotto reports it instead of silently consuming official quota.
+
+### Why can relay models also appear on my phone?
+
+Aiotto manages relays on the computer. When the same ChatGPT account remotely controls that computer's Codex session from a phone, the model list includes the relay models already configured on the computer.
+
+### Does Aiotto ask me to submit my account password?
+
+No. Complete the normal ChatGPT or Codex login flow first, then let Aiotto save the account snapshot. Never send passwords, verification codes, or cookies to a third party.
+
+### Why does Aiotto keep running after I close the window?
+
+Quota alerts and routing need to remain available in the background. Closing the window hides the main interface; use **Quit Aiotto** from the macOS menu bar or Windows system tray to stop the app completely.
+
+<a id="start"></a>
+
+## Start here
+
+1. **Install Aiotto and Codex Desktop.** Choose your system's package from the [latest release](https://github.com/ShawnZhuge/aiotto/releases/latest), then follow the [installation instructions](#install).
+2. **Add an account or provider.** Use an official account or configure a provider endpoint, Key, and model. Preview existing data before importing it.
+3. **Start a task in Codex.** For third-party models, enable Aiotto Smart Router, select a model, and try a familiar small task.
+
+<a id="install"></a>
 
 ## Download and install
 
@@ -155,28 +390,6 @@ xattr -cr /Applications/Aiotto.app
 3. Follow the installer prompts.
 
 A system security prompt may appear the first time you open Aiotto. If Windows blocks it, open **More info**, confirm the application name and download source, then continue.
-
-## Frequently asked questions
-
-### Can I use Aiotto without a ChatGPT account?
-
-Yes. Add an available relay in Aiotto, complete the connection test, and enable no-account mode.
-
-### Can I keep using official models and capabilities when I have an account?
-
-Yes. When Smart Routing is enabled, official and relay models appear together. Official capabilities remain available according to the current account's entitlement and official service status. If a selected relay is unavailable, Aiotto reports it instead of silently consuming official quota.
-
-### Why can relay models also appear on my phone?
-
-Aiotto manages relays on the computer. When the same ChatGPT account remotely controls that computer's Codex session from a phone, the model list includes the relay models already configured on the computer.
-
-### Does Aiotto ask me to submit my account password?
-
-No. Complete the normal ChatGPT or Codex login flow first, then let Aiotto save the account snapshot. Never send passwords, verification codes, or cookies to a third party.
-
-### Why does Aiotto keep running after I close the window?
-
-Quota alerts and routing need to remain available in the background. Closing the window hides the main interface; use **Quit Aiotto** from the macOS menu bar or Windows system tray to stop the app completely.
 
 ## Safety and feedback
 

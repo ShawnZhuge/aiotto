@@ -5,11 +5,11 @@
 <h1 align="center">Aiotto</h1>
 
 <p align="center">
-  <strong>Codex 多账号与多中转管理器</strong>
+  <strong>把你常用的模型，接进 Codex。</strong>
 </p>
 
 <p align="center">
-  集中看额度、快速切换账号，把官方模型和不同协议的中转模型放进同一个列表。
+  Aiotto 是配合 Codex 桌面端使用的模型接入与账号管理工具。接入已有的 Coding Plan、Token Plan 或 API，在熟悉的界面里使用已适配的工具继续任务；账号额度、用量和历史会话，也能集中管理。
 </p>
 
 <p align="center">
@@ -25,112 +25,347 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ShawnZhuge/aiotto/releases/latest"><strong>下载最新版</strong></a>
+  <a href="https://github.com/ShawnZhuge/aiotto/releases/latest"><strong>下载 Aiotto</strong></a>
   ·
-  <a href="https://github.com/ShawnZhuge/aiotto/issues">问题反馈</a>
+  <a href="#in-action">查看使用界面</a>
 </p>
+
+<p align="center">
+  <img src="assets/readme-hero-routing.png" alt="Aiotto：让更多模型进入你的 Codex 工作流" width="1100" />
+</p>
+
+<p align="center"><sub>封面使用较早版本的界面示意；具体型号与支持范围见下方能力表。</sub></p>
+
+> 支持 macOS 和 Windows。本页介绍已发布功能；更新内容见 [发布说明](https://github.com/ShawnZhuge/aiotto/releases)。模型能力以对应套餐、协议和已验证型号为准。
+
+[真实界面](#in-action) · [功能一览](#features) · [账号与测智](#accounts) · [能力对照](#capabilities) · [开始使用](#start)
+
+<a id="in-action"></a>
+
+## 已有模型服务，在 Codex 里接着用
+
+已经有 Coding Plan、Token Plan 或 API？在 Aiotto 添加对应供应商，就能在 Codex 模型列表中选择已接入的模型。
+
+- **官方与第三方，同屏选择。** 按当前任务的需要，选用已经接入的模型。
+- **换一个模型，接着处理任务。** 在同一对话中切换，保留能够携带的消息与工具结果，具体范围见[能力对照](#capabilities)。
+- **已适配的工具，继续参与工作。** 读文件、跑命令、改代码，工具执行结果回到当前对话。
+
+<p align="center">
+  <img src="assets/readme-model-routing.png" alt="Codex 中的官方与第三方模型列表，以及同一会话切换模型的示例" width="1100" />
+</p>
+
+<p align="center"><sub>真实界面示例。截图中的型号与菜单来自当时版本，当前可用项以账号、供应商配置和对应版本为准。</sub></p>
+
+有 ChatGPT 账号，可以同时使用官方与第三方模型；没有账号，也可通过已配置供应商使用无账号模式。明确选择某个供应商后，若请求失败，Aiotto 会报告原因，不悄悄换用其他供应商或官方额度。
+
+<a id="features"></a>
 
 ## 功能一览
 
-| 功能 | 你能得到什么 |
+如果你每天都用 Codex，Aiotto 可以帮你少做几件琐事：换模型时少改配置，换账号前先看额度，查用量时不必翻日志。
+
+| 功能 | 你能做什么 |
 | --- | --- |
-| 账号管理 | 一次登记并保存账号快照；集中查看 5 小时、每周或每月额度、精确重置时间和倒计时，一键切换账号 |
-| 额度提醒 | 按剩余额度百分比设置提醒，达到阈值时提示切换，不用一直盯着进度条 |
-| 多中转聚合 | 同时管理多个中转和模型；有 ChatGPT 账号时，官方模型和中转模型出现在同一个 Codex 模型列表 |
-| 混合会话 | 在同一历史会话中切换官方模型、中转 Codex、Claude 或国产模型，处理协议差异并保留可见对话上下文 |
-| 无账号使用 | 没有 ChatGPT 账号也能使用无账号模式，直接选择已经接入的中转模型 |
-| 手机远程使用 | 电脑端配置一次；使用同一 ChatGPT 账号在手机上远程操作电脑端 Codex 会话时，也能选择中转模型 |
-| 额度预热 | 安排并测试预热计划，查看时间冲突、下次执行和最近结果，让额度窗口更贴合工作时间 |
-| macOS 状态栏 | 不打开主窗口也能查看账号额度、重置倒计时、最近会话，以及各中转的状态、协议、网络方式和延迟 |
-| 会话与统计 | 管理历史会话；按官方或中转、模型和日期查看请求级 Token、缓存、延迟与折算金额 |
-| 存储与诊断 | 用树图和排行定位大文件并安全清理；检查账号、中转和运行状态，需要支持时可发送脱敏诊断 |
-| 其他工具 | 查看 OpenAI 服务状态、Skills、MCP、应用更新和常用维护入口 |
+| 模型接入 | **官方与第三方模型在 Codex 同屏选择**；支持三协议、模型搜索分类、批量选择和供应商配置导入导出 |
+| 工具与续聊 | 用已适配模型读文件、跑命令、改代码；**同一任务换模型**时，保留可携带的对话历史和工具结果 |
+| 无账号使用 | 没有 ChatGPT 账号，也可开启无账号模式，通过已配置的供应商模型开始任务 |
+| 手机远程使用 | 电脑端配置好供应商后，使用同一 ChatGPT 账号在手机上远程操作这台电脑的 Codex 会话，也能选择已接入的模型 |
+| 账号管理 | 保存账号快照，查看套餐、登录状态及账号提供的 5 小时、每周或每月额度；**剩余额度和重置倒计时**同屏展示，支持排序与一键切换 |
+| 分组与迁移 | 给账号分组、筛选和批量整理；导入 JSON 前先预览、再选择，重复账号默认跳过，导入不切换当前账号 |
+| macOS 状态栏 | 不打开主窗口，也能查看账号额度、重置倒计时和最近会话，以及供应商的状态、协议、网络方式与延迟 |
+| 连接测速 | 发起真实流式请求，查看供应商连接状态和延迟；可依次测试已配置模型的供应商，比较本轮结果 |
+| 鹈鹕测智 | 选择账号、模型、思考强度和并行数，查看生成过程与历史结果；支持取消、失败项重试和导出 |
+| 用量统计 | 按官方或供应商、模型和日期筛选，逐请求查看 Token、缓存、延迟、状态与折算费用；macOS 可开启会话内 Token 和上下文占用显示 |
+| 会话整理 | 按内容、目录或 ID 搜索历史，用对话目录定位长对话；支持置顶、继续、批量归档、恢复和导出 |
+| 提醒与预热 | 按剩余额度百分比设置提醒，达到阈值时提示切换；预热计划可绑定账号与模型，支持测试、冲突检查、下次执行和最近结果查看 |
+| 备份与清理 | 查看存储树图和大文件排行，创建备份快照并按范围恢复；永久清理前建立安全备份，保护活跃和近期会话 |
+| 状态与维护 | 查看 OpenAI 服务状态，检查 Aiotto 应用更新及账号、供应商与运行状态；查看本地 Skills / MCP 清单，按需导出或发送脱敏诊断 |
 
-## 重点解决的痛点
+<a id="accounts"></a>
 
-### 1. 账号多了以后，查看余额不方便，切换也慢
+## 账号多了，也能管理得清楚
 
-多个账号的 5 小时额度、每周或每月额度和重置时间并不一致。平时要逐个登录确认，真正用到时又容易停在一个快见底的账号上。
+哪个账号还有额度、什么时候重置、接下来该用哪个，在同一页就能看清。
 
-Aiotto 把账号放在同一页：
-
-- 账号完成一次登记后，保存为可切换的账号快照。
-- 每张卡片直接显示套餐、登录状态、可用额度、精确重置时间和动态倒计时。
-- 点击账号卡片即可切换，也可以快速切到下一个可用账号。
-- 可按剩余额度百分比设置提醒，到达阈值时提示换号。
-
-<p align="center">
-  <img src="assets/readme-accounts.png" alt="Aiotto 账号管理：集中查看额度并快速切换账号" width="1100" />
-</p>
-
-<p align="center"><sub>账号信息已做掩码；额度、状态和切换入口保留真实界面结构。</sub></p>
-
-### 2. 中转不该每次只能用一个，换模型也不该反复改配置
-
-常见做法是只保存一个当前中转。要换中转或模型时，再去改地址、模型或协议。中转和模型一多，维护配置本身就成了工作。
-
-Aiotto 会把多个中转聚合起来：
-
-- 有 ChatGPT 账号：官方模型和多个中转模型放在同一个模型列表，需要哪个就选哪个。
-- 没有 ChatGPT 账号：启用无账号使用模式，直接通过中转模型开始工作。
-- 一个中转可以添加多个模型，并按模型使用 GPT、OpenAI 兼容或 Claude 协议，不必重复维护多套中转地址。
-- 同一历史会话切换官方模型、中转 Codex、Claude 或国产模型时，Aiotto 会处理不兼容状态并保留可见对话上下文。
-- 选中的目标不可用时会明确说明实际中转、模型和原因，不会悄悄改走官方模型或另一个中转。
-
-选择官方模型时，官方能力仍按当前账号权益和官方服务状态使用。保存中转前可以拉取模型并做真实流式测试；添加后可查看余额、延迟、协议和网络方式。
-
-<p align="center">
-  <img src="assets/readme-relays.png" alt="Aiotto 中转管理：集中查看模型数量、协议、连接状态与延迟" width="1100" />
-</p>
-
-<p align="center"><sub>多个中转集中管理；可分别查看模型数量、协议、连接状态和延迟。</sub></p>
-
-<p align="center">
-  <img src="assets/readme-model-routing.png" alt="Codex 同一会话中切换官方 GPT、中转 Claude 与中转 GPT 模型" width="1100" />
-</p>
-
-<p align="center"><sub>同一 Codex 会话中依次使用官方 GPT、中转 Claude 与中转 GPT；右侧同时显示官方和多个中转模型。</sub></p>
-
-| 使用场景 | 选择方式 |
+| 你关心的事 | Aiotto 怎么帮你 |
 | --- | --- |
-| 有 ChatGPT 账号 | 官方模型、中转 A、中转 B 等同时出现在 Codex 模型列表 |
-| 没有 ChatGPT 账号 | 开启无账号使用模式，直接选择中转模型 |
-| 在历史会话中切换模型 | 保留可见对话上下文，并隔离不同模型不兼容的内部状态 |
-| 在手机上继续电脑任务 | 电脑端由 Aiotto 管理中转；手机使用同一 ChatGPT 账号远程操作这台电脑的 Codex 会话，并从列表选择中转模型 |
-
-手机端不需要再录入一遍中转地址和密钥。中转仍由电脑端 Aiotto 管理，手机负责远程操作同一台电脑上的 Codex 会话。
-
-关闭智能路由后，中转模型会立即停用；如有必要，Aiotto 会在完成会话兼容处理后恢复原生官方使用方式。
-
-## 另外几个常见麻烦
-
-### 到了工作时间，额度窗口还没恢复好
-
-额度预热可以按计划自动发起任务，让 5 小时额度窗口提前进入预期节奏。你可以安排多个时间、先测试计划、查看冲突与下次执行，并从最近记录确认结果。
-
-### 每次看余额都要打开主窗口
-
-macOS 用户可以直接在顶部状态栏查看当前及其他账号的额度、精确重置时间、动态倒计时和最近会话，也能分别查看各中转的可用状态、协议、网络方式和延迟。隐私模式隐藏敏感信息后，仍保留账号数量、当前账号和切换入口。
-
-### 历史会话很多，Token 花在哪也说不清
-
-会话页可以搜索、继续、置顶、归档、恢复和导出历史任务。统计页可按官方或中转、中转服务、模型和日期筛选，并查看每个请求的输入、输出、缓存、总 Token、延迟、状态和折算金额；遇到异常历史记录时，会保留可确认的数据并说明影响范围。
-
-### 本地内容越积越多，又不敢直接清理
-
-Aiotto 用交互式矩形树图和会话排行展示 Codex 本地存储构成、大小、占比和最近更新时间。可以先把会话移入回收站；永久清理前会创建安全备份，并保护活跃、置顶、运行中和近期会话。
-
-### 出了问题，不知道是账号、中转还是 Codex
-
-维护工具可以先检查账号、中转、会话和运行状态，并对可确认的问题提供安全处理入口。需要进一步支持时，可以导出或发送脱敏诊断，并获得用于后续沟通的诊断编号。
-
-## 一个仪表盘看全局
+| 还有多少额度？ | 查看账号提供的 5 小时、每周或每月额度，以及精确重置时间和倒计时；按剩余额度百分比设置提醒，达到阈值时提示切换 |
+| 想换一个账号？ | 保存已登录账号的快照，点击卡片切换，也可快速切到下一个可用账号 |
+| 账号太多不好找？ | 按组筛选，按额度、重置时间、订阅有效期或自定义顺序排列 |
+| 需要批量整理？ | 批量管理分组；移出分组不会删除账号 |
+| 已有账号想迁入？ | JSON 导入前先预览和选择，重复项默认跳过；导入不会切换当前账号 |
 
 <p align="center">
-  <img src="assets/readme-dashboard.png" alt="Aiotto 仪表盘：账号、中转、会话、存储与使用趋势" width="1100" />
+  <img src="assets/readme-accounts.png" alt="Aiotto 账号管理：查看额度、重置时间与账号切换入口" width="1100" />
 </p>
 
-<p align="center"><sub>账号、额度、中转、会话、存储、Token 与成本趋势集中展示；账号信息已做掩码。</sub></p>
+<p align="center"><sub>较早版本的界面示例，账号信息已掩码；分组等新版布局以实际安装界面为准。</sub></p>
+
+已有账号数据可从 JSON 文件导入，先预览、再选择；重复账号默认跳过，导入不会切换当前账号。支持 Aiotto 备份及部分 Codex、New API、Sub2API、Cockpit Tools 的 Codex / ChatGPT OAuth 凭据格式，实际可用性仍需认证确认。
+
+### 🦩 鹈鹕测智：把测试过程和结果留在一起
+
+选择已保存的 ChatGPT OAuth 账号，设置模型、思考强度和并行数，即可查看生成过程、结果详情与历史记录。支持取消、失败项重试和导出，便于回看不同测试的输出。
+
+测试会发起真实请求并消耗相应额度。凭据失效时需要重新授权，结果仅供本次任务参考。
+
+### ⏰ 额度预热：按账号安排，执行后核对
+
+预热计划可绑定账号，选择自动或固定模型，并按组安排时间。支持先测试计划、检查时间冲突、查看下次执行时间和最近结果。执行详情展示请求前后的额度窗口采样，区分已确认、已启动与待确认状态。
+
+运行时需保持 Aiotto 开启、电脑唤醒并联网。**预热不保证额度刷新、延长或重置，窗口变化以服务端为准。**
+
+<details>
+<summary>📦 供应商管理、用量统计与日常维护</summary>
+
+### 供应商多了，模型仍然好找
+
+按名称或 ID 搜索模型，按命名空间分类、仅看已选，或批量选择当前筛选结果。供应商配置可导入、导出；新增导入项默认停用，核对后再启用。
+
+连接测试会发起真实流式请求，也可依次测试已配置模型的供应商，查看本轮最快结果。测速可能消耗额度；订阅账号额度、API 余额和本地折算费用分别呈现。
+
+<p align="center">
+  <img src="assets/readme-relays.png" alt="Aiotto 供应商管理：模型、连接状态与延迟" width="1100" />
+</p>
+
+### 用量与缓存，回看有依据
+
+按官方或供应商、模型和日期筛选，查看每个请求的输入、输出、总 Token、缓存、延迟、状态及折算金额。统计异常和额度缓存整理会显示状态反馈；实际账单以供应商为准。
+
+macOS 可按需开启会话内 Token 与缓存统计，查看本轮用量和上下文占用。开启后需重启 Codex，停用后也需重启才能彻底关闭。
+
+### 会话和数据，按需整理
+
+按内容、目录或 ID 搜索会话，用对话目录定位长对话；支持置顶、继续、批量归档、恢复和导出。归档或恢复后如提示目录未完全同步，请勿重复执行。
+
+存储树图和排行帮助定位大文件。永久清理前创建安全备份，并保护活跃、置顶、运行中和近期会话；备份中心支持查看快照和按覆盖范围恢复。
+
+### 状态与诊断，随时可查
+
+不打开主窗口，也能在 macOS 状态栏查看当前与其他账号的额度、精确重置时间、倒计时和最近会话，以及各供应商的状态、协议、网络方式与延迟。隐私模式会隐藏敏感信息，保留切换入口。
+
+维护页可检查账号、供应商和运行状态，导出或发送脱敏诊断并获得诊断编号。Skills / MCP 页面可查看本地清单、来源、配置和状态。
+
+OpenAI 服务状态页展示官方服务是否降级或中断，以及事故处理更新；应用更新入口可检查 Aiotto 新版本。
+
+</details>
+
+<a id="capabilities"></a>
+
+## 能接哪些模型，能做哪些事？
+
+Aiotto 支持 Responses、Chat Completions 和 Anthropic Messages。接入时选择对应协议，再按模型确认工具和多模态能力。
+
+**✅ 原生保留　🔄 桥接可用　⚠️ 有限制或未通过　⬜ 尚未确认　🚫 该路径不提供**
+
+原生与桥接都可以完成各自已验证的任务，具体限制见备注。⚠️ 和 ⬜ 不列为支持承诺，⬜ 也不等于不支持。先找到自己的厂商和套餐，再对照协议与能力。
+
+### 三协议能力一览
+
+Responses 下分官方账号与第三方接入两条路径；它们属于同一协议，但可用能力不同。表格先区分接入方式，再说明各自的支持范围。
+
+<table>
+<thead>
+<tr><th rowspan="2" scope="col">能力</th><th colspan="2" scope="colgroup">Responses</th><th rowspan="2" scope="col">Chat Completions</th><th rowspan="2" scope="col">Anthropic Messages</th></tr>
+<tr><th scope="col">官方账号 · 透传</th><th scope="col">第三方接入</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">文本对话</th><td>✅</td><td>✅</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">流式回答与结束状态</th><td>✅</td><td>✅</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">推理档位</th><td>✅ 按官方模型</td><td>✅ / 🔄 按型号</td><td>🔄 按型号</td><td>🔄 按型号</td></tr>
+<tr><th scope="row">函数工具与结果回传</th><td>✅</td><td>✅ / 🔄 按目标</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">多个工具并行调用</th><td>✅ 按模型</td><td>✅ / 🔄 部分目标</td><td>🔄 部分目标</td><td>🔄 部分目标</td></tr>
+<tr><th scope="row">Apply Patch 代码补丁</th><td>✅</td><td>✅ / 🔄 部分目标</td><td>🔄 部分目标</td><td>🔄 部分目标</td></tr>
+<tr><th scope="row">工具分组（Namespace）</th><td>✅</td><td>✅ / 🔄 按目标</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">动态工具发现（Tool Search）</th><td>✅ 按入口</td><td>✅ / 🔄 部分目标</td><td>⚠️ 工具发现按型号</td><td>🔄 部分目标</td></tr>
+<tr><th scope="row">JSON 回答</th><td>✅ 按模型</td><td>✅ 已验证目标</td><td>🔄 按型号</td><td>🔄 按型号</td></tr>
+<tr><th scope="row">严格结构化输出（JSON Schema）</th><td>✅ 按模型</td><td>⚠️ 按目标与入口</td><td>⚠️ 部分上游拒绝</td><td>⚠️ 按目标与入口</td></tr>
+<tr><th scope="row">图片理解</th><td>✅ 按模型</td><td>✅ 已验证目标</td><td>🔄 已验证目标</td><td>🔄 已验证目标</td></tr>
+<tr><th scope="row">PDF 直接输入</th><td>✅ 按入口</td><td>⚠️ 部分接口已验证</td><td>🚫 标准直接路径</td><td>⚠️ 部分桥接接口已验证</td></tr>
+<tr><th scope="row">联网搜索与来源引用</th><td>✅ 按服务</td><td>✅ / 🔄 按搜索服务</td><td>🔄 按搜索服务</td><td>🔄 按搜索服务</td></tr>
+<tr><th scope="row">同模型多轮对话</th><td>✅</td><td>✅ / 🔄</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">跨模型可见历史</th><td>✅ 官方模型间</td><td>🔄</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">私有推理与加密状态</th><td>✅ 同一模型内保留</td><td>⚠️ 限已测接入</td><td>🚫 跨协议迁移</td><td>⚠️ 限已测接入</td></tr>
+<tr><th scope="row">取消后继续、错误回传</th><td>✅</td><td>✅ / 🔄 按目标</td><td>🔄 按目标</td><td>🔄 按目标</td></tr>
+<tr><th scope="row">Token / 缓存用量回传</th><td>✅ 上游提供字段</td><td>✅ / 🔄 上游提供字段</td><td>🔄 上游提供字段</td><td>🔄 上游提供字段</td></tr>
+<tr><th scope="row">官方生图 / 编辑入口</th><td>✅ 独立服务</td><td>🚫</td><td>🚫</td><td>🚫</td></tr>
+<tr><th scope="row">官方实时语音入口</th><td>⚠️ 透传；服务受限</td><td>🚫</td><td>🚫</td><td>🚫</td></tr>
+</tbody>
+</table>
+
+官方列描述账号原生路径的保留方式，实际能力依赖账号权益、Codex 入口和服务状态。第三方列表示已有适配的范围，不能据此推断任意型号都支持。正确输出一段 JSON 不等于通过严格 JSON Schema；保留图片入口也不等于模型能看懂图片。
+
+<details>
+<summary>🛠️ 桌面工具、协作与扩展能力</summary>
+
+这些能力由 Codex 或已连接的工具执行。Aiotto 负责传递调用、结果与任务上下文；需要宿主提供入口、权限和服务，不是模型自带的服务器工具。
+
+<table>
+<thead>
+<tr><th rowspan="2" scope="col">能力</th><th colspan="2" scope="colgroup">Responses</th><th rowspan="2" scope="col">Chat Completions</th><th rowspan="2" scope="col">Anthropic Messages</th></tr>
+<tr><th scope="col">官方账号 · 透传</th><th scope="col">第三方接入</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">本地文件读取、代码检索与 Shell</th><td>✅</td><td>✅ / 🔄</td><td>🔄</td><td>🔄</td></tr>
+<tr><th scope="row">Skills 与项目规则读取</th><td>✅</td><td>✅ / 🔄 部分目标</td><td>🔄 部分目标</td><td>🔄 部分目标</td></tr>
+<tr><th scope="row">MCP / 插件工具调用</th><td>✅ 按连接</td><td>✅ / 🔄 部分目标</td><td>🔄 部分目标</td><td>🔄 部分目标</td></tr>
+<tr><th scope="row">浏览器打开、读页与截图</th><td>✅ 按入口</td><td>✅ / 🔄 部分目标</td><td>🔄 部分目标</td><td>🔄 部分目标</td></tr>
+<tr><th scope="row">电脑操作（计算器等）</th><td>✅ 按入口</td><td>✅ / 🔄 部分目标</td><td>🔄 部分目标</td><td>⚠️ 按目标</td></tr>
+<tr><th scope="row">网站工具（WebMCP）</th><td>✅ 按入口</td><td>✅ / 🔄 部分目标</td><td>🔄 部分目标</td><td>⚠️ 按目标</td></tr>
+<tr><th scope="row">子任务创建、等待与结果续接</th><td>✅</td><td>🔄 部分目标</td><td>🔄 部分目标</td><td>🔄 部分目标</td></tr>
+<tr><th scope="row">PTY 终端中断与恢复</th><td>✅</td><td>✅ / 🔄 部分目标</td><td>🔄 部分目标</td><td>⚠️ 按目标</td></tr>
+<tr><th scope="row">只读代码审查</th><td>✅</td><td>✅ / 🔄 部分目标</td><td>🔄 部分目标</td><td>🔄 部分目标</td></tr>
+<tr><th scope="row">Goal 持续任务</th><td>✅ 按入口</td><td>⚠️ 部分生命周期已验证</td><td>⚠️ 部分生命周期已验证</td><td>⚠️ 部分生命周期已验证</td></tr>
+<tr><th scope="row">自动任务创建与定时执行</th><td>✅ 按入口</td><td>⬜ 定时执行未确认</td><td>⚠️ 创建已验证；定时执行未确认</td><td>⚠️ 定时执行未确认</td></tr>
+<tr><th scope="row">审批、沙箱与拒绝处理</th><td>✅ 按宿主策略</td><td>⚠️ 按具体任务验证</td><td>⚠️ 按具体任务验证</td><td>⚠️ 按具体任务验证</td></tr>
+<tr><th scope="row">Plan / Worktree 界面入口</th><td>✅ 按宿主版本</td><td>⬜ 不作逐模型承诺</td><td>⬜ 不作逐模型承诺</td><td>⬜ 不作逐模型承诺</td></tr>
+<tr><th scope="row">Memory / Hooks</th><td>✅ 按宿主配置</td><td>⬜ 不作逐模型承诺</td><td>⬜ 不作逐模型承诺</td><td>⬜ 不作逐模型承诺</td></tr>
+<tr><th scope="row">生成文件与可点击预览</th><td>✅ 按宿主入口</td><td>⚠️ 文件生成不等于可预览</td><td>⚠️ 文件生成不等于可预览</td><td>⚠️ 文件生成不等于可预览</td></tr>
+<tr><th scope="row">上游托管 File Search / Remote MCP / Code Execution</th><td>✅ 按官方入口</td><td>⬜ 依赖上游，尚未确认</td><td>🚫 未作等价映射</td><td>🚫 未作等价映射</td></tr>
+</tbody>
+</table>
+
+本地文件搜索、连接的 MCP、Shell 与上游托管服务是不同路径。🚫 不排除调用独立工具完成任务；自动任务的预览卡不等于已创建，更不等于已按时执行。
+
+</details>
+
+### 按厂商查看能力
+
+在同一张表中，依次查看中国厂商、美国厂商和接入平台。同厂商共用名称，套餐/API 与协议分别列行；排序方便查找，不代表能力高低。编号对应下方对齐排列的型号与使用条件。
+
+<table id="provider-capability-matrix">
+<caption>厂商能力总表 · 可横向滚动查看全部能力</caption>
+<colgroup><col width="112"><col width="116"><col width="120"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"><col width="86"></colgroup>
+<thead>
+<tr><th rowspan="2" scope="col">厂商</th><th rowspan="2" scope="col">套餐 / API</th><th rowspan="2" scope="col">协议</th><th colspan="4" scope="colgroup">常用工具</th><th colspan="6" scope="colgroup">协作与桌面操作</th><th colspan="4" scope="colgroup">推理与多模态</th></tr>
+<tr><th scope="col">文件 / Shell</th><th scope="col">代码补丁</th><th scope="col">Skills</th><th scope="col">MCP 工具</th><th scope="col">浏览器</th><th scope="col">电脑操作</th><th scope="col">子任务</th><th scope="col">多轮对话</th><th scope="col">代码审查</th><th scope="col">网站工具</th><th scope="col">推理档位</th><th scope="col">图片理解</th><th scope="col">PDF 直接输入</th><th scope="col">搜索与来源引用</th></tr>
+</thead>
+<tbody class="region-heading"><tr><th colspan="17">中国厂商</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>DeepSeek</strong></th><td>API <sup><a href="#provider-scope-1" aria-label="查看适用范围 1">1</a></sup></td><td>Chat Completions</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>接口</small></td><td><span>🚫</span> <small>该已测文本型号</small></td><td><span>🚫</span> <small>标准直接路径</small></td><td><span>⬜</span> <small>搜索使用未确认</small></td></tr>
+<tr><td>API <sup><a href="#provider-scope-2" aria-label="查看适用范围 2">2</a></sup></td><td>Responses</td><td><span>🔄</span> <small>工具桥接</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>工具与认证有差异</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span> <small>独立档位验证</small></td><td><span>🚫</span> <small>该已测文本型号</small></td><td><span>⚠️</span> <small>未确认可用</small></td><td><span>⬜</span> <small>搜索使用未确认</small></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>阿里千问</strong></th><td>Token Plan <sup><a href="#provider-scope-3" aria-label="查看适用范围 3">3</a></sup></td><td>Responses</td><td><span>🔄</span> <small>工具桥接</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>🔄</span> <small>跨模型链</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>分档验证</small></td><td><span>✅</span> <small>桌面读图</small></td><td><span>⬜</span></td><td><span>⬜</span></td></tr>
+<tr><td>第三方 API <sup><a href="#provider-scope-4" aria-label="查看适用范围 4">4</a></sup></td><td>Responses</td><td><span>⚠️</span> <small>上游阻塞</small></td><td><span>⚠️</span> <small>上游阻塞</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>上游阻塞</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>历史接口通过；后续阻塞</small></td><td><span>⚠️</span> <small>历史接口通过；后续阻塞</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>智谱</strong></th><td>Coding Plan <sup><a href="#provider-scope-5" aria-label="查看适用范围 5">5</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⬜</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>✅</span> <small>接口</small></td><td><span>⚠️</span> <small>内容识别未通过</small></td><td><span>⚠️</span> <small>内容识别未通过</small></td><td><span>⬜</span> <small>搜索使用未确认</small></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>月之暗面</strong></th><td>API <sup><a href="#provider-scope-6" aria-label="查看适用范围 6">6</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>🔄</span></td><td><span>✅</span> <small>接口</small></td><td><span>✅</span> <small>接口</small></td><td><span>⚠️</span> <small>上游拒绝</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>小米</strong></th><td>Token Plan <sup><a href="#provider-scope-7" aria-label="查看适用范围 7">7</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>⬜</span> <small>桌面使用未确认</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>✅</span> <small>接口</small></td><td><span>⚠️</span> <small>上游拒绝</small></td><td><span>⚠️</span> <small>上游拒绝</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>MiniMax</strong></th><td>Token Plan <sup><a href="#provider-scope-8" aria-label="查看适用范围 8">8</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>限已测工具</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>⚠️</span> <small>high 通过；none 有偏差</small></td><td><span>🔄</span> <small>桌面；大图受限</small></td><td><span>🔄</span> <small>接口</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>火山引擎</strong></th><td>Coding Plan <sup><a href="#provider-scope-9" aria-label="查看适用范围 9">9</a></sup></td><td>Responses</td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分补丁任务已通过</small></td><td><span>🔄</span></td><td><span>🔄</span> <small>限已测工具</small></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>✅</span> <small>接口；实际推理档位未确认</small></td><td><span>⬜</span> <small>该入口未确认</small></td><td><span>✅</span> <small>接口</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody class="region-heading"><tr><th colspan="17">美国厂商</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="2"><strong>OpenAI</strong></th><td>官方账号 <sup><a href="#provider-scope-10" aria-label="查看适用范围 10">10</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span> <small>按连接</small></td><td><span>✅</span> <small>按入口</small></td><td><span>✅</span> <small>按入口</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span> <small>按入口</small></td><td><span>✅</span> <small>按模型</small></td><td><span>✅</span> <small>按模型</small></td><td><span>✅</span> <small>按入口</small></td><td><span>✅</span> <small>按服务</small></td></tr>
+<tr><td>第三方 API <sup><a href="#provider-scope-11" aria-label="查看适用范围 11">11</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>⬜</span> <small>桌面使用未确认</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>⚠️</span> <small>高档存在偏差</small></td><td><span>✅</span> <small>接口</small></td><td><span>✅</span> <small>接口</small></td><td><span>⬜</span> <small>搜索使用未确认</small></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Anthropic</strong></th><td>第三方 API <sup><a href="#provider-scope-12" aria-label="查看适用范围 12">12</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⚠️</span> <small>网关有差异</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>⚠️</span> <small>部分</small></td><td><span>🔄</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>🔄</span> <small>接口映射</small></td><td><span>🔄</span> <small>接口</small></td><td><span>🔄</span> <small>接口</small></td><td><span>🔄</span> <small>已测搜索链；按网关</small></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>Google</strong></th><td>第三方 API <sup><a href="#provider-scope-13" aria-label="查看适用范围 13">13</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span> <small>历史记录</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>🔄</span> <small>历史记录</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>🔄</span> <small>历史记录</small></td><td><span>⬜</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>🔄</span> <small>历史记录</small></td><td><span>🔄</span> <small>历史记录</small></td><td><span>⬜</span></td><td><span>🔄</span> <small>接口；网关受限</small></td><td><span>🔄</span> <small>接口；网关受限</small></td><td><span>⚠️</span> <small>内容识别未通过</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>xAI</strong></th><td>第三方 API <sup><a href="#provider-scope-14" aria-label="查看适用范围 14">14</a></sup></td><td>Responses</td><td><span>✅</span></td><td><span>⚠️</span> <small>桌面未通过</small></td><td><span>⚠️</span> <small>有限制</small></td><td><span>⚠️</span> <small>未通过</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>未通过</small></td><td><span>✅</span></td><td><span>✅</span></td><td><span>⚠️</span> <small>部分</small></td><td><span>✅</span> <small>接口</small></td><td><span>✅</span> <small>接口</small></td><td><span>⚠️</span> <small>上游拒绝</small></td><td><span>⚠️</span> <small>按网关与搜索路径</small></td></tr>
+</tbody>
+<tbody class="region-heading"><tr><th colspan="17">接入平台</th></tr></tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>CommandCode</strong><br><small>接入平台</small></th><td>API <sup><a href="#provider-scope-15" aria-label="查看适用范围 15">15</a></sup></td><td>Chat Completions</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>🔄</span> <small>跨模型链</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>分档验证</small></td><td><span>🔄</span> <small>桌面读图</small></td><td><span>🚫</span> <small>标准直接路径</small></td><td><span>⬜</span></td></tr>
+</tbody>
+<tbody>
+<tr><th scope="rowgroup" rowspan="1"><strong>opencode</strong><br><small>接入平台</small></th><td>API <sup><a href="#provider-scope-16" aria-label="查看适用范围 16">16</a></sup></td><td>Anthropic Messages</td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>🔄</span></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>🔄</span></td><td><span>🔄</span> <small>跨模型链</small></td><td><span>⬜</span></td><td><span>⬜</span></td><td><span>⬜</span> <small>分档验证</small></td><td><span>⬜</span> <small>独立读图</small></td><td><span>⬜</span></td><td><span>🔄</span> <small>独立搜索执行器</small></td></tr>
+</tbody>
+</table>
+
+**已验证型号与使用条件**
+
+各行只对应以下组合和已测平台，不代表厂商全部型号。单元格中的“接口”“历史记录”等限定仍然有效。
+
+<table id="provider-scope-table">
+<colgroup><col width="48"><col width="100"><col width="115"><col width="125"><col width="210"><col></colgroup>
+<thead><tr><th scope="col">编号</th><th scope="col">厂商 / 平台</th><th scope="col">套餐 / API</th><th scope="col">协议</th><th scope="col">已验证型号</th><th scope="col">使用条件</th></tr></thead>
+<tbody class="region-heading"><tr><th colspan="6">中国厂商</th></tr></tbody>
+<tbody>
+<tr id="provider-scope-1"><td>1</td><td>DeepSeek</td><td>API</td><td>Chat Completions</td><td><code>deepseek-v4-pro</code></td><td>按上表各项能力的标注范围使用。</td></tr>
+<tr id="provider-scope-2"><td>2</td><td>DeepSeek</td><td>API</td><td>Responses</td><td><code>deepseek-v4-pro</code></td><td>按上表各项能力的标注范围使用。</td></tr>
+<tr id="provider-scope-3"><td>3</td><td>阿里千问</td><td>Token Plan</td><td>Responses</td><td><code>qwen3.8-flash</code></td><td>Token Plan 与第三方 API 分别判断。第三方网关的请求拒绝记录，不适用于 Token Plan。</td></tr>
+<tr id="provider-scope-4"><td>4</td><td>阿里千问</td><td>第三方 API</td><td>Responses</td><td><code>qwen3.7-plus</code></td><td>按上表各项能力的标注范围使用。</td></tr>
+<tr id="provider-scope-5"><td>5</td><td>智谱</td><td>Coding Plan</td><td>Responses</td><td><code>glm-5.3</code></td><td>按上表各项能力的标注范围使用。</td></tr>
+<tr id="provider-scope-6"><td>6</td><td>月之暗面</td><td>API</td><td>Responses</td><td><code>kimi-k2.7-code-highspeed</code></td><td>按上表各项能力的标注范围使用。</td></tr>
+<tr id="provider-scope-7"><td>7</td><td>小米</td><td>Token Plan</td><td>Responses</td><td><code>mimo-v2.5-pro</code></td><td>图片历史恢复只证明对话可以继续，不算图片理解通过。</td></tr>
+<tr id="provider-scope-8"><td>8</td><td>MiniMax</td><td>Token Plan</td><td>Anthropic Messages</td><td><code>MiniMax-M3</code></td><td>桌面小图用例已通过；大图另有上游限制，不把小图结果扩大到所有图片。</td></tr>
+<tr id="provider-scope-9"><td>9</td><td>火山引擎</td><td>Coding Plan</td><td>Responses</td><td><code>ark-code-latest</code></td><td>按上表各项能力的标注范围使用。</td></tr>
+</tbody>
+<tbody class="region-heading"><tr><th colspan="6">美国厂商</th></tr></tbody>
+<tbody>
+<tr id="provider-scope-10"><td>10</td><td>OpenAI</td><td>官方账号</td><td>Responses</td><td>账号可用型号</td><td>按上表各项能力的标注范围使用。</td></tr>
+<tr id="provider-scope-11"><td>11</td><td>OpenAI</td><td>第三方 API</td><td>Responses</td><td><code>gpt-5.6-sol</code></td><td>按上表各项能力的标注范围使用。</td></tr>
+<tr id="provider-scope-12"><td>12</td><td>Anthropic</td><td>第三方 API</td><td>Anthropic Messages</td><td><code>claude-sonnet-4-6</code></td><td>这里记录的是第三方网关中的 Claude 接入。不同网关的 MCP 与搜索结果存在差异，不作为 Anthropic 官方 API 的能力结论。</td></tr>
+<tr id="provider-scope-13"><td>13</td><td>Google</td><td>第三方 API</td><td>Anthropic Messages</td><td><code>gemini-3.1-pro</code></td><td>保留已测网关的历史通过项；该网关另有额度 / 限流阻塞，历史结果不保证当前服务始终可用。</td></tr>
+<tr id="provider-scope-14"><td>14</td><td>xAI</td><td>第三方 API</td><td>Responses</td><td><code>grok-4.6</code></td><td>按上表各项能力的标注范围使用。</td></tr>
+</tbody>
+<tbody class="region-heading"><tr><th colspan="6">接入平台</th></tr></tbody>
+<tbody>
+<tr id="provider-scope-15"><td>15</td><td>CommandCode</td><td>API</td><td>Chat Completions</td><td><code>z-ai/glm-5.3-flash</code></td><td>图片续聊成功不代表子任务通过；电脑操作仅覆盖已测的计算器任务。</td></tr>
+<tr id="provider-scope-16"><td>16</td><td>opencode</td><td>API</td><td>Anthropic Messages</td><td><code>qwen3.8-flash</code></td><td>已测接入完成了父任务等待与子任务结果汇总，另有停止流式生成后恢复的记录。搜索由独立执行器完成，不据此宣称供应商原生搜索。</td></tr>
+</tbody>
+</table>
+
+<details>
+<summary>如何理解这些能力结果</summary>
+
+- 结果只对应列出的型号、套餐、网关和已测平台。“历史记录”保留当时的适用范围，不保证当前服务可用。
+- “接口”表示真实上游请求通过，不等于完整桌面流程通过。图片和 PDF 只覆盖已测内容；PDF 直接输入与本地文件工具分别判断。
+- 多轮对话只覆盖已测的轻量上下文或跨模型链，不承诺无限上下文。电脑操作仅指已测的计算器任务，不代表任意桌面软件。
+- 子任务同时考虑创建、执行、回传和目标继承，局部成功保留 ⚠️。独立搜索服务可以把来源交给当前模型，不因此算作供应商原生搜索。
+
+PTY 终端中断与恢复已有 DeepSeek 两协议、GLM、GPT 第三方网关和火山对应目标的记录；停止流式生成属于另一种取消场景。尚未确认的定时触发、语音委派、持久记忆和完整产物预览不作逐厂商承诺。
+
+严格结构化输出、动态工具发现、托管工具与私有状态依赖具体接入，请结合协议表判断。能力表和鹈鹕测智结果都不用于模型智力排名。
+
+</details>
+
+## 常见问题
+
+### 没有 ChatGPT 账号也能用吗？
+
+可以。先在 Aiotto 中添加可用的供应商并完成连接测试，再开启无账号使用模式。
+
+### 有账号时还能继续使用官方模型和官方能力吗？
+
+可以。开启智能路由后，官方模型和供应商模型会同时显示；选择官方模型时，相关能力仍按当前账号权益和官方服务状态使用。选中的供应商不可用时，Aiotto 会明确提示，不会悄悄改用官方额度。
+
+### 手机上为什么也能看到供应商模型？
+
+电脑端 Aiotto 负责管理供应商。使用同一 ChatGPT 账号从手机远程操作这台电脑上的 Codex 会话时，模型列表会包含已经接入的供应商模型。
+
+### Aiotto 会要求我提交账号密码吗？
+
+不会。请先通过 ChatGPT 或 Codex 的正常流程完成登录，再由 Aiotto 保存账号快照。不要把密码、验证码或 Cookie 发给任何第三方。
+
+### 为什么关闭窗口后 Aiotto 还在运行？
+
+额度提醒和路由需要在后台保持可用。关闭窗口只会隐藏主界面；需要完全退出时，请使用 macOS 状态栏或 Windows 系统托盘里的“退出 Aiotto”。
+
+<a id="start"></a>
+
+## 从这里开始
+
+1. **安装 Aiotto 和 Codex 桌面端。** 从[最新发布页](https://github.com/ShawnZhuge/aiotto/releases/latest)下载对应系统的安装包，按下方[安装说明](#install)操作。
+2. **添加账号或供应商。** 使用官方账号，或配置自己的供应商地址、Key 与模型；已有数据可先导入预览。
+3. **在 Codex 中开始任务。** 使用第三方模型时启用 Aiotto 智能路由，在模型列表选择目标，从一个熟悉的小任务开始。
+
+<a id="install"></a>
 
 ## 下载与安装
 
@@ -156,32 +391,10 @@ xattr -cr /Applications/Aiotto.app
 
 首次打开可能出现系统安全提示。如果 Windows 阻止启动，请选择“更多信息”，核对应用名称和下载来源后继续运行。
 
-## 常见问题
-
-### 没有 ChatGPT 账号也能用吗？
-
-可以。先在 Aiotto 中添加可用的中转并完成连接测试，再开启无账号使用模式。
-
-### 有账号时还能继续使用官方模型和官方能力吗？
-
-可以。开启智能路由后，官方模型和中转模型会同时显示；选择官方模型时，相关能力仍按当前账号权益和官方服务状态使用。选中的中转不可用时，Aiotto 会明确提示，不会悄悄改用官方额度。
-
-### 手机上为什么也能看到中转模型？
-
-电脑端 Aiotto 负责管理中转。使用同一 ChatGPT 账号从手机远程操作这台电脑上的 Codex 会话时，模型列表会包含已经接入的中转模型。
-
-### Aiotto 会要求我提交账号密码吗？
-
-不会。请先通过 ChatGPT 或 Codex 的正常流程完成登录，再由 Aiotto 保存账号快照。不要把密码、验证码或 Cookie 发给任何第三方。
-
-### 为什么关闭窗口后 Aiotto 还在运行？
-
-额度提醒和路由需要在后台保持可用。关闭窗口只会隐藏主界面；需要完全退出时，请使用 macOS 状态栏或 Windows 系统托盘里的“退出 Aiotto”。
-
 ## 安全与反馈
 
 - 不要在 Issue、截图或日志中上传账号凭据、API Key、令牌或个人信息。
-- 使用第三方中转前，请自行确认其计费方式、数据处理政策和服务条款。
+- 使用第三方供应商前，请自行确认其计费方式、数据处理政策和服务条款。
 - 遇到问题可以通过 [GitHub Issues](https://github.com/ShawnZhuge/aiotto/issues) 提交。
 
 项目采用 [Apache License 2.0](LICENSE)。
